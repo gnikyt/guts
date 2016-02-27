@@ -1,8 +1,11 @@
 # Start SimpleCov
 require "simplecov"
-SimpleCov.start "rails" do
-  add_group "Concerns", "/app/concerns"
-  add_filter "lib/guts/version.rb" # No need to test version file... doesnt work.
+
+unless ENV["NO_COVERAGE"]
+  SimpleCov.start "rails" do
+    add_group "Concerns", "/app/concerns"
+    add_filter "lib/guts/version.rb" # No need to test version file... doesnt work.
+  end
 end
 
 # Configure Rails Environment
