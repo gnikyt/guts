@@ -22,7 +22,7 @@ Next, run the following commands:
 ``` bash
 bundle # fetches the new gem
 bundle exec rake guts:install:migrations # installs Guts migrations
-bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an Admin group which is important too)
+bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an "Admins" group which is important)
 bubdle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
 ```
 
@@ -36,13 +36,11 @@ You will now be able to access Guts by visiting `/admin` in your Rails applicati
 
 ## Configuration
 
-Please see documentation for current configuration settings and usage.
+See [configurations](docs/extra/configurations.md) in docs.
 
 ## Documentation
 
-### Guides
-
-See `doc/extra` folder of this repository.
+See [extra](docs/extra) under docs for information.
 
 ### Code
 
@@ -50,7 +48,7 @@ YARD is used for documentation generation of the code itself. You may run `bundl
 
 ## Commands
 
-To see all commands available simply run `bundle exec rake -T guts`.
+To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user cretion, user deletion, changing user passwords, database seeds for install, and migration installs.
 
 ## Features
 
@@ -69,6 +67,7 @@ To see all commands available simply run `bundle exec rake -T guts`.
 
 ## Todo
 
++ Allow for pre-existing/other User models (suggestions on implementation?)
 + Add configurable roles for users (suggestions?)
 + Add to RubyGems.org
 

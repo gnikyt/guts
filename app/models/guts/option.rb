@@ -15,7 +15,9 @@ module Guts
       self[:key] = key.gsub(KEY_REGEX, "").gsub(/\s+/, "_").downcase.chomp
     end
     
-    # Helper lookup for keys
+    # Simple helper lookup for keys
+    # @param [Symbol] key the option key to look up
+    # @return [Object] the option record
     def self.for_key(key)
       self.find_by_key(key)
     end

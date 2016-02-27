@@ -5,5 +5,6 @@ require "guts/version"
 require "guts/engine"
 require "guts/configuration"
 
+# Guts' module namespace
 module Guts
 end

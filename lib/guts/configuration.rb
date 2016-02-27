@@ -17,6 +17,7 @@ module Guts
     # so that there is not a set amount of configs
     # @param [String] name the config name
     # @param [Array] args list of args (used for setting)
+    # @return the configuration requested
     def method_missing(name, *args)
       name = name.to_s
 

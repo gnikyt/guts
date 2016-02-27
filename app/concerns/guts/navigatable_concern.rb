@@ -19,6 +19,7 @@ module Guts
     # Class methods for the concern
     # @attr [Hash] navigatable_opts the options
     module ClassMethods
+      # @return [Hash] the configuration for the navigatable object
       attr_accessor :navigatable_opts
 
       # Allows a class to be navigatable
