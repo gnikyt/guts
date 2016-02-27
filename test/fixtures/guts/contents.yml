@@ -1,0 +1,17 @@
+test_page:
+  title: Test Page
+  slug: test-page
+  tags: one,two,three
+  content: Test page content
+  visible: true
+  type: page_type
+  user: admin_user
+  
+test_page_2:
+  title: Test Page 2
+  slug: test-page-2
+  tags: ~
+  content: Test page content 2
+  visible: true
+  type: page_type
+  user: ~

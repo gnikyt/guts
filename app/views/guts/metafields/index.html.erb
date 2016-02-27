@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Metafields<% if @object.try(:title) or @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || "N/A" %></span><% end %></h1>
+    <%= link_to "New", new_polymorphic_path([@object, :metafield]), class: "button" %>
+    <%= link_to "Back", url_for([:edit, @object]), class: "secondary hollow button" %>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <table id="metafields_table">
+      <tbody>
+        <% if @metafields.size > 0 %>
+          <% @metafields.each do |metafield| %>
+            <% value = strip_tags metafield.value %>
+            <tr>
+              <td><%= metafield.key %></td>
+              <td><blockquote><%= strip_tags(value)[0..50] %><%= "..." unless value.length < 50 %></blockquote></td>
+              <td align="right" class="action_links">
+                <%= link_to "Edit", edit_polymorphic_path([@object, metafield]) %>
+                <%= link_to_destroy "Destroy", polymorphic_path([@object, metafield])%>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="3">No metafields have been added.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

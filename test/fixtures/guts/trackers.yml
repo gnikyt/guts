@@ -1,0 +1,9 @@
+one:
+  object: test_page (Guts::Content)
+  action: update
+  params: >
+    {"title": ["X", "Y"]}
+
+two:
+  object: test_page (Guts::Content)
+  action: create

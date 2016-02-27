@@ -1,0 +1,36 @@
+<%= form_for(@category) do |f| %>
+  <div class="small-12 columns">
+    <%= f.submit "Save", class: "success button" %>
+    <%= link_to "Back", categories_path, class: "secondary hollow button" %>
+    <% unless @category.new_record? %>
+      <%= link_to "Metafields (#{@category.metafields.size})", category_metafields_path(@category), class: "hollow button" %>
+      <%= link_to "Media (#{@category.media.size})", category_media_path(@category), class: "hollow button warning" %>
+    <% end %>
+  </div>
+
+  <% if @category.errors.any? %>
+    <div class="small-12 columns">
+      <div class="callout warning">
+        <h5><%= pluralize(@category.errors.count, "error") %> prohibited this content from being saved:</h5>
+
+        <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="small-12 columns">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <% unless @category.new_record? %>
+    <div class="small-12 columns">
+      <%= f.label :slug %>
+      <%= f.text_field :slug %>
+    </div>
+  <% end %>
+<% end %>

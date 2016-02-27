@@ -1,0 +1,5 @@
+<% if track.params.size > 0 %>
+    <br>
+    <pre><% track.params.each do |key, values| %>   <%= key.humanize %>: <u><%= values.first %></u> =&gt; <u><%= values.last %></u>
+<% end %></pre>
+<% end %>

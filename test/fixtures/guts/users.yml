@@ -1,0 +1,5 @@
+admin_user:
+  name: Test Admin
+  email: test@domain.com
+  password_digest: <%= BCrypt::Password.create("dingo", cost: 10) %>
+  password_token: 123456

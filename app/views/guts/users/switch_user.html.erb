@@ -1,0 +1,24 @@
+<%= form_tag switch_user_users_path do %>
+  <div class="row">
+    <div class="small-12 columns">
+      <h1>Switch User</h1>
+      <%= submit_tag "Submit", class: "success button" %>
+    </div>
+  </div>
+
+  <% if flash[:notice] %>
+    <div class="row">
+      <div class="small-12 columns">
+        <div class="callout success">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <%= select_tag :user_id, options_for_select(@users.map{|u| ["#{u.name} &mdash; #{u.email}".html_safe, u.id]}) %>
+    </div>
+  </div>
+<% end %>

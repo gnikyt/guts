@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Option</h1>
+    <%= link_to "Back", options_path, class: "secondary button" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <tr>
+        <td><strong>Key</strong></td>
+        <td><%= @option.key %></td>
+      </tr>
+      <tr>
+        <td><strong>Value</strong></td>
+        <td><%= @option.value %></td>
+      </tr>
+      <tr>
+        <td><strong>Created</strong></td>
+        <td><%= @option.created_at %></td>
+      </tr>
+      <tr>
+        <td><strong>Updated</strong></td>
+        <td><%= @option.updated_at %></td>
+      </tr>
+    </table>
+  </div>
+</div>

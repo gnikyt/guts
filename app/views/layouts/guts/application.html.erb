@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "guts/application", media: "all" %>
+    <%= yield :head %>
+  </head>
+  <body id="<%= controller_css_id %>">
+    <%= yield :body_before %>
+    
+    <div id="wrapper">
+      <div id="sidebar-wrapper">
+        <%= yield :sidebar_before %>
+        
+        <% if logged_in? %>
+          <ul class="sidebar-nav">
+            <li class="<%= "active" if menu_active? :types %>">
+              <%= link_to "Content Types", types_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :categories %>">
+              <%= link_to "Categories", categories_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :navigation, false %>">
+              <%= link_to "Navigation", navigations_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :media %>">
+              <%= link_to "Media", media_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :users %>">
+              <%= link_to "Users", users_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :groups %>">
+              <%= link_to "User Groups", groups_path %>
+            </li>
+            
+            <li>&nbsp;</li>
+            
+            <% Guts::Type.all.each do |type| %>
+              <li class="<%= "active" if menu_active?(:contents) and @type == type %>">
+                <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
+              </li>
+            <% end %>
+            
+            <li>&nbsp;</li>
+            
+            <%= yield :menu_links %>
+            
+            <li class="<%= "active" if menu_active? :trackers %>">
+              <%= link_to "Logs", trackers_path %>
+            </li>
+            <li class="<%= "active" if menu_active? :options %>">
+              <%= link_to "Options", options_path %>
+            </li>
+            
+            <li>&nbsp;</li>
+            
+            <li>
+              <a href="<%= destroy_session_path %>">Log out <small><%= current_user.name %></small></a>
+            </li>
+          </ul>
+        <% end %>
+        
+        <%= yield :sidebar_after %>
+      </div>
+      
+      <div id="page-content-wrapper">
+        <div class="row">
+          <div class="small-12 columns">
+            <a href="#menu-toggle" id="menu-toggle"><i class="fa fa-angle-left fa-2x"></i></a>
+          </div>
+        </div>
+        
+        <%= yield :content_before %>
+        <%= yield %>
+        <%= yield :content_after %>
+      </div>
+    </div>
+
+    <%= yield :body_after %>
+    <%= javascript_include_tag "guts/application" %>
+  </body>
+</html>

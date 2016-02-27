@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <%= yield :mailer_head %>
+  </head>
+  <body>
+    <%= yield :mailer_html_before %>
+    <%= yield %>
+    <%= yield :mailer_html_after %>
+  </body>
+</html>

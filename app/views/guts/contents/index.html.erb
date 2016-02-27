@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1><%= @type.title.pluralize 2 %></h1>
+    <%= link_to "New #{@type.title}", new_content_path(type: @type.slug), class: "button" %>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <tbody>
+        <% @contents.each do |content| %>
+          <tr>
+            <td><%= content.title %><% if content.visible == 0 %>&nbsp;&nbsp;<i class="fa fa-eye-slash"></i><% end %></td>
+            <td><small>Created on <%= content.created_at.strftime("%b #{content.created_at.day.ordinalize}, %Y") %></small></td>
+            <td><small>Updated at <%= content.updated_at.strftime("%b #{content.updated_at.day.ordinalize}, %Y") %></small></td>
+            <td align="right" class="action_links">
+              <%= link_to "Edit", edit_content_path(content) %>
+              <%= link_to_destroy "Destroy", content %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <%= will_paginate @options %>
+  </div>
+</div>

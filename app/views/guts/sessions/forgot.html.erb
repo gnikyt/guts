@@ -1,0 +1,22 @@
+<div class="row">
+  <%= form_for(:session, url: forgot_token_session_path) do |f| %>
+    <div class="small-12 columns">
+      <h1>Forgot Password</h1>
+      <%= f.submit "Submit", {class: "button"} %>
+      <%= link_to "Back", new_session_path, {class: "hollow button secondary"} %>
+    </div>
+  
+    <% if flash[:notice] %>
+      <div class="small-12 columns">
+        <div class="callout alert">
+          <%= flash[:notice] %>
+        </div>
+      </div>
+    <% end %>
+  
+    <div class="small-12 columns">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    </div>
+  <% end %>
+</div>

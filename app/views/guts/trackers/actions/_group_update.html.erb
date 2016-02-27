@@ -1,0 +1,6 @@
+<% if track.object.nil? %>
+  Group <u>that no longer exists (#<%= track.object_id.to_s %>)</u>, was updated
+<% else %>
+  Group <u><%= track.object.title %></u> was updated
+  <%= render partial: "guts/trackers/actions/params", locals: {track: track} %>
+<% end %>

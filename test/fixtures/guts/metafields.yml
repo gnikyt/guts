@@ -1,0 +1,34 @@
+metafield_for_content:
+  key: Test Metafield
+  value: Test Value
+  fieldable: test_page (Guts::Content)
+  
+metafield_for_type:
+  key: Test Metafield 2
+  value: Test Value 2
+  fieldable: page_type (Guts::Type)
+  
+metafield_for_user:
+  key: Test Metafield 3
+  value: Test Value 3
+  fieldable: admin_user (Guts::User)
+  
+metafield_for_group:
+  key: Test Metafield 4
+  value: Test Value 4
+  fieldable: test_group (Guts::Group)
+  
+metafield_for_category:
+  key: Test Metafield 5
+  value: Test Value 5
+  fieldable: test_category (Guts::Category)
+  
+metafield_for_navigation:
+  key: Test Metafield 6
+  value: Test Value 6
+  fieldable: test_navigation (Guts::Navigation)
+  
+metafield_for_navigation_item:
+  key: Test Metafield 7
+  value: Test Value 7
+  fieldable: test_navigation_item (Guts::NavigationItem)

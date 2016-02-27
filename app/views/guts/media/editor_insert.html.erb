@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h3>Insert Media</h3>
+    <p class="lead">Choose a size...</p>
+    <p><small>Please note, you can resize the file in the editor window as well.</small></p>
+
+    <select>
+      <% Guts.configuration.file_image_sizing.each do |k, v| %>
+        <option value="<%= k.to_s %>"><%= k.to_s.humanize %> (<%= v %>)</option>
+      <% end %>
+    </select>
+    <input type="hidden" id="media_insert_file_link" value="<%= @medium.file.url :original %>">
+    <button type="button" class="button secondary" id="media_insert_size">Insert</button>
+  </div>
+</div>

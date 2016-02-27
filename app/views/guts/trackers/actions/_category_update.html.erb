@@ -1,0 +1,6 @@
+<% if track.object.nil? %>
+  Category <u>that no longer exists (#<%= track.object_id.to_s %>)</u>, was updated
+<% else %>
+  Category <u><%= track.object.title %></u> was updated
+  <%= render partial: "guts/trackers/actions/params", locals: {track: track} %>
+<% end %>

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Log</h1>
+  </div>
+</div>
+
+<div class="row">
+  <% @tracks.each_with_index do |track, index| %>
+    <div class="small-12 columns">
+      <div class="row track <%= 'odd' if index % 2 == 0 %>">
+        <div class="small-12 medium-3 columns time">
+          <%= track.created_at.strftime("%b #{track.created_at.day.ordinalize}, %Y at %I:%M%p %Z") %>
+        </div>
+        <div class="small-12 medium-9 columns"><%= render_track track %></div>
+      </div>
+    </div>
+  <% end %>
+</div>

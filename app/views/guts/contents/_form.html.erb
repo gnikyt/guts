@@ -1,0 +1,63 @@
+<%= form_for @content do |f| %>
+  <div class="small-12 medium-8 columns">
+    <div class="row">
+      <div class="small-12 columns">
+        <%= f.submit "Save #{@type.title}", class: "success button" %>
+        <% unless @content.new_record? %>
+          <%= link_to "Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: "hollow button" %>
+          <%= link_to "Media (#{@content.media.size})", content_media_path(@content), class: "hollow button secondary" %>
+        <% end %>
+      </div>
+
+      <% if @content.errors.any? %>
+        <div class="small-12 columns">
+          <div class="callout warning">
+            <h5><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h5>
+
+            <ul>
+              <% @content.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="small-12 columns">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+      
+      <% unless @content.new_record? %>
+        <div class="small-12 columns">
+          <%= f.label :slug %>
+          <%= f.text_field :slug %>
+        </div>
+      <% end %>
+
+      <div class="small-12 columns <% unless @content.new_record? %>hide<% end %>">
+        <%= f.label :type %>
+        <%= f.collection_select :type_id, Guts::Type.all, :id, :title %>
+      </div>
+
+      <div class="small-12 columns">
+        <%= f.label :content %>
+        <%= f.text_area :content, {class: "tinymce"} %>
+      </div>
+    </div>
+  </div>
+  <aside class="small-12 medium-4 columns">
+    <div class="row">
+      <div class="small-12 columns">
+        <%= f.label :visiblity %>
+        <%= f.radio_button :visible, 1 %> <%= f.label :visible_1, "Visible" %>
+        <%= f.radio_button :visible, 0 %> <%= f.label :visible_0, "Hidden" %>
+      </div>
+
+      <div class="small-12 columns">
+        <%= f.label :categories %>
+        <%= f.collection_select :category_ids, Guts::Category.all, :id, :title, {}, {multiple: true} %>
+      </div>
+    </div>
+  </aside>
+<% end %>

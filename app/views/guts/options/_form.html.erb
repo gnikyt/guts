@@ -1,0 +1,31 @@
+<%= form_for(@option) do |f| %>
+  <div class="small-12 columns">
+    <%= f.submit "Save", class: "success button" %>
+    <%= link_to "Back", options_path, class: "secondary hollow button" %>
+  </div>
+
+  <% if @option.errors.any? %>
+    <div class="small-12 columns">
+      <div class="callout warning">
+        <h5><%= pluralize(@option.errors.count, "error") %> prohibited this content from being saved:</h5>
+
+        <ul>
+          <% @option.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="small-12 columns">
+    <%= f.label :key %>
+    <%= f.text_field :key %>
+    <p class="help-text">Keys must be all lowercase with no spaces or special characters (example: facebook_url)</p>
+  </div>
+
+  <div class="small-12 columns">
+    <%= f.label :value %>
+    <%= f.text_area :value %>
+  </div>
+<% end %>

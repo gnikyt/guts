@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>User Groups</h1>
+    <%= link_to "New", new_group_path, class: "button" %>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <% if @groups.size > 0 %>
+      <table>
+        <tbody>
+          <% @groups.each do |group| %>
+            <tr>
+              <td><%= group.title %></td>
+              <td><%= link_to pluralize(group.users.size, "user", "users"), users_path(group: group.id) %></td>
+              <td align="right" class="action_links">
+                <%= link_to "Edit", edit_group_path(group) %>
+                <%= link_to_destroy "Destroy", group %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No groups have been added.</p>
+    <% end %>
+  </div>
+</div>

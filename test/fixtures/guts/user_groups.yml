@@ -1,0 +1,3 @@
+group_join_one:
+  user: admin_user
+  group: test_group

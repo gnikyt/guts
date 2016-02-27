@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Metafield</h1>
+    <%= link_to "Back", url_for([@object, :metafields]), class: "secondary button" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <tr>
+        <td><strong>Key</strong></td>
+        <td><%= @metafield.key %></td>
+      </tr>
+      <tr>
+        <td><strong>Value</strong></td>
+        <td><%= @metafield.value %></td>
+      </tr>
+      <tr>
+        <td><strong>Fieldable Type</strong></td>
+        <td><%= @metafield.fieldable_type %></td>
+      </tr>
+      <tr>
+        <td><strong>Fieldable ID</strong></td>
+        <td><%= @metafield.fieldable_id %></td>
+      </tr>
+      <tr>
+        <td><strong>Created</strong></td>
+        <td><%= @metafield.created_at %></td>
+      </tr>
+      <tr>
+        <td><strong>Updated</strong></td>
+        <td><%= @metafield.updated_at %></td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+test_file:
+  title: Pepper
+  position: 0
+  tags: ~
+  filable: test_page (Guts::Content)
+  caption: My dog
+  file_file_name: Pepper.jpg
+  file_content_type: image/jpg
+  file_file_size: 129314

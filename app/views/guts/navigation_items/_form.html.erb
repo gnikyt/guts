@@ -1,0 +1,56 @@
+<%= form_for([@navigation, @navigation_item]) do |f| %>
+  <div class="small-12 columns">
+    <%= f.submit "Save", class: "success button" %>
+    <%= link_to "Back", (@navigation.nil? ? navigations_path : navigation_navigation_items_path(@navigation)), class: "secondary hollow button" %>
+    <% unless @navigation_item.new_record? %>
+    <%= link_to "Metafields (#{@navigation_item.metafields.size})", (@navigation.nil? ? navigation_item_metafields_path : navigation_navigation_item_metafields_path(@navigation, @navigation_item)), class: "hollow button" %>
+    <%= link_to "Media (#{@navigation_item.media.size})", (@navigation.nil? ? navigation_item_media_path : navigation_navigation_item_media_path(@navigation, @navigation_item)), class: "hollow button warning" %>
+    <% end %>
+  </div>
+
+  <% if @navigation_item.errors.any? %>
+    <div class="small-12 columns">
+      <div class="callout warning">
+        <h5><%= pluralize(@navigation_item.errors.count, "error") %> prohibited this content from being saved:</h5>
+
+        <ul>
+          <% @navigation_item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="small-12 columns">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="small-6 columns">
+    <%= f.label :type %>
+    <%=
+      f.select(
+        :navigatable_type,
+        @navigatable.map {|model| [model[:readable], model[:name]]} << ["Custom", nil],
+        {include_blank: "Choose a type..."},
+        {data: {callback_url: navigatable_objects_navigation_items_path}}
+      )
+    %>
+  </div>
+  <div class="small-6 columns">
+    <%= f.label :value %>
+    <%= f.select :navigatable_id, {}, {}, {data: {initial: @navigation_item.new_record? ? nil : @navigation_item.navigatable_id}} %>
+    
+    <%= f.text_field :custom, {style: "display: none"} %>
+  </div>
+
+  <% if @navigation.nil? %>
+    <div class="small-12 columns">
+      <%= f.label :navigation %>
+      <%= f.collection_select :navigation_id, Guts::Navigation.all, :id, :title %>
+    </div>
+  <% else %>
+    <%= f.hidden_field :navigation_id, value: @navigation.id %>
+  <% end %>
+<% end %>

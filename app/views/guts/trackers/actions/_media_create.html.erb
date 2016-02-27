@@ -1,0 +1,5 @@
+<% if track.object.nil? %>
+  Media <u>that no longer exists (#<%= track.object_id.to_s %>)</u>, was created
+<% else %>
+  Media <u><%= track.object.title %></u> was created
+<% end %>
