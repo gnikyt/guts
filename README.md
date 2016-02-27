@@ -37,9 +37,13 @@ Please see documentation for current configuration settings and usage.
 
 ## Documentation
 
-YARD is used for documentation.
+### Guides
 
-You may run `bundle exec yardoc` in this repository and then open `doc/index.html` to view.
+See `doc/extra` folder of this repository.
+
+### Code
+
+YARD is used for documentation generation of the code itself. You may run `bundle exec yardoc` in this repository and then open `doc/index.html` to view.
 
 ## Commands
 
