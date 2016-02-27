@@ -1,5 +1,8 @@
 # Guts
 
+[![Build Status](https://secure.travis-ci.org/tyler-king/guts.svg?branch=master)](http://travis-ci.org/tyler-king/guts)
+[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
+
 A mountable CMS engine for Rails 4.
 
 ### Intensions
