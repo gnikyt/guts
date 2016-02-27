@@ -36,11 +36,11 @@ You will now be able to access Guts by visiting `/admin` in your Rails applicati
 
 ## Configuration
 
-See [configurations](docs/extra/configurations.md) in docs.
+See [configurations](doc/extra/configurations.md) in docs.
 
 ## Documentation
 
-See [extra](docs/extra) under docs for information.
+See [extra](doc/extra) under docs for information.
 
 ### Code
 
