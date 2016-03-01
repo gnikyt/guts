@@ -1,7 +1,7 @@
 # Guts
 
 [![Build Status](https://secure.travis-ci.org/tyler-king/guts.svg?branch=master)](http://travis-ci.org/tyler-king/guts)
-[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
+[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)[![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
 A mountable CMS engine for Rails 4.
 
@@ -14,7 +14,8 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile`:
 
 ``` ruby
-gem "guts", git: "git@github.com:tyler-king/guts.git"
+gem 'guts', "~> 1.0", ">= 1.0.3"
+# or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
 Next, run the following commands:
@@ -75,7 +76,6 @@ Check out [this album](http://imgur.com/a/6dFLL) for some screenshots.
 + Create a project page
 + Generators for installing (useful?)
 + Add configurable roles for users (suggestions?)
-+ Add to RubyGems.org
 
 ## License
 
