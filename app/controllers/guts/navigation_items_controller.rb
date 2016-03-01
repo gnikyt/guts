@@ -54,7 +54,7 @@ module Guts
       redirect_to navigation_navigation_items_path(@navigation), notice: "Navigation item was successfully destroyed."
     end
     
-    # Generates a list of navigatable models
+    # Generates a list of navigatable objects from the model provided
     # @see Guts::NavigatableConcern
     # @return [Object] JSON of navigatable objects
     def navigatable_objects

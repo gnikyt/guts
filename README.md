@@ -65,9 +65,15 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 + Basic session management
 + And more...
 
+### Screenshots
+
+Check out [this album](http://imgur.com/a/6dFLL) for some screenshots.
+
 ## Todo
 
-+ Allow for pre-existing/other User models (suggestions on implementation?)
++ Write usage guides
++ Create a project page
++ Generators for installing (useful?)
 + Add configurable roles for users (suggestions?)
 + Add to RubyGems.org
 

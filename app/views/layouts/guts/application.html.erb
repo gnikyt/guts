@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <% if lookup_context.exists?("layout_hook", ["guts/application"], true) %>
+      <%= render "layout_hook" %>
+    <% end %>
+    
+    <title>Dashboard &mdash; <%= controller_name.humanize %></title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag "guts/application", media: "all" %>
     <%= yield :head %>
@@ -76,8 +80,8 @@
         <%= yield :content_after %>
       </div>
     </div>
-
-    <%= yield :body_after %>
+    
     <%= javascript_include_tag "guts/application" %>
+    <%= yield :body_after %>
   </body>
 </html>

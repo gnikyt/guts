@@ -2,6 +2,10 @@ require "test_helper"
 
 module Guts
   class ContentTest < ActiveSupport::TestCase
+    setup do
+      @user = guts_users :admin_user
+    end
+    
     test "should not create without title" do
       content = Content.new
       
@@ -28,6 +32,15 @@ module Guts
       content.save
       
       assert_equal "how-to-win-an-xbox", content.slug
+    end
+    
+    test "should create content with user" do
+      content       = Content.new
+      content.title = "I love users"
+      content.user  = @user
+      content.save
+      
+      assert_not_nil content.user
     end
     
     test "should return navigatable format" do

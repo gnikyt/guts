@@ -58,6 +58,11 @@
         <%= f.label :categories %>
         <%= f.collection_select :category_ids, Guts::Category.all, :id, :title, {}, {multiple: true} %>
       </div>
+      
+      <div class="small-12 columns">
+        <%= f.label :tags %>
+        <%= f.text_field :tags, {class: "tags"} %>
+      </div>
     </div>
   </aside>
 <% end %>

@@ -1,47 +1,31 @@
 @font-face {
   font-family: 'Ubuntu';
-  src: font-url('ubuntu-regular.eot');
-  src: font-url('ubuntu-regular.eot') format('embedded-opentype'),
-       font-url('ubuntu-regular.woff2') format('woff2'),
-       font-url('ubuntu-regular.woff') format('woff'),
-       font-url('ubuntu-regular.ttf') format('truetype'),
-       font-url('ubuntu-regular.svg') format('svg');
+  src: font-url('ubuntu/ubuntu-regular.woff') format('woff'),
+       font-url('ubuntu/ubuntu-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ubuntu';
-  src: font-url('ubuntu-medium.eot');
-  src: font-url('ubuntu-medium.eot') format('embedded-opentype'),
-       font-url('ubuntu-medium.woff2') format('woff2'),
-       font-url('ubuntu-medium.woff') format('woff'),
-       font-url('ubuntu-medium.ttf') format('truetype'),
-       font-url('ubuntu-medium.svg') format('svg');
+  src: font-url('ubuntu/ubuntu-medium.woff') format('woff'),
+       font-url('ubuntu/ubuntu-medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ubuntu';
-  src: font-url('ubuntu-bold.eot');
-  src: font-url('ubuntu-bold.eot') format('embedded-opentype'),
-       font-url('ubuntu-bold.woff2') format('woff2'),
-       font-url('ubuntu-bold.woff') format('woff'),
-       font-url('ubuntu-bold.ttf') format('truetype'),
-       font-url('ubuntu-bold.svg') format('svg');
+  src: font-url('ubuntu/ubuntu-bold.woff') format('woff'),
+       font-url('ubuntu/ubuntu-bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Ubuntu';
-  src: font-url('ubuntu-light.eot');
-  src: font-url('ubuntu-light.eot') format('embedded-opentype'),
-       font-url('ubuntu-light.woff2') format('woff2'),
-       font-url('ubuntu-light.woff') format('woff'),
-       font-url('ubuntu-light.ttf') format('truetype'),
-       font-url('ubuntu-light.svg') format('svg');
+  src: font-url('ubuntu/ubuntu-light.woff') format('woff'),
+       font-url('ubuntu/ubuntu-light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }

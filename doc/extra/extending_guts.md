@@ -54,4 +54,10 @@ Guts::Type.class_eval do
 end
 ```
 
+## Views
+
+As per standard Rails convention, all you need to do is create a the view in your own app. For instance, if you'd like to overwrite `Guts::Users#index` you would make a view `app/views/guts/users/index.html.erb` in your Rails app.
+
+Guts also has some `yield` calls you can hook into in the `app/views/layouts/guts/application.html.erb` file for your convenience. Without having to overwriting the entire layout to hook into these yields, Guts will automatically look for a partial in your Rails app. This partial must exist in `app/views/guts/application` and be called `_layout_hooks` (example: `app/views/guts/application/_layout_hooks.html.erb`).
+
 Thats it!

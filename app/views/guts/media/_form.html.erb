@@ -32,7 +32,7 @@
   </div>
   <div class="small-12 columns">
     <%= f.label :tags %>
-    <%= f.text_area :tags %>
+    <%= f.text_field :tags, {class: "tags"} %>
   </div>
 
   <% if @object %>
