@@ -1,7 +1,8 @@
 # Guts
 
 [![Build Status](https://secure.travis-ci.org/tyler-king/guts.svg?branch=master)](http://travis-ci.org/tyler-king/guts)
-[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)[![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
+[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
+[![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
 A mountable CMS engine for Rails 4.
 
