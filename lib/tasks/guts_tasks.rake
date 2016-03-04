@@ -16,7 +16,7 @@ namespace :guts do
       
       category       = Guts::Category.new
       category.title = "Uncategorized"
-      catrgory.slug  = "uncategorized"
+      category.slug  = "uncategorized"
       category.save!
       
       group       = Guts::Group.new
