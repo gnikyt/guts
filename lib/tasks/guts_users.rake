@@ -5,11 +5,10 @@ namespace :guts do
     desc "Create a user"
     task :create, [:name, :email, :password, :is_admin] => :environment do |t, args|
       if args.to_hash.size < 3
-        puts "Please enter name, email, and a password"
-        exit
+        raise ArgumentError, "[Guts] Please enter name, email, and a password"
       end
       
-      group = Guts::Group.find_by(title: Guts::Configuration.admin_groups[0])
+      group = Guts::Group.find_by(title: Guts.configuration.admin_groups[0])
       
       user                       = Guts::User.new
       user.name                  = args[:name]
@@ -19,17 +18,18 @@ namespace :guts do
       user.groups << group if args[:is_admin] and group
       user.save!
       
-      puts "[Guts] User #{args[:name]} created"
+      puts "[Guts] User created"
     end
     
     desc "Delete a user"
     task :delete, [:email] => :environment do |t, args|
       if args.to_hash.size === 0
-        puts "Please enter an email"
-        exit
+        raise ArgumentError, "[Guts] Please enter an email"
       end
       
-      user = Guts::User.find(email: args[:email])
+      user = Guts::User.find_by(email: args[:email])
+      raise StandardError, "[Guts] User not found" unless user
+      
       user.destroy!
       
       puts "[Guts] User destroyed"
@@ -38,11 +38,12 @@ namespace :guts do
     desc "New password for a user"
     task :new_password, [:email, :password] => :environment do |t, args|
       if args.to_hash.size < 2
-        puts "Please enter a password and an email"
-        exit
+        raise ArgumentError, "[Guts] Please enter a password and an email"
       end
       
-      user                       = Guts::User.find(email: args[:email])
+      user = Guts::User.find_by(email: args[:email])
+      raise StandardError, "[Guts] User not found" unless user
+      
       user.password              = args[:password]
       user.password_confirmation = args[:password]
       user.save!

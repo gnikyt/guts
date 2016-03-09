@@ -5,6 +5,8 @@ unless ENV["NO_COVERAGE"]
   SimpleCov.start "rails" do
     add_group "Concerns", "/app/concerns"
     add_filter "lib/guts/version.rb" # No need to test version file... doesnt work.
+    add_filter "lib/tasks/guts_tasks.rake" # Inconsistant coverage reports, not sure why
+    add_filter "lib/tasks/guts_users.rake" # Inconsistant coverage reports, not sure why
   end
 end
 
@@ -22,6 +24,9 @@ require "webmock/minitest"
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+
+# For rake tests
+require "rake"
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
