@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309030244) do
+ActiveRecord::Schema.define(version: 13) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -49,15 +49,13 @@ ActiveRecord::Schema.define(version: 20160309030244) do
     t.text     "tags"
     t.text     "content"
     t.integer  "visible",    limit: 1, default: 1
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
     t.integer  "type_id"
     t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "guts_contents", ["slug"], name: "index_guts_contents_on_slug", unique: true
-  add_index "guts_contents", ["type_id"], name: "index_guts_contents_on_type_id"
-  add_index "guts_contents", ["user_id"], name: "index_guts_contents_on_user_id"
 
   create_table "guts_groups", force: :cascade do |t|
     t.string   "title"
@@ -102,13 +100,12 @@ ActiveRecord::Schema.define(version: 20160309030244) do
     t.integer  "position",         default: 0
     t.integer  "navigatable_id"
     t.string   "navigatable_type"
+    t.integer  "navigation_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "navigation_id"
   end
 
   add_index "guts_navigation_items", ["navigatable_type", "navigatable_id"], name: "index_nav_items_on_nav_with_type_and_id"
-  add_index "guts_navigation_items", ["navigation_id"], name: "index_guts_navigation_items_on_navigation_id"
 
   create_table "guts_navigations", force: :cascade do |t|
     t.string   "title"
