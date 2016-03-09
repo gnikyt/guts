@@ -35,11 +35,6 @@
         </div>
       <% end %>
 
-      <div class="small-12 columns <% unless @content.new_record? %>hide<% end %>">
-        <%= f.label :type %>
-        <%= f.collection_select :type_id, Guts::Type.all, :id, :title %>
-      </div>
-
       <div class="small-12 columns">
         <%= f.label :content %>
         <%= f.text_area :content, {class: "tinymce"} %>
@@ -65,4 +60,6 @@
       </div>
     </div>
   </aside>
+
+  <input type="hidden" name="type" value="<%= @type.slug %>">
 <% end %>

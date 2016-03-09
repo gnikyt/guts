@@ -31,6 +31,7 @@ module Guts
     def create
       @content      = Content.new content_params
       @content.user = current_user
+      @content.type = @type
 
       if @content.save
         redirect_to contents_path(type: @content.type.slug), notice: "#{@content.type.title} was successfully created."
@@ -78,7 +79,7 @@ module Guts
     # Permits category params from forms
     # @private
     def content_params
-      params.require(:content).permit(:title, :slug, :content, :visible, :type_id, :tags, category_ids: [])
+      params.require(:content).permit(:title, :slug, :content, :visible, :tags, category_ids: [])
     end
   
     # Gets the per-page value to use
