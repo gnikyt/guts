@@ -50,7 +50,7 @@ module Guts
       end
     end
 
-    # Destroys a category
+    # Destroys a content
     # @note Redirects to #index on success
     def destroy
       @content.destroy
@@ -76,7 +76,7 @@ module Guts
       end
     end
 
-    # Permits category params from forms
+    # Permits content params from forms
     # @private
     def content_params
       params.require(:content).permit(:title, :slug, :content, :visible, :tags, category_ids: [])

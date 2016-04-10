@@ -82,7 +82,7 @@ module Guts
       end
     end
 
-    # Permits metafield params from forms
+    # Permits navigation nitem params from forms
     # @private
     def navigation_item_params
       params.require(:navigation_item).permit(:title, :custom, :position, :navigation_id, :navigatable_type, :navigatable_id)

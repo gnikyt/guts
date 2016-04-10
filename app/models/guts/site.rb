@@ -1,4 +1,5 @@
 module Guts
+  # Site model
   class Site < ActiveRecord::Base
     include TrackableConcern
     
@@ -17,6 +18,8 @@ module Guts
     
     trackable :create, :update, :destroy, fields: [:name]
     
+    # Checks if a site is default
+    # @return [Boolean]
     def is_default?
       self[:default] == true
     end

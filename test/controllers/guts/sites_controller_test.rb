@@ -27,6 +27,11 @@ module Guts
       assert_redirected_to sites_path
       assert_equal "Site was successfully created.", flash[:notice]
     end
+    
+    test "should fail to create site and send back to new" do
+      post :create, site: {name: ""}
+      assert_template "guts/sites/new"
+    end
 
     test "should show site" do
       get :show, id: @site
@@ -43,6 +48,11 @@ module Guts
       assert_redirected_to sites_path
       assert_equal "Site was successfully updated.", flash[:notice]
     end
+    
+    test "should fail to update site and send back to edit" do
+      patch :update, id: @site, site: {name: ""}
+      assert_template "guts/sites/edit"
+    end
 
     test "should destroy site" do
       assert_difference('Site.count', -1) do
@@ -56,8 +66,10 @@ module Guts
     test "should set default site" do
       get :set_default, id: @site2
       @site2.reload
+      @site.reload
       
       assert_equal true, @site2.is_default?
+      assert_equal false, @site.is_default?
       assert_redirected_to sites_path
       assert_equal "Site was successfully set to default.", flash[:notice]
     end
