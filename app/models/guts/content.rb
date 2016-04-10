@@ -8,6 +8,7 @@ module Guts
     validates :type, presence: true
     validates :title, presence: true, length: {minimum: 3}
     
+    belongs_to :site
     belongs_to :type
     belongs_to :user, required: false
     has_many :categorizations

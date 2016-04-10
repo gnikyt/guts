@@ -32,3 +32,8 @@ metafield_for_navigation_item:
   key: Test Metafield 7
   value: Test Value 7
   fieldable: test_navigation_item (Guts::NavigationItem)
+  
+metafield_for_site:
+  key: Test Metafield 8
+  value: Test Value 8
+  fieldable: default_site (Guts::Site)

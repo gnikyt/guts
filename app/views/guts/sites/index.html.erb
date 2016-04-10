@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Sites</h1>
+    <%= link_to "New", new_site_path, class: "button" %>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <% if @sites.size > 0 %>
+      <table>
+        <tbody>
+          <% @sites.each do |site| %>
+            <tr>
+              <td><% if site.is_default? %><strong>Default:</strong> <% end %><%= site.name %></td>
+              <td align="right" class="action_links">
+                <% if site.is_default? %>
+                  <%= link_to "Remove Default", remove_default_site_path(site) %>
+                <% else %>
+                  <%= link_to "Set as Default", set_default_site_path(site) %>
+                <% end %>
+                <%= link_to "Edit", edit_site_path(site) %>
+                <%= link_to_destroy "Destroy", site %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No additional sites have been added.</p>
+    <% end %>
+  </div>
+</div>

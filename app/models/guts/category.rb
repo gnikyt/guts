@@ -7,6 +7,7 @@ module Guts
     
     validates :title, presence: true, length: {minimum: 3}
     
+    belongs_to :site
     has_many :categorizations
     has_many :tracks, as: :object
     has_many :contents, through: :categorizations

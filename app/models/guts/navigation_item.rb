@@ -3,6 +3,7 @@ module Guts
   class NavigationItem < ActiveRecord::Base
     validates :title, presence: true
     
+    belongs_to :site
     belongs_to :navigation
     belongs_to :navigatable, polymorphic: true, required: false
     has_many :media, as: :filable, dependent: :destroy

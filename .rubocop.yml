@@ -1,0 +1,15 @@
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 100
+  
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - test/fixtures/**/**
+    - coverage/**/*
+    - bin/**/*
+    - doc/**/*
+    - config/**/*
+    - db/**/*

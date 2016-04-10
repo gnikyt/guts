@@ -8,6 +8,9 @@ module Guts
     
     validates :key, presence: true, length: {minimum: 3}
     
+    belongs_to :site
+    has_many :tracks, as: :object
+    
     trackable :create, :update, :destroy, fields: [:value]
     
     # Setter override for setting key
