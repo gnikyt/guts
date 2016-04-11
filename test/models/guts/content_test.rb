@@ -77,5 +77,9 @@ module Guts
       content = guts_contents :test_page_2
       assert_nil content.user
     end
+    
+    test "content should be multisite compatible" do
+      assert Content.all.to_sql.include?('site_id')
+    end
   end
 end

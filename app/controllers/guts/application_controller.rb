@@ -31,6 +31,12 @@ module Guts
       end
     end
     
+    # Sets the current site based on the request host
+    # @return [Object, nil] the current site if found or nil
+    def current_site
+      @current_site = Site.find_by(domain: request.host)
+    end
+    
     # Wraps all actions to set current site for multisite
     # @see Guts::ApplicationController#current_site
     def with_current_site
@@ -42,12 +48,6 @@ module Guts
         # Clean up the current site ID
         Site.current_id = nil
       end
-    end
-    
-    # Sets the current site based on the request host
-    # @return [Object, nil] the current site if found or nil
-    def current_site
-      @current_site = Site.find_by(domain: request.host)
     end
   end
 end

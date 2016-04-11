@@ -13,5 +13,9 @@ module Guts
 
       assert metafield.fieldable
     end
+    
+    test "metafield should be multisite compatible" do
+      assert Metafield.all.to_sql.include?('site_id')
+    end
   end
 end

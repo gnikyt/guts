@@ -46,5 +46,9 @@ module Guts
     test "should be trackable" do
       assert_equal true, Category.methods.include?(:trackable)
     end
+    
+    test "category should be multisite compatible" do
+      assert Category.all.to_sql.include?('site_id')
+    end
   end
 end

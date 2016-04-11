@@ -19,5 +19,9 @@ module Guts
 
       assert_equal 2, track.params["title"].size
     end
+    
+    test "tracker should be multisite compatible" do
+      assert Tracker.all.to_sql.include?('site_id')
+    end
   end
 end

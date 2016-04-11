@@ -40,5 +40,9 @@ module Guts
     test "should return polymorphic object for medium" do
       assert_instance_of Guts::Content, @medium.filable
     end
+    
+    test "medium should be multisite compatible" do
+      assert Medium.all.to_sql.include?('site_id')
+    end
   end
 end

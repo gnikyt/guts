@@ -48,6 +48,10 @@ module Guts
       assert_equal true, Type.methods.include?(:trackable)
     end
     
+    test "type should be multisite compatible" do
+      assert Type.all.to_sql.include?('site_id')
+    end
+    
     test "should have site id as null in scope" do
       sql = Type.all.to_sql
       assert sql.include?('"site_id" IS NULL')

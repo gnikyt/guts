@@ -41,5 +41,9 @@ module Guts
     test "should find by key using helper method" do
       assert_instance_of Option, Option.for_key(:test_key)
     end
+    
+    test "option should be multisite compatible" do
+      assert Option.all.to_sql.include?('site_id')
+    end
   end
 end
