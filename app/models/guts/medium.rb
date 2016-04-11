@@ -2,7 +2,7 @@ module Guts
   # Medium model which utilizes PaperClip
   class Medium < ActiveRecord::Base
     include TrackableConcern
-    include SiteScopeConcern
+    include MultisiteScopeConcern
     
     validates :title, presence: true, length: {minimum: 3}
     

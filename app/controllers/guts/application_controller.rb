@@ -3,10 +3,10 @@ module Guts
   # @abstract
   class ApplicationController < ActionController::Base
     include SessionsHelper
+    include MultisiteConcern
     
     protect_from_forgery with: :exception
     before_action :firewall
-    around_action :with_current_site
     
     private
     # Checks if a user is logged in and an admin
@@ -28,25 +28,6 @@ module Guts
           # Not logged in, go to login page
           redirect_to new_session_path
         end
-      end
-    end
-    
-    # Sets the current site based on the request host
-    # @return [Object, nil] the current site if found or nil
-    def current_site
-      @current_site = Site.find_by(domain: request.host)
-    end
-    
-    # Wraps all actions to set current site for multisite
-    # @see Guts::ApplicationController#current_site
-    def with_current_site
-      begin
-        # Get the current site and begin action
-        Site.current_id = current_site.try(:id)
-        yield
-      ensure
-        # Clean up the current site ID
-        Site.current_id = nil
       end
     end
   end

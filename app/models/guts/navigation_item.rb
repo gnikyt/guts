@@ -1,7 +1,7 @@
 module Guts
   # Navigation item model
   class NavigationItem < ActiveRecord::Base
-    include SiteScopeConcern
+    include MultisiteScopeConcern
     
     validates :title, presence: true
     

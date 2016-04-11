@@ -3,7 +3,7 @@ module Guts
   class Navigation < ActiveRecord::Base
     extend FriendlyId
     include TrackableConcern
-    include SiteScopeConcern
+    include MultisiteScopeConcern
     
     validates :title, presence: true
     

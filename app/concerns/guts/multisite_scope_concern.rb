@@ -1,6 +1,6 @@
 module Guts
   # Handled adding a default scope to Active Record calls for multisites
-  module SiteScopeConcern
+  module MultisiteScopeConcern
     extend ActiveSupport::Concern
     
     included do
