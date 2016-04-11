@@ -23,5 +23,19 @@ module Guts
     def is_default?
       self[:default] == true
     end
+    
+    # Sets the current site ID
+    # @param [Integer] id the ID to use
+    # @note I simply can not see a better way at the moment to handle this with default_scope
+    def self.current_id=(id)
+      Thread.current[:site_id] = id
+    end
+    
+    # Gets the current site ID
+    # @return [Integer] the ID
+    # @note I simply can not see a better way at the moment to handle this with default_scope
+    def self.current_id
+      Thread.current[:site_id]
+    end
   end
 end
