@@ -47,5 +47,19 @@ module Guts
     test "should be trackable" do
       assert_equal true, Type.methods.include?(:trackable)
     end
+    
+    test "should have site id as null in scope" do
+      sql = Type.all.to_sql
+      assert sql.include?('"site_id" IS NULL')
+    end
+    
+    test "should have site id as integer in scope" do
+      site = guts_sites(:nondefault_site)
+      Site.current_id = site.id
+      sql  = Type.all.to_sql
+      Site.current_id = nil
+      
+      assert sql.include?(site.id.to_s)
+    end
   end
 end

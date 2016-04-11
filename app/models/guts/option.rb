@@ -2,6 +2,7 @@ module Guts
   # Option model
   class Option < ActiveRecord::Base
     include TrackableConcern
+    include SiteScopeConcern
     
     # Regex for replacing key values with
     KEY_REGEX = /[^a-zA-Z0-9_ ]/i

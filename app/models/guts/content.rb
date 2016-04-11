@@ -4,6 +4,7 @@ module Guts
     extend FriendlyId
     include NavigatableConcern
     include TrackableConcern
+    include SiteScopeConcern
     
     validates :type, presence: true
     validates :title, presence: true, length: {minimum: 3}
