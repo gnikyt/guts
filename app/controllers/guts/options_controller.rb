@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Options controller
@@ -30,7 +30,8 @@ module Guts
       @option = Option.new option_params
 
       if @option.save
-        redirect_to options_path, notice: "Option was successfully created."
+        flash[:notice] = 'Option was successfully created.'
+        redirect_to options_path
       else
         render :new
       end
@@ -40,7 +41,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @option.update option_params
-        redirect_to options_path, notice: "Option was successfully updated."
+        flash[:notice] = 'Option was successfully updated.'
+        redirect_to options_path
       else
         render :edit
       end
@@ -49,10 +51,13 @@ module Guts
     # Destroys an option
     def destroy
       @option.destroy
-      redirect_to options_path, notice: "Option was successfully destroyed."
+      
+      flash[:notice] = 'Option was successfully destroyed.'
+      redirect_to options_path
     end
 
     private
+    
     # Sets a coption from the database using `id` param
     # @note This is a `before_action` callback
     # @private

@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Navigations ontroller
@@ -29,7 +29,8 @@ module Guts
       @navigation = Navigation.new navigation_params
 
       if @navigation.save
-        redirect_to navigations_path, notice: "Navigation was successfully created."
+        flash[:notice] = 'Navigation was successfully created.'
+        redirect_to navigations_path
       else
         render :new
       end
@@ -39,7 +40,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @navigation.update(navigation_params)
-        redirect_to navigations_path, notice: "Navigation was successfully updated."
+        flash[:notice] = 'Navigation was successfully updated.'
+        redirect_to navigations_path
       else
         render :edit
       end
@@ -49,10 +51,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @navigation.destroy
-      redirect_to navigations_path, notice: "Navigation was successfully destroyed."
+      
+      flash[:notice] = 'Navigation was successfully destroyed.'
+      redirect_to navigations_path
     end
 
     private
+    
     # Sets a navigation from the database using `id` param
     # @note This is a `before_action` callback
     # @private

@@ -22,10 +22,10 @@
         <tbody>
           <% @sites.each do |site| %>
             <tr>
-              <td><% if site.is_default? %><strong>Default:</strong> <% end %><%= site.name %></td>
+              <td><% if site.default? %><strong>Default:</strong> <% end %><%= site.name %></td>
               <td><%= site.domain %></td>
               <td align="right" class="action_links">
-                <% if site.is_default? %>
+                <% if site.default? %>
                   <%= link_to "Remove Default", remove_default_site_path(site) %>
                 <% else %>
                   <%= link_to "Set as Default", set_default_site_path(site) %>

@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Users controller
@@ -10,7 +10,7 @@ module Guts
     def index
       if params[:group]
         @group = Group.find params[:group]
-        @users = User.includes(:groups).where(guts_groups: {id: @group.id})
+        @users = User.in_group(@group)
       else
         @users = User.all
       end
@@ -35,7 +35,7 @@ module Guts
       @user = User.new user_params
 
       if @user.save
-        redirect_to users_path, notice: "User was successfully created."
+        redirect_to users_path, notice: 'User was successfully created.'
       else
         render :new
       end
@@ -45,7 +45,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @user.update(user_params)
-        redirect_to users_path, notice: "User was successfully updated."
+        flash[:notice] = 'User was successfully updated.'
+        redirect_to users_path
       else
         render :edit
       end
@@ -55,7 +56,9 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @user.destroy
-      redirect_to users_url, notice: "User was successfully destroyed."
+      
+      flash[:notice] = 'User was successfully destroyed.'
+      redirect_to users_url
     end
 
     # Allows switching of users by passing `user_id` in params
@@ -71,6 +74,7 @@ module Guts
     end
     
     private
+    
     # Sets a user from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -81,7 +85,13 @@ module Guts
     # Permits user params from forms
     # @private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, group_ids: [])
+      params.require(:user).permit(
+        :name,
+        :email,
+        :password,
+        :password_confirmation,
+        group_ids: []
+      )
     end
   end
 end

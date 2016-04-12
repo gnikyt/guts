@@ -3,7 +3,10 @@ Rails:
 
 Metrics/LineLength:
   Max: 100
-  
+
+Style/TrailingWhitespace:
+  Enabled: false
+
 AllCops:
   Exclude:
     - vendor/**/*

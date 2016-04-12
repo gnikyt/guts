@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Groups controller
@@ -29,7 +29,8 @@ module Guts
       @group = Group.new group_params
 
       if @group.save
-        redirect_to groups_path, notice: "Group was successfully created."
+        flash[:notice] = 'Group was successfully created.'
+        redirect_to groups_path
       else
         render :new
       end
@@ -39,7 +40,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @group.update(group_params)
-        redirect_to groups_path, notice: "Group was successfully updated."
+        flash[:notice] = 'Group was successfully updated.'
+        redirect_to groups_path
       else
         render :edit
       end
@@ -49,10 +51,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @group.destroy
-      redirect_to groups_url, notice: "Group was successfully destroyed."
+      
+      flash[:notice] = 'Group was successfully destroyed.'
+      redirect_to groups_url
     end
 
     private
+    
     # Sets a group from the database using `id` param
     # @note This is a `before_action` callback
     # @private

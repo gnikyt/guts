@@ -17,15 +17,13 @@ module Guts
     # @see Guts::MultisiteConcern#current_site
     # @note This is a `around_action` method
     def with_current_site
-      begin
-        # Get the current site and begin action
-        Site.current_id = current_site.try(:id)
-        
-        yield
-      ensure
-        # Clean up the current site ID
-        Site.current_id = nil
-      end
+      # Get the current site and begin action
+      Site.current_id = current_site.try(:id)
+
+      yield
+    ensure
+      # Clean up the current site ID
+      Site.current_id = nil
     end
   end
 end

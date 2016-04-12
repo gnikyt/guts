@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Sessions controller
@@ -13,11 +13,12 @@ module Guts
     # @see Guts::SessionsHelper#log_in
     def create
       user = User.find_by(email: params[:session][:email].downcase)
+      
       if user && user.authenticate(params[:session][:password])
         log_in user
         redirect_to users_path
       else
-        flash.now[:notice] = "Invalid login credentials"
+        flash.now[:notice] = 'Invalid login credentials'
         render :new
       end
     end
@@ -26,7 +27,7 @@ module Guts
     # @see Guts::SessionsHelper#log_out
     def destroy
       log_out
-      flash[:notice] = "You have been logged out"
+      flash[:notice] = 'You have been logged out'
       redirect_to new_session_path
     end
     
@@ -38,26 +39,23 @@ module Guts
     def forgot_token
       user = User.find_by(email: params[:session][:email].downcase)
       if user
-        user.password_token = Digest::SHA1.hexdigest("#{Time.now.to_s}#{rand(100)}")[0,8]
-        user.save
+        password = Digest::SHA1.hexdigest("#{Time.current}#{rand(100)}")[0, 8]
+        user.update_attribute(:password_token, password)
         UserMailer.password_reset(user).deliver_now
         
-        flash[:notice] = "Your reset link has been sent to your inbox."
+        flash[:notice] = 'Your reset link has been sent to your inbox.'
         redirect_to new_session_path
       else
-        flash.now[:notice] = "Invalid email address"
+        flash.now[:notice] = 'Invalid email address'
         render :forgot
       end
     end
     
     # Resets the user's password
     def reset_password
-      new_password = Digest::SHA1.hexdigest("#{Time.now.to_s}#{rand(100)}")[0,8]
-      
-      user                = User.find_by(password_token: params[:token])
-      user.password_token = nil
-      user.password       = new_password
-      user.save
+      new_password = Digest::SHA1.hexdigest("#{Time.current}#{rand(100)}")[0, 8]
+      user         = User.find_by(password_token: params[:token])
+      user.update(password_token: nil, password: new_password)
       
       flash[:notice] = "Your new password is now: #{new_password}. You may now login with it."
       redirect_to new_session_path

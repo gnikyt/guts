@@ -68,8 +68,8 @@ module Guts
       @site2.reload
       @site.reload
       
-      assert_equal true, @site2.is_default?
-      assert_equal false, @site.is_default?
+      assert_equal true, @site2.default?
+      assert_equal false, @site.default?
       assert_redirected_to sites_path
       assert_equal "Site was successfully set to default.", flash[:notice]
     end
@@ -78,7 +78,7 @@ module Guts
       get :remove_default, id: @site
       @site.reload
       
-      assert_equal false, @site.is_default?
+      assert_equal false, @site.default?
       assert_redirected_to sites_path
       assert_equal "Site was successfully changed to not default.", flash[:notice]
     end

@@ -26,7 +26,7 @@
               <td><%= navigation_item.title %></td>
               <td>
                 <small>
-                  to: <%= navigation_item.is_custom? ? "Custom" : navigation_item.navigatable.navigatable_format %> <%= "(#{navigation_item.custom})" if navigation_item.is_custom? %>
+                  to: <%= navigation_item.custom? ? "Custom" : navigation_item.navigatable.navigatable_format %> <%= "(#{navigation_item.custom})" if navigation_item.custom? %>
                 </small>
               </td>
               <td class="action_links">

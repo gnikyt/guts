@@ -20,7 +20,7 @@ module Guts
     
     # Checks if a site is default
     # @return [Boolean]
-    def is_default?
+    def default?
       self[:default] == true
     end
     

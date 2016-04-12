@@ -12,7 +12,7 @@ module Guts
     def navigatable_format
       formatted = self.class.navigatable_opts[:format]
       self.class.navigatable_opts[:variables].each do |var|
-        formatted = formatted.gsub /\:#{var.to_s}/, self.instance_eval("self.#{var.to_s}")
+        formatted = formatted.gsub(/\:#{var}/, instance_eval("self.#{var}"))
       end
       
       formatted

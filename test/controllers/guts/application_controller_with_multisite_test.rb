@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 module Guts
   class ApplicationControllerWithMultisiteTest < ActionController::TestCase
@@ -7,12 +7,12 @@ module Guts
       @routes     = Engine.routes
     end
     
-    test "should set current site and current site should be nil" do
+    test 'should set current site and current site should be nil' do
       get :index
       assert_equal nil, assigns('current_site')
     end
 
-    test "should set current site with actual site" do
+    test 'should set current site with actual site' do
       @request.host = 'fr.testsite.com'
       get :index
       

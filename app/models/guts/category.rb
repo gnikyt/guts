@@ -6,7 +6,7 @@ module Guts
     include TrackableConcern
     include MultisiteScopeConcern
     
-    validates :title, presence: true, length: {minimum: 3}
+    validates :title, presence: true, length: { minimum: 3 }
     
     belongs_to :site
     has_many :categorizations
@@ -16,7 +16,7 @@ module Guts
     has_many :metafields, as: :fieldable, dependent: :destroy
     
     friendly_id :title, use: [:slugged, :finders]
-    navigatable :title, format: ":title"
+    navigatable :title, format: ':title'
     trackable :create, :update, :destroy, fields: [:title, :slug]
   end
 end

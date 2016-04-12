@@ -30,7 +30,7 @@
             <% if navigation.navigation_items.size > 0 %>
               <% navigation.navigation_items.each do |item| %>
                 <li>
-                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.is_custom? ? "Custom" : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.is_custom? %>
+                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.custom? ? "Custom" : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.custom? %>
                   <div class="action_links">
                     <%= link_to "Edit", edit_navigation_navigation_item_path(navigation, item) %>
                     <%= link_to_destroy "Destroy", navigation_navigation_item_path(navigation, item) %>

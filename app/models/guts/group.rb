@@ -4,7 +4,7 @@ module Guts
     extend FriendlyId
     include TrackableConcern
     
-    validates :title, presence: true, length: {minimum: 3}
+    validates :title, presence: true, length: { minimum: 3 }
     
     has_many :user_groups
     has_many :users, through: :user_groups

@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Contents controller
@@ -34,7 +34,8 @@ module Guts
       @content.type = @type
 
       if @content.save
-        redirect_to contents_path(type: @content.type.slug), notice: "#{@content.type.title} was successfully created."
+        flash[:notice] = "#{@content.type.title} was successfully created."
+        redirect_to contents_path(type: @content.type.slug)
       else
         render :new
       end
@@ -44,7 +45,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @content.update(content_params)
-        redirect_to contents_path(type: @content.type.slug), notice: "#{@content.type.title} was successfully updated."
+        flash[:notice] = "#{@content.type.title} was successfully updated."
+        redirect_to contents_path(type: @content.type.slug)
       else
         render :edit
       end
@@ -54,10 +56,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @content.destroy
-      redirect_to contents_path(type: @content.type.slug), notice: "#{@content.type.title} was successfully destroyed."
+      
+      flash[:notice] = "#{@content.type.title} was successfully destroyed."
+      redirect_to contents_path(type: @content.type.slug)
     end
 
     private
+    
     # Sets a content from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -69,11 +74,11 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_type
-      @type = if @content and !@content.new_record?
-        @content.type
-      else
-        Type.find params[:type]
-      end
+      @type = if @content && !@content.new_record?
+                @content.type
+              else
+                Type.find params[:type]
+              end
     end
 
     # Permits content params from forms

@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Navigation Items controller
@@ -31,7 +31,8 @@ module Guts
       @navigation_item = NavigationItem.new navigation_item_params
 
       if @navigation_item.save
-        redirect_to navigation_navigation_items_path(@navigation), notice: "Navigation item was successfully created."
+        flash[:notice] = 'Navigation item was successfully created.'
+        redirect_to navigation_navigation_items_path(@navigation)
       else
         render :new
       end
@@ -41,7 +42,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @navigation_item.update navigation_item_params
-        redirect_to navigation_navigation_items_path(@navigation), notice: "Navigation item was successfully updated."
+        flash[:notice] = 'Navigation item was successfully updated.'
+        redirect_to navigation_navigation_items_path(@navigation)
       else
         render :edit
       end
@@ -51,7 +53,9 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @navigation_item.destroy
-      redirect_to navigation_navigation_items_path(@navigation), notice: "Navigation item was successfully destroyed."
+      
+      flash[:notice] = 'Navigation item was successfully destroyed.'
+      redirect_to navigation_navigation_items_path(@navigation)
     end
     
     # Generates a list of navigatable objects from the model provided
@@ -59,11 +63,14 @@ module Guts
     # @return [Object] JSON of navigatable objects
     def navigatable_objects
       model   = params[:model].constantize
-      objects = model.all.map {|obj| {id: obj.id, format: obj.navigatable_format}} if @navigatable.map {|m| m[:name]}.include?(params[:model])
+      is_nav  = @navigatable.map { |m| m[:name] }.include?(params[:model])
+      objects = model.all.map { |obj| { id: obj.id, format: obj.navigatable_format } } if is_nav
+      
       render json: objects
     end
 
     private
+    
     # Sets a navigation from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -75,30 +82,43 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_navigation
-      if params[:navigation_id]
-        @navigation = Navigation.find params[:navigation_id]
-      else
-        @navigation = @navigation_item.try :navigation
-      end
+      @navigation = if params[:navigation_id]
+                      Navigation.find params[:navigation_id]
+                    else
+                      @navigation_item.try :navigation
+                    end
     end
 
     # Permits navigation nitem params from forms
     # @private
     def navigation_item_params
-      params.require(:navigation_item).permit(:title, :custom, :position, :navigation_id, :navigatable_type, :navigatable_id)
+      params.require(:navigation_item).permit(
+        :title,
+        :custom,
+        :position,
+        :navigation_id,
+        :navigatable_type,
+        :navigatable_id
+      )
     end
     
     # Forces module load models so we can determine who is navigatable
     # @see Guts::NavigatableConcern
     # @private
     def set_navigatable_models
-      Dir["#{Guts::Engine.root.to_s}/app/models/**/*.rb"].each {|model| require model}
+      Dir["#{Guts::Engine.root}/app/models/**/*.rb"].each { |model| require model }
       
-      @navigatable = ActiveRecord::Base.descendants.map(&:name)
-        .select {|model| model.constantize.methods.include? :navigatable}
-        .map do |model|
-          {name: model, class: model.constantize, readable: model.demodulize.underscore.humanize.capitalize}
-        end
+      @navigatable = ActiveRecord::Base
+                     .descendants
+                     .map(&:name)
+                     .select { |model| model.constantize.methods.include? :navigatable }
+                     .map do |model|
+                       {
+                         name: model,
+                         class: model.constantize,
+                         readable: model.demodulize.underscore.humanize.capitalize
+                       }
+                     end
     end
   end
 end

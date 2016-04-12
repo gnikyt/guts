@@ -17,13 +17,13 @@ module Guts
         # Loop over each type
         types.each do |type|
           # Start the callback on this modal
-          self.send :"after_#{type}" do
+          send :"after_#{type}" do
             params = {}
 
             # Check if we're watching for a specific field
-            if opts[:fields] and type == :update
+            if opts[:fields] && type == :update
               # They do... grab those changes and merge them into our params
-              params = self.changes.select {|field| opts[:fields].include? field.to_sym}
+              params = changes.select { |field| opts[:fields].include? field.to_sym }
             end
             
             # Finally, complete the track to the database if allowed

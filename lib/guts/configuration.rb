@@ -1,3 +1,4 @@
+# Guts' module namespace
 module Guts
   # Configuration for Guts
   # @return [Object] returns configuration
@@ -21,7 +22,7 @@ module Guts
     def method_missing(name, *args)
       name = name.to_s
 
-      if name =~ (/=$/)
+      if name =~ /=$/
         instance_variable_set "@#{name.chop}", args.first
       else
         instance_variable_get "@#{name}"

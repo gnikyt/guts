@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Sites controller
@@ -29,7 +29,8 @@ module Guts
       @site = Site.new site_params
 
       if @site.save
-        redirect_to sites_url, notice: 'Site was successfully created.'
+        flash[:notice] = 'Site was successfully created.'
+        redirect_to sites_url
       else
         render :new
       end
@@ -39,7 +40,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @site.update site_params
-        redirect_to sites_url, notice: 'Site was successfully updated.'
+        flash[:notice] = 'Site was successfully updated.'
+        redirect_to sites_url
       else
         render :edit
       end
@@ -55,21 +57,24 @@ module Guts
     # Sets a site as default
     def set_default
       old_default = Site.find_by(default: true)
-      if old_default
-        old_default.update_attribute(:default, false)
-      end
+      old_default.update_attribute(:default, false) unless old_default.nil?
       
       @site.update_attribute(:default, true)
-      redirect_to sites_url, notice: 'Site was successfully set to default.'
+      
+      flash[:notice] = 'Site was successfully set to default.'
+      redirect_to sites_url
     end
     
     # Removes a site as default
     def remove_default
       @site.update_attribute(:default, false)
-      redirect_to sites_url, notice: 'Site was successfully changed to not default.'
+      
+      flash[:notice] = 'Site was successfully changed to not default.'
+      redirect_to sites_url
     end
 
     private
+    
     # Sets a site from the database using `id` param
     # @note This is a `before_action` callback
     # @private

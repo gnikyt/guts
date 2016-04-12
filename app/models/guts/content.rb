@@ -7,7 +7,7 @@ module Guts
     include MultisiteScopeConcern
     
     validates :type, presence: true
-    validates :title, presence: true, length: {minimum: 3}
+    validates :title, presence: true, length: { minimum: 3 }
     
     belongs_to :site
     belongs_to :type
@@ -19,7 +19,7 @@ module Guts
     has_many :tracks, as: :object
 
     friendly_id :title, use: [:slugged, :finders]
-    navigatable :"type.title", :title, format: "[:type.title] :title"
+    navigatable :'type.title', :title, format: '[:type.title] :title'
     trackable :create, :update, :destroy, fields: [:title, :visible, :tags, :slug]
   end
 end

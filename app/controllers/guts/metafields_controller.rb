@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Metafields controller
@@ -22,7 +22,8 @@ module Guts
       @metafield = Metafield.new metafield_params
 
       if @metafield.save
-        redirect_to polymorphic_path([@object, :metafields]), notice: "Metafield was successfully created."
+        flash[:notice] = 'Metafield was successfully created.'
+        redirect_to polymorphic_path([@object, :metafields])
       else
         render :new
       end
@@ -41,7 +42,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @metafield.update metafield_params
-        redirect_to polymorphic_path([@object, :metafields]), notice: "Metafield was successfully updated."
+        flash[:notice] = 'Metafield was successfully updated.'
+        redirect_to polymorphic_path([@object, :metafields])
       else
         render :edit
       end
@@ -51,10 +53,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @metafield.destroy
-      redirect_to polymorphic_path([@object, :metafields]), notice: "Metafield was successfully destroyed."
+      
+      flash[:notice] = 'Metafield was successfully destroyed.'
+      redirect_to polymorphic_path([@object, :metafields])
     end
 
     private
+    
     # Sets a metafield from the database using `id` param
     # @note This is a `before_action` callback
     # @private

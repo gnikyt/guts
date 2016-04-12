@@ -29,13 +29,13 @@ module Guts
     test "should not be custom" do
       navigation = guts_navigation_items :test_navigation_item
       
-      assert_equal false, navigation.is_custom?
+      assert_equal false, navigation.custom?
     end
     
     test "should be custom" do
       navigation = guts_navigation_items :test_navigation_item_two
       
-      assert_equal true, navigation.is_custom?
+      assert_equal true, navigation.custom?
     end
   end
 end
