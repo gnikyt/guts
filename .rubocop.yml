@@ -6,6 +6,9 @@ Metrics/LineLength:
 
 Style/TrailingWhitespace:
   Enabled: false
+  
+Style/NumericLiterals:
+  Enabled: false
 
 AllCops:
   Exclude:
@@ -16,3 +19,4 @@ AllCops:
     - doc/**/*
     - config/**/*
     - db/**/*
+    - test/dummy/**/**

@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 module Guts
   class TrackersControllerTest < ActionController::TestCase
@@ -6,7 +6,7 @@ module Guts
       @routes = Engine.routes
     end
 
-    test "should get index" do
+    test 'should get index' do
       get :index
       assert_response :success
       assert_not_nil assigns(:tracks)

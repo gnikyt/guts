@@ -30,12 +30,12 @@ class GutsTest < ActiveSupport::TestCase
   
   test 'config should be overrideable' do
     original_groups                 = Guts.configuration.admin_groups
-    Guts.configuration.admin_groups = ['Changed', 'To', 'More', 'Admins']
+    Guts.configuration.admin_groups = %w(Changed To More Admins)
     assert_not_equal Guts.configuration.admin_groups, original_groups
   end
   
   test 'should grab decorators in app' do
-    assert_equal true, $LOADED_FEATURES.join(',').include?('app/decorators/controllers/guts/type_decorator.rb')
-    assert_equal true, Guts::TypesController.instance_methods.include?(:explode)
+    assert $LOADED_FEATURES.join(',').include?('app/decorators/controllers/guts/type_decorator.rb')
+    assert Guts::TypesController.instance_methods.include?(:explode)
   end
 end

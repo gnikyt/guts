@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 module Guts
   class MetafieldsControllerTest < ActionController::TestCase
@@ -11,79 +11,89 @@ module Guts
       @routes    = Engine.routes
     end
 
-    test "should get index" do
-      get :index, content_id: @content.id, fieldable_type: "Guts::Content"
+    test 'should get index' do
+      get :index, content_id: @content.id, fieldable_type: 'Guts::Content'
       assert_response :success
       assert_not_nil assigns(:metafields)
     end
     
-    test "should get index for non friendly" do
-      get :index, user_id: @user.id, fieldable_type: "Guts::User"
+    test 'should get index for non friendly' do
+      get :index, user_id: @user.id, fieldable_type: 'Guts::User'
       assert_response :success
       assert_not_nil assigns(:metafields)
     end
     
-    test "should get new" do
-      get :new, content_id: @content.id, fieldable_type: "Guts::Content"
+    test 'should get new' do
+      get :new, content_id: @content.id, fieldable_type: 'Guts::Content'
       assert_response :success
     end
     
-    test "should create metafield" do
-      assert_difference("Metafield.count") do
+    test 'should create metafield' do
+      assert_difference('Metafield.count') do
         post :create,
-          content_id: @content.id,
-          fieldable_type: "Guts::Content",
-          metafield: {
-            key: "Test",
-            value: "Test"
-          }
+             content_id: @content.id,
+             fieldable_type: 'Guts::Content',
+             metafield: {
+               key: 'Test',
+               value: 'Test'
+             }
       end
 
       assert_redirected_to polymorphic_path([@content, :metafields])
-      assert_match /successfully created/, flash[:notice]
+      assert flash[:notice].include?('successfully created')
     end
     
-    test "should not create metafield and send back to new" do
+    test 'should not create metafield and send back to new' do
       post :create,
-        content_id: @content.id,
-        fieldable_type: "Guts::Content",
-        metafield: {
-          key: "",
-          value: ""
-        }
+           content_id: @content.id,
+           fieldable_type: 'Guts::Content',
+           metafield: {
+             key: '',
+             value: ''
+           }
 
-      assert_template "guts/metafields/new"
+      assert_template 'guts/metafields/new'
     end
     
    
-    test "should show metafield" do
-      get :show, id: @metafield, content_id: @content.id, fieldable_type: "Guts::Content"
+    test 'should show metafield' do
+      get :show, id: @metafield, content_id: @content.id, fieldable_type: 'Guts::Content'
       assert_response :success
     end
 
-    test "should get edit" do
-      get :edit, id: @metafield, content_id: @content.id, fieldable_type: "Guts::Content"
+    test 'should get edit' do
+      get :edit, id: @metafield, content_id: @content.id, fieldable_type: 'Guts::Content'
       assert_response :success
     end
     
-    test "should update metafield" do
-      patch :update, id: @metafield.id, content_id: @content.id, fieldable_type: "Guts::Content", metafield: { key: "Demo Me" }
+    test 'should update metafield' do
+      patch :update,
+            id: @metafield.id,
+            content_id: @content.id,
+            fieldable_type: 'Guts::Content',
+            metafield: { key: 'Demo Me' }
+      
       assert_redirected_to polymorphic_path([@content, :metafields])
-      assert_match /successfully updated/, flash[:notice]
+      assert flash[:notice].include?('successfully updated')
     end
 
-    test "should fail to edit metafield and send back to edit" do
-      patch :update, id: @metafield.id, content_id: @content.id, fieldable_type: "Guts::Content", metafield: { key: "" }
-      assert_template "guts/metafields/edit"
+    test 'should fail to edit metafield and send back to edit' do
+      patch :update,
+            id: @metafield.id,
+            content_id: @content.id,
+            fieldable_type: 'Guts::Content',
+            metafield: { key: '' }
+      
+      assert_template 'guts/metafields/edit'
     end
 
-    test "should destroy metafield" do
-      assert_difference("Metafield.count", -1) do
-        delete :destroy, id: @metafield, content_id: @content.id, fieldable_type: "Guts::Content"
+    test 'should destroy metafield' do
+      assert_difference('Metafield.count', -1) do
+        delete :destroy, id: @metafield, content_id: @content.id, fieldable_type: 'Guts::Content'
       end
 
       assert_redirected_to polymorphic_path([@content, :metafields])
-      assert_match /successfully destroyed/, flash[:notice]
+      assert flash[:notice].include?('successfully destroyed')
     end
   end
 end
