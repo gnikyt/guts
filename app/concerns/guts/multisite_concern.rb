@@ -10,7 +10,7 @@ module Guts
     # Sets the current site based on the request host
     # @return [Object, nil] the current site if found or nil
     def current_site
-      @current_site = Site.find_by(domain: request.host)
+      @current_site ||= Site.find_by(domain: request.host)
     end
     
     # Wraps all actions to set current site for multisite
