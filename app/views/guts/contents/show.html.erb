@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1><%= @content.type.title %></h1>
-    <%= link_to "Back", contents_path, class: "secondary button" %>
+    <%= link_to 'Back', contents_path, class: 'secondary button' %>
   </div>
 </div>
 
@@ -26,15 +26,15 @@
       </tr>
       <tr>
         <td><strong>Visible</strong></td>
-        <td><%= @content.visible == 1 ? "Yes" : "No" %></td>
+        <td><%= @content.visible == 1 ? 'Yes' : 'No' %></td>
       </tr>
       <tr>
         <td><strong>Created By User</strong></td>
-        <td><%= @content.user || "-" %></td>
+        <td><%= @content.user || '-' %></td>
       </tr>
       <tr>
         <td><strong>Categories</strong></td>
-        <td><%= @content.categories.map(&:title).join(", ") %></td>
+        <td><%= @content.categories.map(&:title).join(', ') %></td>
       </tr>
       <tr>
         <td><strong>Created</strong></td>

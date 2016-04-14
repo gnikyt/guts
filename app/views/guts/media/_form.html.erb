@@ -1,13 +1,13 @@
 <%= form_for([@object, @medium]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit "Save", class: "success button" %>
-    <%= link_to "Back", polymorphic_url([@object, :media]), class: "secondary hollow button" %>
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', polymorphic_url([@object, :media]), class: 'secondary hollow button' %>
   </div>
 
   <% if @medium.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@medium.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@medium.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @medium.errors.full_messages.each do |message| %>
@@ -20,7 +20,7 @@
 
   <div class="small-12 columns">
     <%= f.label :file %>
-    <%= f.file_field :file, {class: "hollow button"} %>
+    <%= f.file_field :file, { class: 'hollow button' } %>
   </div>
   <div class="small-12 columns">
     <%= f.label :title %>
@@ -32,7 +32,7 @@
   </div>
   <div class="small-12 columns">
     <%= f.label :tags %>
-    <%= f.text_field :tags, {class: "tags"} %>
+    <%= f.text_field :tags, { class: 'tags' } %>
   </div>
 
   <% if @object %>

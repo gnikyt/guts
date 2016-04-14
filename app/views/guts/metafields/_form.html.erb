@@ -1,13 +1,13 @@
 <%= form_for([@object, @metafield]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit "Save", class: "success button" %>
-    <%= link_to "Back", url_for([@object, :metafields]), class: "secondary hollow button" %>
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', url_for([@object, :metafields]), class: 'secondary hollow button' %>
   </div>
 
   <% if @metafield.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@metafield.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@metafield.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @metafield.errors.full_messages.each do |message| %>
@@ -25,7 +25,7 @@
 
   <div class="small-12 columns">
     <%= f.label :value %>
-    <%= f.text_area :value, {class: "tinymce"} %>
+    <%= f.text_area :value, { class: 'tinymce' } %>
   </div>
 
   <div class="hide">

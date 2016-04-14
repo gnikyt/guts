@@ -1,11 +1,11 @@
 <div class="row">
   <div class="small-12 columns">
-    <h1>Media<% if @object.try(:title) or @object.try(:name) and !params.has_key? :insert %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || "N/A" %></span><% end %></h1>
+    <h1>Media<% if @object.try(:title) or @object.try(:name) and !params.has_key? :insert %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || 'N/A' %></span><% end %></h1>
     <% if @object %>
-    <%= link_to "New", new_polymorphic_path([@object, :medium]), class: "button" %>
-      <%= link_to "Back", url_for([:edit, @object]), class: "secondary hollow button" %>
+    <%= link_to 'New', new_polymorphic_path([@object, :medium]), class: 'button' %>
+      <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
     <% else %>
-      <%= link_to "New", new_medium_path, class: "button" %>
+      <%= link_to 'New', new_medium_path, class: 'button' %>
     <% end %>
   </div>
 </div>
@@ -28,7 +28,7 @@
           <% @media.each do |media| %>
             <tr>
               <td width="15%">
-                <% if media.file_content_type.include? "image" %>
+                <% if media.file_content_type.include? 'image' %>
                   <%= image_tag media.file.url(:small) %>
                 <% else %>
                   <i class="fa fa-3x fa-file-o"></i>
@@ -45,10 +45,10 @@
               </td>
               <td class="action_links">
                 <a href="<%= editor_insert_medium_path(media) %>" class="media_insert" data-type="<%= media.file_content_type %>" data-url="<%= media.file.url(:original) %>" data-title="<%= media.title %>">Insert</a>
-                <%= link_to "View", media.file.url(:original), {target: "_blank"} %>
-                <%= link_to "Info", medium_path(media) %>
-                <%= link_to "Edit", edit_polymorphic_path([@object, media]) %>
-                <%= link_to_destroy "Destroy", polymorphic_path([@object, media])%>
+                <%= link_to 'View', media.file.url(:original), { target: '_blank' } %>
+                <%= link_to 'Info', medium_path(media) %>
+                <%= link_to 'Edit', edit_polymorphic_path([@object, media]) %>
+                <%= link_to_destroy 'Destroy', polymorphic_path([@object, media])%>
               </td>
             </tr>
           <% end %>

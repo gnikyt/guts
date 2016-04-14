@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Sites</h1>
-    <%= link_to "New", new_site_path, class: "button" %>
+    <%= link_to 'New', new_site_path, class: 'button' %>
   </div>
 </div>
 
@@ -26,12 +26,12 @@
               <td><%= site.domain %></td>
               <td align="right" class="action_links">
                 <% if site.default? %>
-                  <%= link_to "Remove Default", remove_default_site_path(site) %>
+                  <%= link_to 'Remove Default', remove_default_site_path(site) %>
                 <% else %>
-                  <%= link_to "Set as Default", set_default_site_path(site) %>
+                  <%= link_to 'Set as Default', set_default_site_path(site) %>
                 <% end %>
-                <%= link_to "Edit", edit_site_path(site) %>
-                <%= link_to_destroy "Destroy", site %>
+                <%= link_to 'Edit', edit_site_path(site) %>
+                <%= link_to_destroy 'Destroy', site %>
               </td>
             </tr>
           <% end %>

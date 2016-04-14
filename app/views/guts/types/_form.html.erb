@@ -3,16 +3,16 @@
     <%= f.submit "Save", class: "success button" %>
     <%= link_to "Back", types_path, class: "secondary hollow button" %>
     <% unless @type.new_record? %>
-      <%= link_to "Records (#{@type.contents.size})", contents_path(type: @type.slug), class: "hollow button warning" %>
-      <%= link_to "Metafields (#{@type.metafields.size})", type_metafields_path(@type), class: "hollow button" %>
-      <%= link_to "Media (#{@type.media.size})", type_media_path(@type), class: "hollow button alert" %>
+      <%= link_to "Records (#{@type.contents.size})", contents_path(type: @type.slug), class: 'hollow button warning' %>
+      <%= link_to "Metafields (#{@type.metafields.size})", type_metafields_path(@type), class: 'hollow button' %>
+      <%= link_to "Media (#{@type.media.size})", type_media_path(@type), class: 'hollow button alert' %>
     <% end %>
   </div>
 
   <% if @type.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@type.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@type.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @type.errors.full_messages.each do |message| %>
