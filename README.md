@@ -15,7 +15,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile`:
 
 ``` ruby
-gem 'guts', "~> 1.0"
+gem 'guts', "~> 1.1"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
