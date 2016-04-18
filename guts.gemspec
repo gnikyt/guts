@@ -10,12 +10,18 @@ Gem::Specification.new do |s|
   s.authors     = ['Tyler King']
   s.email       = ['tyler.n.king@outlook.com']
   s.homepage    = 'http://tylerking.me/'
-  s.summary     = 'A mountable Rails 4 CMS Engine'
-  s.description = 'A mountable Rails 4 CMS Engine with a basic'\
-                  'dashboard interface for your projects'
+  s.summary     = 'A mountable, multisite, CMS engine for Rails 4'
+  s.description = 'A mountable, multisite, CMS engine for Rails 4'\
+                  'with a basic dashboard interface for your projects'
   s.license     = 'bsd-3-clause'
 
-  s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
+  s.files = Dir[
+    '{app,config,db,lib}/**/*',
+    'LICENSE',
+    'Rakefile',
+    'README.md',
+    'CHANGELOG.md'
+  ]
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'rails', '~> 4.2'
