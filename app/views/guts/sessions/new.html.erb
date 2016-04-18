@@ -2,8 +2,8 @@
   <%= form_for(:session, url: create_session_path) do |f| %>
     <div class="small-12 columns">
       <h1>Session</h1>
-      <%= f.submit "Login", {class: "button"} %>
-      <%= link_to "Forgot Password?", forgot_session_path, {class: "hollow button secondary"} %>
+      <%= f.submit 'Login', { class: 'button' } %>
+      <%= link_to 'Forgot Password?', forgot_session_path, { class: 'hollow button secondary' } %>
     </div>
   
     <% if flash[:notice] %>

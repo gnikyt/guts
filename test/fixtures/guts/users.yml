@@ -3,3 +3,8 @@ admin_user:
   email: test@domain.com
   password_digest: <%= BCrypt::Password.create("dingo", cost: 10) %>
   password_token: 123456
+
+regular_user:
+  name: Test Regular
+  email: test_regular@domain.com
+  password_digest: <%= BCrypt::Password.create("dingo_regular", cost: 10) %>

@@ -1,3 +1,4 @@
+# Guts' module namespace
 module Guts 
   # Guts' engine class
   class Engine < ::Rails::Engine

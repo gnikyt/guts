@@ -1,0 +1,8 @@
+default_site:
+  name: Test Site
+  domain: testsite.com
+  default: true
+
+nondefault_site:
+  name: Fr Test Site
+  domain: fr.testsite.com

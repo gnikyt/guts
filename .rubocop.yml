@@ -1,0 +1,22 @@
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 100
+
+Style/TrailingWhitespace:
+  Enabled: false
+  
+Style/NumericLiterals:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - test/fixtures/**/**
+    - coverage/**/*
+    - bin/**/*
+    - doc/**/*
+    - config/**/*
+    - db/**/*
+    - test/dummy/**/**

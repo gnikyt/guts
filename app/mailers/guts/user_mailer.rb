@@ -7,7 +7,7 @@ module Guts
       @user  = user
       @token = user.password_token
       
-      mail to: @user.email, subject: "Reset Password"
+      mail to: @user.email, subject: 'Reset Password'
     end
   end
 end

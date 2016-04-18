@@ -24,7 +24,7 @@ module Guts
     # Determins if the user is logged in
     # @return [Boolean] true for logged in, false for not
     def logged_in?
-      false === current_user.nil?
+      !current_user.nil?
     end
   end
 end

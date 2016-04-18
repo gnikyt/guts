@@ -45,4 +45,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost:3000" }
   
   config.action_mailer.preview_path = "#{Guts::Engine.root}/test/mailers/previews"
+  
+  config.action_dispatch.tld_length = 0
 end

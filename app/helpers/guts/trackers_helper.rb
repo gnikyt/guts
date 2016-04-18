@@ -8,7 +8,7 @@ module Guts
     def render_track(track, layout = nil)
       return unless track.is_a? Guts::Tracker
 
-      render partial: track_view_for(track), layout: layout, locals: {track: track}
+      render partial: track_view_for(track), layout: layout, locals: { track: track }
     end
     
     # Determines the partial template for a track object

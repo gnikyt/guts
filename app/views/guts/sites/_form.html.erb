@@ -1,0 +1,31 @@
+<%= form_for(@site) do |f| %>
+  <div class="small-12 columns">
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', sites_path, class: 'secondary hollow button' %>
+  </div>
+
+  <% if @site.errors.any? %>
+    <div class="small-12 columns">
+      <div class="callout warning">
+        <h5><%= pluralize(@site.errors.count, 'error') %> prohibited this content from being saved:</h5>
+
+        <ul>
+          <% @site.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="small-12 columns">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="small-12 columns">
+    <%= f.label :domain %>
+    <%= f.text_field :domain %>
+    <p class="help-text">Example: fr.domain.com</p>
+  </div>
+<% end %>

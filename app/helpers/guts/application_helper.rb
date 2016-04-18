@@ -9,10 +9,10 @@ module Guts
     # @return [String] html to display
     def link_to_destroy(title, object, link_opts = {})
       html = []
-      html << link_to(title, "#", link_opts.merge({class: "destroy_resource #{link_opts[:class]}"}))
-      html << form_for(object, url: object, method: :delete, html: {style: "display: none"}) {}
+      html << link_to(title, '#', link_opts.merge(class: "destroy_resource #{link_opts[:class]}"))
+      html << form_for(object, url: object, method: :delete, html: { style: 'display: none' }) {}
       
-      html.join("").html_safe
+      html.join('').html_safe
     end
     
     # Creates a human-readable version of an object
@@ -28,7 +28,7 @@ module Guts
     # @example Types#edit
     #   Will produce `guts_types_edit`
     def controller_css_id
-      "#{params[:controller].gsub(/\//, "_")}_#{params[:action]}"
+      "#{params[:controller].tr('/', '_')}_#{params[:action]}"
     end
     
     # Determines if a menu is active in the admin panel
@@ -44,6 +44,13 @@ module Guts
       else
         controller.controller_name.include? key.to_s
       end
+    end
+    
+    # Helper for settings the current site ID for a model in the form
+    # @param [Object] f the current form object
+    # @return [String] html for form field
+    def current_site_form_field(f)
+      f.hidden_field :site_id, value: @current_site.try(:id)
     end
   end
 end

@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Site</h1>
+    <%= link_to 'Back', sites_path, class: 'secondary button' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <tr>
+        <td><strong>Site</strong></td>
+        <td><%= @site.name %></td>
+      </tr>
+      <tr>
+        <td><strong>Domain</strong></td>
+        <td><%= @site.domain %></td>
+      </tr>
+      <tr>
+        <td><strong>Default?</strong></td>
+        <td><%= if @site.default? then "Yes" else "No" end %></td>
+      </tr>
+      <tr>
+        <td><strong>Created</strong></td>
+        <td><%= @site.updated_at %></td>
+      </tr>
+      <tr>
+        <td><strong>Updated</strong></td>
+        <td><%= @site.updated_at %></td>
+      </tr>
+    </table>
+  </div>
+</div>

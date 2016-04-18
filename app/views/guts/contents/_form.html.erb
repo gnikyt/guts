@@ -2,17 +2,17 @@
   <div class="small-12 medium-8 columns">
     <div class="row">
       <div class="small-12 columns">
-        <%= f.submit "Save #{@type.title}", class: "success button" %>
+        <%= f.submit "Save #{@type.title}", class: 'success button' %>
         <% unless @content.new_record? %>
-          <%= link_to "Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: "hollow button" %>
-          <%= link_to "Media (#{@content.media.size})", content_media_path(@content), class: "hollow button secondary" %>
+          <%= link_to "Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: 'hollow button' %>
+          <%= link_to "Media (#{@content.media.size})", content_media_path(@content), class: 'hollow button secondary' %>
         <% end %>
       </div>
 
       <% if @content.errors.any? %>
         <div class="small-12 columns">
           <div class="callout warning">
-            <h5><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h5>
+            <h5><%= pluralize(@content.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
             <ul>
               <% @content.errors.full_messages.each do |message| %>
@@ -37,7 +37,7 @@
 
       <div class="small-12 columns">
         <%= f.label :content %>
-        <%= f.text_area :content, {class: "tinymce"} %>
+        <%= f.text_area :content, { class: 'tinymce' } %>
       </div>
     </div>
   </div>
@@ -45,21 +45,22 @@
     <div class="row">
       <div class="small-12 columns">
         <%= f.label :visiblity %>
-        <%= f.radio_button :visible, 1 %> <%= f.label :visible_1, "Visible" %>
-        <%= f.radio_button :visible, 0 %> <%= f.label :visible_0, "Hidden" %>
+        <%= f.radio_button :visible, 1 %> <%= f.label :visible_1, 'Visible' %>
+        <%= f.radio_button :visible, 0 %> <%= f.label :visible_0, 'Hidden' %>
       </div>
 
       <div class="small-12 columns">
         <%= f.label :categories %>
-        <%= f.collection_select :category_ids, Guts::Category.all, :id, :title, {}, {multiple: true} %>
+        <%= f.collection_select :category_ids, Guts::Category.all, :id, :title, {}, { multiple: true } %>
       </div>
       
       <div class="small-12 columns">
         <%= f.label :tags %>
-        <%= f.text_field :tags, {class: "tags"} %>
+        <%= f.text_field :tags, { class: 'tags' } %>
       </div>
     </div>
   </aside>
 
   <input type="hidden" name="type" value="<%= @type.slug %>">
+  <%= current_site_form_field f %>
 <% end %>

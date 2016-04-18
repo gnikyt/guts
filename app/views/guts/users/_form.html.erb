@@ -1,17 +1,17 @@
 <%= form_for(@user) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit "Save", class: "success button" %>
-    <%= link_to "Back", users_path, class: "secondary hollow button" %>
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', users_path, class: 'secondary hollow button' %>
     <% unless @user.new_record? %>
-    <%= link_to "Metafields (#{@user.metafields.size})", user_metafields_path(@user), class: "hollow button" %>
-    <%= link_to "Media (#{@user.media.size})", user_media_path(@user), class: "hollow button alert" %>
+    <%= link_to "Metafields (#{@user.metafields.size})", user_metafields_path(@user), class: 'hollow button' %>
+    <%= link_to "Media (#{@user.media.size})", user_media_path(@user), class: 'hollow button alert' %>
     <% end %>
   </div>
 
   <% if @user.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@user.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@user.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @user.errors.full_messages.each do |message| %>
@@ -35,11 +35,11 @@
     <%= f.password_field :password %>
   </div>
   <div class="small-12 medium-6 columns">
-    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.label :password_confirmation, 'Confirmation' %>
     <%= f.password_field :password_confirmation %>
   </div>
   <div class="small-12 columns">
     <%= f.label :groups %>
-    <%= f.collection_select :group_ids, Guts::Group.all, :id, :title, {}, {multiple: true} %>
+    <%= f.collection_select :group_ids, Guts::Group.all, :id, :title, {}, { multiple: true } %>
   </div>
 <% end %>

@@ -1,17 +1,17 @@
 <%= form_for(@navigation) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit "Save", class: "success button" %>
-    <%= link_to "Back", navigations_path, class: "secondary hollow button" %>
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', navigations_path, class: 'secondary hollow button' %>
     <% unless @navigation.new_record? %>
-      <%= link_to "Metafields (#{@navigation.metafields.size})", navigation_metafields_path(@navigation), class: "hollow button" %>
-      <%= link_to "Media (#{@navigation.media.size})", navigation_media_path(@navigation), class: "hollow button warning" %>
+      <%= link_to "Metafields (#{@navigation.metafields.size})", navigation_metafields_path(@navigation), class: 'hollow button' %>
+      <%= link_to "Media (#{@navigation.media.size})", navigation_media_path(@navigation), class: 'hollow button warning' %>
     <% end %>
   </div>
 
   <% if @navigation.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@navigation.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@navigation.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @navigation.errors.full_messages.each do |message| %>
@@ -33,4 +33,6 @@
       <%= f.text_field :slug %>
     </div>
   <% end %>
+
+  <%= current_site_form_field f %>
 <% end %>

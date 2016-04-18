@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Types controller
@@ -29,7 +29,8 @@ module Guts
       @type = Type.new type_params
 
       if @type.save
-        redirect_to types_path, notice: "Type was successfully created."
+        flash[:notice] = 'Type was successfully created.'
+        redirect_to types_path
       else
         render :new
       end
@@ -39,7 +40,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @type.update type_params
-        redirect_to types_path, notice: "Type was successfully updated."
+        flash[:notice] = 'Type was successfully updated.'
+        redirect_to types_path
       else
         render :edit
       end
@@ -49,10 +51,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @type.destroy
-      redirect_to types_path, notice: "Type was successfully destroyed."
+      
+      flash[:notice] = 'Type was successfully destroyed.'
+      redirect_to types_path
     end
 
     private
+    
     # Sets a type from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -63,7 +68,7 @@ module Guts
     # Permits type params from forms
     # @private
     def type_params
-      params.require(:type).permit(:title, :slug)
+      params.require(:type).permit(:title, :slug, :site_id)
     end
   end
 end

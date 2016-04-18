@@ -6,10 +6,18 @@ Guts::Engine.routes.draw do
   # Resources and routes
   get "/", to: "users#index"
   
+  # Sites
+  resources :sites do
+    get :set_default, on: :member
+    get :remove_default, on: :member
+  end
+  
+  # Media
   resources :media do
     get :editor_insert, on: :member
   end
   
+  # Users
   resources :users do
     concerns :fieldable, fieldable_type: "Guts::User"
     concerns :filable, filable_type: "Guts::User"
@@ -17,26 +25,31 @@ Guts::Engine.routes.draw do
     match :switch_user, on: :collection, via: [:get, :post]
   end
   
+  # Groups
   resources :groups do
     concerns :fieldable, fieldable_type: "Guts::Group"
     concerns :filable, filable_type: "Guts::Group"
   end
   
+  # Categories
   resources :categories do
     concerns :fieldable, fieldable_type: "Guts::Category"
     concerns :filable, filable_type: "Guts::Category"
   end
   
+  # Types
   resources :types do
     concerns :fieldable, fieldable_type: "Guts::Type"
     concerns :filable, filable_type: "Guts::Type"
   end
   
+  # Contents
   resources :contents do
     concerns :fieldable, fieldable_type: "Guts::Content"
     concerns :filable, filable_type: "Guts::Content"
   end
   
+  # Navigations
   resources :navigations do
     concerns :fieldable, fieldable_type: "Guts::Navigation"
     concerns :filable, filable_type: "Guts::Navigation"
@@ -47,6 +60,7 @@ Guts::Engine.routes.draw do
     end
   end
   
+  # Navigation Items
   resources :navigation_items do
     concerns :fieldable, fieldable_type: "Guts::NavigationItem"
     concerns :filable, filable_type: "Guts::NavigationItem"
@@ -54,6 +68,7 @@ Guts::Engine.routes.draw do
     get :navigatable_objects, on: :collection
   end
   
+  # Options
   resources :options
   
   # Session

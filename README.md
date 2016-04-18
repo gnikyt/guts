@@ -4,7 +4,7 @@
 [![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
 [![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
-A mountable CMS engine for Rails 4.
+A mountable, multisite, CMS engine for Rails 4.
 
 ### Intensions
 
@@ -26,7 +26,7 @@ bundle # fetches the new gem
 bundle exec rake guts:install:migrations # installs Guts migrations
 bundle exec rake db:migrate # load migrations into your database
 bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an "Admins" group which is important)
-bubdle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
+bundle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
 ```
 
 Open `config/routes.rb` in your Rails application and add:
@@ -43,11 +43,7 @@ See [configurations](doc/extra/configurations.md) in docs.
 
 ## Documentation
 
-See [extra](doc/extra) under docs for information.
-
-### Code
-
-YARD is used for documentation generation of the code itself. You may run `bundle exec yardoc` in this repository and then open `doc/index.html` to view.
+See [extra](doc/extra) under docs for information. The docs contain information for configuration usage, extending, and how to implement multisite support.
 
 ## Commands
 
@@ -55,6 +51,7 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 
 ## Features
 
++ Multisite support
 + Unit tested and documented
 + Dynamic content types
 + File management
@@ -74,10 +71,10 @@ Check out [this album](http://imgur.com/a/6dFLL) for some screenshots.
 
 ## Todo
 
-+ Write usage guides
 + Create a project page
 + Generators for installing (useful?)
 + Add configurable roles for users (suggestions?)
++ Scope users and groups for multisite
 
 ## License
 

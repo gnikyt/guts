@@ -1,4 +1,4 @@
-require_dependency "guts/application_controller"
+require_dependency 'guts/application_controller'
 
 module Guts
   # Media controller
@@ -11,10 +11,10 @@ module Guts
     # @note Depending on the object passed (polymorphic)
     def index
       @media = if @object
-        @object.media.paginate(page: params[:page], per_page: @per_page)
-      else
-        Medium.paginate(page: params[:page], per_page: @per_page)
-      end
+                 @object.media.paginate(page: params[:page], per_page: @per_page)
+               else
+                 Medium.paginate(page: params[:page], per_page: @per_page)
+               end
     end
     
     # Shows details about a single medium
@@ -36,7 +36,8 @@ module Guts
       @medium = Medium.new medium_params
 
       if @medium.save
-        redirect_to polymorphic_path([@object, :media]), notice: "Media was successfully created."
+        flash[:notice] = 'Media was successfully created.'
+        redirect_to polymorphic_path([@object, :media])
       else
         render :new
       end
@@ -46,7 +47,8 @@ module Guts
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @medium.update(medium_params)
-        redirect_to polymorphic_path([@object, :media]), notice: "Media was successfully updated."
+        flash[:notice] = 'Media was successfully updated.'
+        redirect_to polymorphic_path([@object, :media])
       else
         render :edit
       end
@@ -56,7 +58,9 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @medium.destroy
-      redirect_to polymorphic_path([@object, :media]), notice: "Media was successfully destroyed."
+      
+      flash[:notice] = 'Media was successfully destroyed.'
+      redirect_to polymorphic_path([@object, :media])
     end
     
     # Handles showing the insert medium
@@ -66,6 +70,7 @@ module Guts
     end
 
     private
+  
     # Sets a medium from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -89,7 +94,16 @@ module Guts
     # Permits medium params from forms
     # @private
     def medium_params
-      params.require(:medium).permit(:title, :tags, :position, :caption, :file, :filable_type, :filable_id)
+      params.require(:medium).permit(
+        :title,
+        :tags,
+        :position,
+        :caption,
+        :file,
+        :filable_type,
+        :filable_id,
+        :site_id
+      )
     end
 
     # Gets the per-page value to use

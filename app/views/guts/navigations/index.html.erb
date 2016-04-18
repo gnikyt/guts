@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Navigations</h1>
-    <%= link_to "New", new_navigation_path, class: "button" %>
+    <%= link_to 'New', new_navigation_path, class: 'button' %>
   </div>
 </div>
 
@@ -22,18 +22,18 @@
         <div class="callout secondary">
           <h5><%= navigation.title %></h5>
           <div class="tiny button-group">
-            <%= link_to "New", new_navigation_navigation_item_path(navigation), {class: "button"} %>
-            <%= link_to "Edit", edit_navigation_path(navigation), {class: "warning button"} %>
-            <%= link_to_destroy "Destroy", navigation, {class: "alert button"} %>
+            <%= link_to 'New', new_navigation_navigation_item_path(navigation), { class: 'button' } %>
+            <%= link_to 'Edit', edit_navigation_path(navigation), { class: 'warning button' } %>
+            <%= link_to_destroy 'Destroy', navigation, { class: 'alert button' } %>
           </div>
           <ul>
             <% if navigation.navigation_items.size > 0 %>
               <% navigation.navigation_items.each do |item| %>
                 <li>
-                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.is_custom? ? "Custom" : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.is_custom? %>
+                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.custom? ? 'Custom' : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.custom? %>
                   <div class="action_links">
-                    <%= link_to "Edit", edit_navigation_navigation_item_path(navigation, item) %>
-                    <%= link_to_destroy "Destroy", navigation_navigation_item_path(navigation, item) %>
+                    <%= link_to 'Edit', edit_navigation_navigation_item_path(navigation, item) %>
+                    <%= link_to_destroy 'Destroy', navigation_navigation_item_path(navigation, item) %>
                   </div>
                 </li>
               <% end %>

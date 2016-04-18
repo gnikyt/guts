@@ -3,9 +3,11 @@ module Guts
   class Navigation < ActiveRecord::Base
     extend FriendlyId
     include TrackableConcern
+    include MultisiteScopeConcern
     
     validates :title, presence: true
     
+    belongs_to :site
     has_many :tracks, as: :object
     has_many :navigation_items, dependent: :destroy
     has_many :media, as: :filable, dependent: :destroy

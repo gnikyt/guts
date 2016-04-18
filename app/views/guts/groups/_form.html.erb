@@ -1,18 +1,18 @@
 <%= form_for(@group) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit "Save", class: "success button" %>
-    <%= link_to "Back", groups_path, class: "secondary hollow button" %>
+    <%= f.submit 'Save', class: 'success button' %>
+    <%= link_to 'Back', groups_path, class: 'secondary hollow button' %>
     <% unless @group.new_record? %>
-      <%= link_to "Records (#{@group.users.size})", users_path(group: @group.id), class: "hollow button warning" %>
-      <%= link_to "Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: "hollow button" %>
-      <%= link_to "Media (#{@group.media.size})", group_media_path(@group), class: "hollow button alert" %>
+      <%= link_to "Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning' %>
+      <%= link_to "Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button' %>
+      <%= link_to "Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert' %>
     <% end %>
   </div>
 
   <% if @group.errors.any? %>
     <div class="small-12 columns">
       <div class="callout warning">
-        <h5><%= pluralize(@group.errors.count, "error") %> prohibited this content from being saved:</h5>
+        <h5><%= pluralize(@group.errors.count, 'error') %> prohibited this content from being saved:</h5>
 
         <ul>
           <% @group.errors.full_messages.each do |message| %>

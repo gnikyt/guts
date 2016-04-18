@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if lookup_context.exists?("layout_hook", ["guts/application"], true) %>
-      <%= render "layout_hook" %>
+    <% if lookup_context.exists?('layout_hook', ['guts/application'], true) %>
+      <%= render 'layout_hook' %>
     <% end %>
     
     <title>Dashboard &mdash; <%= controller_name.humanize %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag "guts/application", media: "all" %>
+    <%= stylesheet_link_tag 'guts/application', media: 'all' %>
     <%= yield :head %>
   </head>
   <body id="<%= controller_css_id %>">
@@ -19,29 +19,29 @@
         
         <% if logged_in? %>
           <ul class="sidebar-nav">
-            <li class="<%= "active" if menu_active? :types %>">
-              <%= link_to "Content Types", types_path %>
+            <li class="<%= 'active' if menu_active? :types %>">
+              <%= link_to 'Content Types', types_path %>
             </li>
-            <li class="<%= "active" if menu_active? :categories %>">
-              <%= link_to "Categories", categories_path %>
+            <li class="<%= 'active' if menu_active? :categories %>">
+              <%= link_to 'Categories', categories_path %>
             </li>
-            <li class="<%= "active" if menu_active? :navigation, false %>">
-              <%= link_to "Navigation", navigations_path %>
+            <li class="<%= 'active' if menu_active? :navigation, false %>">
+              <%= link_to 'Navigation', navigations_path %>
             </li>
-            <li class="<%= "active" if menu_active? :media %>">
-              <%= link_to "Media", media_path %>
+            <li class="<%= 'active' if menu_active? :media %>">
+              <%= link_to 'Media', media_path %>
             </li>
-            <li class="<%= "active" if menu_active? :users %>">
-              <%= link_to "Users", users_path %>
+            <li class="<%= 'active' if menu_active? :users %>">
+              <%= link_to 'Users', users_path %>
             </li>
-            <li class="<%= "active" if menu_active? :groups %>">
-              <%= link_to "User Groups", groups_path %>
+            <li class="<%= 'active' if menu_active? :groups %>">
+              <%= link_to 'User Groups', groups_path %>
             </li>
             
             <li>&nbsp;</li>
             
             <% Guts::Type.all.each do |type| %>
-              <li class="<%= "active" if menu_active?(:contents) and @type == type %>">
+              <li class="<%= 'active' if menu_active?(:contents) and @type == type %>">
                 <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
               </li>
             <% end %>
@@ -50,11 +50,14 @@
             
             <%= yield :menu_links %>
             
-            <li class="<%= "active" if menu_active? :trackers %>">
-              <%= link_to "Logs", trackers_path %>
+            <li class="<%= 'active' if menu_active? :trackers %>">
+              <%= link_to 'Logs', trackers_path %>
             </li>
-            <li class="<%= "active" if menu_active? :options %>">
-              <%= link_to "Options", options_path %>
+            <li class="<%= 'active' if menu_active? :options %>">
+              <%= link_to 'Options', options_path %>
+            </li>
+            <li class="<%= 'active' if menu_active? :sites %>">
+              <%= link_to 'Sites', sites_path %>
             </li>
             
             <li>&nbsp;</li>
@@ -81,7 +84,7 @@
       </div>
     </div>
     
-    <%= javascript_include_tag "guts/application" %>
+    <%= javascript_include_tag 'guts/application' %>
     <%= yield :body_after %>
   </body>
 </html>
