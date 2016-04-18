@@ -26,7 +26,7 @@ bundle # fetches the new gem
 bundle exec rake guts:install:migrations # installs Guts migrations
 bundle exec rake db:migrate # load migrations into your database
 bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an "Admins" group which is important)
-bubdle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
+bundle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
 ```
 
 Open `config/routes.rb` in your Rails application and add:
