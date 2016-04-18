@@ -84,7 +84,15 @@ module Guts
     # Permits content params from forms
     # @private
     def content_params
-      params.require(:content).permit(:title, :slug, :content, :visible, :tags, category_ids: [])
+      params.require(:content).permit(
+        :title,
+        :slug,
+        :content,
+        :visible,
+        :tags,
+        :site_id,
+        category_ids: []
+      )
     end
   
     # Gets the per-page value to use

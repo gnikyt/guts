@@ -98,7 +98,8 @@ module Guts
         :position,
         :navigation_id,
         :navigatable_type,
-        :navigatable_id
+        :navigatable_id,
+        :site_id
       )
     end
     

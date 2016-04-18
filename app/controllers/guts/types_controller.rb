@@ -68,7 +68,7 @@ module Guts
     # Permits type params from forms
     # @private
     def type_params
-      params.require(:type).permit(:title, :slug)
+      params.require(:type).permit(:title, :slug, :site_id)
     end
   end
 end

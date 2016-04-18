@@ -45,5 +45,12 @@ module Guts
         controller.controller_name.include? key.to_s
       end
     end
+    
+    # Helper for settings the current site ID for a model in the form
+    # @param [Object] f the current form object
+    # @return [String] html for form field
+    def current_site_form_field(f)
+      f.hidden_field :site_id, value: @current_site.try(:id)
+    end
   end
 end

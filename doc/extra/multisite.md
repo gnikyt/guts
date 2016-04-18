@@ -39,3 +39,15 @@ The `Set as Default` option the in sites section internally means nothing to Gut
 ### Users & Groups
 
 Currenly multisite support does not scope users and groups. This means the same users and groups will appear in all domains.
+
+### Unscoping
+
+Because for most models, a `default_scope` is provided, you may wish to remove this scope in some use-cases (such as pulling content from all sites not just the current site). Simply add `unscoped` to your ActiveRecord queries.
+
+```ruby
+# For current site
+Guts::Content.where(type: @type)
+
+# For all
+Guts::Content.unscoped.where(type: @type)
+```

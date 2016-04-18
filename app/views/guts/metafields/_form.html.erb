@@ -32,4 +32,6 @@
     <%= f.text_field :fieldable_id, value: @object.id %>
     <%= f.text_field :fieldable_type, value: @object.class %>
   </div>
+
+  <%= current_site_form_field f %>
 <% end %>

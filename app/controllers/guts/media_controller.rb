@@ -101,7 +101,8 @@ module Guts
         :caption,
         :file,
         :filable_type,
-        :filable_id
+        :filable_id,
+        :site_id
       )
     end
 

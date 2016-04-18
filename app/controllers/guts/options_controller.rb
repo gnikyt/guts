@@ -68,7 +68,7 @@ module Guts
     # Permits option params from forms
     # @private
     def option_params
-      params.require(:option).permit(:key, :value)
+      params.require(:option).permit(:key, :value, :site_id)
     end
     
     # Gets the per-page value to use

@@ -81,7 +81,7 @@ module Guts
     # Permits metafield params from forms
     # @private
     def metafield_params
-      params.require(:metafield).permit(:key, :value, :fieldable_id, :fieldable_type)
+      params.require(:metafield).permit(:key, :value, :fieldable_id, :fieldable_type, :site_id)
     end
   end
 end

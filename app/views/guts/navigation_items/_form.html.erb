@@ -53,4 +53,6 @@
   <% else %>
     <%= f.hidden_field :navigation_id, value: @navigation.id %>
   <% end %>
+
+  <%= current_site_form_field f %>
 <% end %>

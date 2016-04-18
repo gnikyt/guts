@@ -68,7 +68,7 @@ module Guts
     # Permits navigation params from forms
     # @private
     def navigation_params
-      params.require(:navigation).permit(:title)
+      params.require(:navigation).permit(:title, :site_id)
     end
   end
 end

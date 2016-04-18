@@ -2,6 +2,11 @@ require 'test_helper'
 
 module Guts
   class ApplicationHelperTest < ActionView::TestCase
+    # Mock type_path
+    def type_path(_)
+      '/guts/types'
+    end
+    
     # Mocking params
     def params
       { controller: 'guts/types', action: 'edit' }
@@ -37,6 +42,16 @@ module Guts
     
     test 'should not return menu as active' do
       assert_equal false, menu_active?(:types)
+    end
+    
+    test 'should return hidden form field for site ID' do
+      form_html = capture do
+        form_for guts_types(:page_type) do |f|
+          current_site_form_field f
+        end
+      end
+
+      assert form_html.include?('type[site_id]')
     end
   end
 end

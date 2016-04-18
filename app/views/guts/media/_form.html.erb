@@ -39,4 +39,6 @@
     <%= f.hidden_field :filable_type, value: @object.class %>
     <%= f.hidden_field :filable_id, value: @object.id %>
   <% end %>
+
+  <%= current_site_form_field f %>
 <% end %>
