@@ -84,7 +84,13 @@
       </div>
     </div>
     
+    <script>
+      var TINYMCE_GUTS_MEDIA_PATH = '<%= Guts::Engine.routes.url_helpers.media_path %>';
+    </script>
+    <%= tinymce_assets %>
     <%= javascript_include_tag 'guts/application' %>
+    <%= tinymce %>
+    
     <%= yield :body_after %>
   </body>
 </html>

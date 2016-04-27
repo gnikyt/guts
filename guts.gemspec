@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'paperclip', '~> 4.3'
   s.add_dependency 'bcrypt', '~> 3.1'
   s.add_dependency 'will_paginate', '~> 3.0'
+  s.add_dependency 'tinymce-rails', '~> 4.3'
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'webmock', '~> 1.22'
   s.add_development_dependency 'simplecov', '~> 0.11'

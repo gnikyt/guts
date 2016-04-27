@@ -1,6 +1,7 @@
 require 'friendly_id'
 require 'paperclip'
 require 'will_paginate'
+require 'tinymce-rails'
 require 'guts/version'
 require 'guts/engine'
 require 'guts/configuration'

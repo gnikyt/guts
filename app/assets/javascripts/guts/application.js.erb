@@ -1,7 +1,6 @@
 //= require ./vendor/jquery
 //= require ./vendor/foundation
-//= require ./vendor/tinymce/tinymce.min.js
-//= require_directory ./vendor
+//= require tinymce-jquery
 //= require_directory .
 
 jQuery(document).foundation();
@@ -36,31 +35,5 @@ jQuery(document).ready(function($) {
     }, function() {
       $that.parent().find("form").trigger("submit");
     });
-  });
-  
-  tinymce.init({
-    selector: ".tinymce",
-    plugins: [
-      "advlist autolink lists link image charmap hr anchor pagebreak",
-      "searchreplace visualblocks visualchars code fullscreen",
-      "insertdatetime media nonbreaking save table contextmenu directionality",
-      "paste textcolor colorpicker textpattern imagetools"
-    ],
-    toolbar1: "undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify |  forecolor backcolor",
-    toolbar2: "bullist numlist outdent indent | link image gutsimages media",
-    setup: function (editor) {
-      editor.addButton("gutsimages", {
-        text: null,
-        icon: "browse",
-        onclick: function () {
-          editor.windowManager.open({
-            title: "Browse",
-            url: "<%= Guts::Engine.routes.url_helpers.media_path %>?insert=1",
-            width: 700,
-            height: 700
-          });
-        }
-      });
-    },
   });
 });
