@@ -1,13 +1,21 @@
 class AddSiteToGuts < ActiveRecord::Migration
   def change
-    add_reference :guts_types, :site, index: true, foreign_key: true
-    add_reference :guts_categories, :site, index: true, foreign_key: true
-    add_reference :guts_contents, :site, index: true, foreign_key: true
-    add_reference :guts_navigations, :site, index: true, foreign_key: true
-    add_reference :guts_navigation_items, :site, index: true, foreign_key: true
-    add_reference :guts_metafields, :site, index: true, foreign_key: true
-    add_reference :guts_trackers, :site, index: true, foreign_key: true
-    add_reference :guts_options, :site, index: true, foreign_key: true
-    add_reference :guts_media, :site, index: true, foreign_key: true
+    tables = [
+      :guts_types,
+      :guts_categories,
+      :guts_contents,
+      :guts_navigations,
+      :guts_navigation_items,
+      :guts_metafields,
+      :guts_trackers,
+      :guts_options,
+      :guts_media
+    ]
+    
+    tables.each do |table|
+      change_table table do |t|
+        t.references :site, index: true
+      end
+    end
   end
 end

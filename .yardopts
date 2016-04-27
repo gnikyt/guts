@@ -1,1 +1,1 @@
---markup markdown --protected --private app/**/*.rb lib/ - README.md LICENSE CHANGELOG.md doc/extra/*
+--embed-mixins --markup markdown --protected --private app/**/*.rb lib/ - README.md LICENSE CHANGELOG.md doc/extra/*
