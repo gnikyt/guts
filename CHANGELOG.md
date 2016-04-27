@@ -1,3 +1,7 @@
+# Version 1.1.1
+
++ Fixed issue where migration for adding `site_id` failed due to invalid scope
+
 # Version 1.1.0
 
 + Added multisite support. See `doc/extra/multisite.md` and PR [#1][]
