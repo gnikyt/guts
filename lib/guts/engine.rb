@@ -14,5 +14,8 @@ module Guts
         require_dependency(c)
       end
     end
+    
+    # Load in our custom assets to precompile
+    config.assets.precompile << "#{config.root}/app/assets/javascripts/tinymce/plugins/guts_media/plugin.js"
   end
 end
