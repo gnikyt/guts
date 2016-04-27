@@ -1,3 +1,8 @@
+# Version 1.2.0
+
++ Switched TinyMCE to tinymce-rails gem. See docs for implementation on how to enable on your applications with our custom TinyMCE plugins
++ Added precompile call in `lib/engine.rb` to include our TinyMCE plugins
+
 # Version 1.1.1
 
 + Fixed issue where migration for adding `site_id` failed due to invalid scope

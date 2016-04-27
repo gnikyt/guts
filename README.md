@@ -15,7 +15,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile`:
 
 ``` ruby
-gem 'guts', "~> 1.1"
+gem 'guts', "~> 1.2"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
@@ -35,7 +35,7 @@ Open `config/routes.rb` in your Rails application and add:
 mount Guts::Engine => "/admin"
 ```
 
-You will now be able to access Guts by visiting `/admin` in your Rails application.
+You will now be able to access Guts by visiting `/admin` in your Rails application. See documentation for furthur items such as configuring TinyMCE to use our plugins.
 
 ## Configuration
 
