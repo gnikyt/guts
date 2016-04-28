@@ -1,3 +1,7 @@
+# Version 1.2.1
+
++ Fixed issue where assets for vendors were not loaded in
+
 # Version 1.2.0
 
 + Switched TinyMCE to tinymce-rails gem. See docs for implementation on how to enable on your applications with our custom TinyMCE plugins

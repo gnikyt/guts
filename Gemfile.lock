@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    guts (1.2.0)
+    guts (1.2.1)
       bcrypt (~> 3.1)
       friendly_id (~> 5.1)
       paperclip (~> 4.3)
