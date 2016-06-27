@@ -16,7 +16,7 @@ body {
 
 table {
   width: 100%;
-  
+
   thead {
     th {
       font-weight: 500;
@@ -31,7 +31,7 @@ table {
 
 .action_links {
   text-align: right;
-  
+
   a {
     font-size: 0.88em;
     display: inline-block;
@@ -46,13 +46,13 @@ form {
     max-height: 80px;
     background-image: none;
   }
-  
+
   aside {
     padding-top: 1.5em;
     padding-bottom: 1.5em;
     background: $light-grey-color;
     border-left: 2px solid rgba(0, 0, 0, 0.8);
-    
+
     & > .row:not(:first-child) {
       margin-top: 1.5em;
     }
@@ -69,11 +69,11 @@ form {
 
   &.toggled {
     padding-left: 250px;
-    
+
     #sidebar-wrapper {
       width: 250px;
     }
-    
+
     #page-content-wrapper {
       position: absolute;
       margin-right: -250px;
@@ -130,7 +130,7 @@ textarea.tinymce {
         background: rgba(255,255,255,0.2);
       }
     }
-    
+
     a {
       display: block;
       text-decoration: none;
@@ -144,12 +144,12 @@ textarea.tinymce {
       &:hover {
         padding-left: 30px;
       }
-      
+
       &:active,
       &:focus {
         text-decoration: none;
       }
-      
+
       small {
         display: block;
         clear: both;
@@ -167,7 +167,7 @@ textarea.tinymce {
 
     a {
       color: #999999;
-      
+
       &:hover {
         color: #fff;
         background: none;
@@ -182,13 +182,13 @@ textarea.tinymce {
   height: 180px;
   padding: 0.5em 0.5em 0 0.5em;
   background: $light-grey-color;
-  
+
   img {
     display: block;
     margin: 0.5em auto;
     max-height: 105px;
   }
-  
+
   .actions {
     position: absolute;
     bottom: 0;
@@ -218,18 +218,18 @@ textarea.tinymce {
 
     &.toggled {
       padding-left: 0;
-      
+
       #sidebar-wrapper {
         width: 0;
       }
-      
+
       #page-content-wrapper {
         position: relative;
         margin-right: 0;
       }
     }
   }
-  
+
   #sidebar-wrapper {
     width: 250px;
   }
@@ -243,7 +243,7 @@ textarea.tinymce {
 /* Navigation */
 .nav_block .callout ul {
   list-style: none;
-  
+
   li {
     padding: 0.3rem 0;
   }
@@ -272,15 +272,15 @@ textarea.tinymce {
 .track {
   font-size: 0.90em;
   padding: 0.5rem 0;
-  
+
   &.odd {
     background-color: $light-grey-color;
   }
-  
+
   .time {
     font-weight: 500;
   }
-  
+
   pre {
     font-style: italic;
     margin-top: 0.5rem;
@@ -292,8 +292,13 @@ textarea.tinymce {
   text-align: center;
   font-size: 0.88em;
   margin: 2rem 0;
-  
+
   a {
     display: inline-block;
   }
+}
+
+/* Content */
+label[for="content_categories"] ~ div:not(:last-of-type) input {
+  margin-bottom: 0;
 }

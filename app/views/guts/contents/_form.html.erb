@@ -27,7 +27,7 @@
         <%= f.label :title %>
         <%= f.text_field :title %>
       </div>
-      
+
       <% unless @content.new_record? %>
         <div class="small-12 columns">
           <%= f.label :slug %>
@@ -51,9 +51,11 @@
 
       <div class="small-12 columns">
         <%= f.label :categories %>
-        <%= f.collection_select :category_ids, Guts::Category.all, :id, :title, {}, { multiple: true } %>
+        <%= f.collection_check_boxes :category_ids, Guts::Category.all, :id, :title do |cb| %>
+          <div><%= cb.check_box %> <%= cb.label %></div>
+        <% end %>
       </div>
-      
+
       <div class="small-12 columns">
         <%= f.label :tags %>
         <%= f.text_field :tags, { class: 'tags' } %>
