@@ -12,30 +12,31 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 
 ## Installation
 
-Include the gem in your `Gemfile`:
+Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', "~> 1.2"
+gem 'guts', "~> 1.3"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
-Next, run the following commands:
+Next, run the following commands for a install of routes, initializer, and editor configurations:
 
 ``` bash
-bundle # fetches the new gem
+bin/rails generate guts:install
+```
+
+If you'd prefer to install individually, see all generators via `bin/rails generate --help | grep guts`
+
+Next, run:
+
+``` bash
 bundle exec rake guts:install:migrations # installs Guts migrations
 bundle exec rake db:migrate # load migrations into your database
 bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an "Admins" group which is important)
 bundle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
 ```
 
-Open `config/routes.rb` in your Rails application and add:
-
-``` ruby
-mount Guts::Engine => "/admin"
-```
-
-You will now be able to access Guts by visiting `/admin` in your Rails application. See documentation for furthur items such as configuring TinyMCE to use our plugins.
+You will now be able to access Guts by visiting `/admin` in your Rails application.
 
 ## Configuration
 
@@ -47,7 +48,7 @@ See [extra](doc/extra) under docs for information. The docs contain information 
 
 ## Commands
 
-To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user cretion, user deletion, changing user passwords, database seeds for install, and migration installs.
+To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
 
 ## Features
 
@@ -72,7 +73,6 @@ Check out [this album](http://imgur.com/a/6dFLL) for some screenshots.
 ## Todo
 
 + Create a project page
-+ Generators for installing (useful?)
 + Add configurable roles for users (suggestions?)
 + Scope users and groups for multisite
 

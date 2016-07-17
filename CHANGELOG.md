@@ -1,3 +1,7 @@
+# Version 1.3.0
+
++ Added generators for routes, tinymce, initializers, and install
+
 # Version 1.2.1
 
 + Fixed issue where assets for vendors were not loaded in
