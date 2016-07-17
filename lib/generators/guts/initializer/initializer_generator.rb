@@ -3,12 +3,7 @@ module Guts
   class InitializerGenerator < Rails::Generators::Base
     # Creates Guts initializer file in Rails app
     def create_initializer_file
-      create_file 'config/initializers/guts.rb' do
-        %Q{
-Guts.configure do
-end
-        }
-      end
+      create_file 'config/initializers/guts.rb', %(Guts.configure do\nend\n)
     end
   end
 end

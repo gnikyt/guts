@@ -10,9 +10,13 @@ module Guts
 
     # Inserts the route into an existing routes file
     def add_route
-      options[:pathname].insert(0, '/') unless options[:pathname][0] === '/'
+      options[:pathname].insert(0, '/') unless options[:pathname][0] == '/'
 
-      inject_into_file 'config/routes.rb', %Q{\n  mount Guts::Engine => "#{options[:pathname]}"\n}, after: '.routes.draw do'
+      inject_into_file(
+        'config/routes.rb',
+        %Q(\n  mount Guts::Engine => "#{options[:pathname]}"\n),
+        after: '.routes.draw do'
+      )
     end
   end
 end

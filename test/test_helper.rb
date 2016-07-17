@@ -22,9 +22,6 @@ require 'rails/test_help'
 # For mocking web requests
 require 'webmock/minitest'
 
-# For mocking objects
-require 'mocha/mini_test'
-
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
 Minitest.backtrace_filter = Minitest::BacktraceFilter.new

@@ -13,7 +13,7 @@ module Guts
 
       run_generator
 
-      assert File.exists? "#{config_dir}/tinymce.yml"
+      assert File.exist? "#{config_dir}/tinymce.yml"
     end
   end
 end

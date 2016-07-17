@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    guts (1.2.2)
+    guts (1.3.0)
       bcrypt (~> 3.1)
       friendly_id (~> 5.1)
       paperclip (~> 4.3)
@@ -79,7 +79,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
-    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -87,8 +86,6 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
-    mocha (1.1.0)
-      metaclass (~> 0.0.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -189,7 +186,6 @@ PLATFORMS
 DEPENDENCIES
   guts!
   inch (~> 0.7)
-  mocha
   rubocop (~> 0.39)
   simplecov (~> 0.11)
   sqlite3 (~> 1.3)

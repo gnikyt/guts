@@ -12,11 +12,11 @@ module Guts
       FileUtils.mkdir_p(config_dir)
 
       File.open("#{config_dir}/routes.rb", 'w+') do |f|
-        f.write %Q{
+        f.write %(
 Rails.application.routes.draw do
   resource :blog
 end
-        }
+)
       end
 
       run_generator ['--pathname=dashboard']
