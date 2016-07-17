@@ -1,0 +1,31 @@
+toolbar:
+  - undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify |  forecolor backcolor
+  - bullist numlist outdent indent | link image gutsimages media guts_media
+plugins:
+  - guts_media
+  - advlist
+  - autolink
+  - lists
+  - link
+  - image
+  - charmap
+  - hr
+  - anchor
+  - pagebreak
+  - searchreplace
+  - visualblocks
+  - visualchars
+  - code
+  - fullscreen
+  - insertdatetime
+  - media
+  - nonbreaking
+  - save
+  - table
+  - contextmenu
+  - directionality
+  - paste
+  - textcolor
+  - colorpicker
+  - textpattern
+  - imagetools

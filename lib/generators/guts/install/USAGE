@@ -1,0 +1,5 @@
+Description:
+  Runs all generators for Guts (routes, initializer, tinymce)
+
+Example:
+  rails generate guts:install

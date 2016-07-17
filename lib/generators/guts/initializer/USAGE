@@ -1,0 +1,8 @@
+Description:
+  Generates a blank initializer file in your Rails app
+
+Example:
+  rails generate guts:initializer
+
+  This will create:
+    config/initializers/guts.rb

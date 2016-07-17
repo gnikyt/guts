@@ -1,0 +1,5 @@
+Description:
+  Adds TinyMCE configuration for Guts to a new or existing tinymce.yml file
+
+Example:
+  rails generate guts:tinymce

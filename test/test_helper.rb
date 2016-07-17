@@ -4,6 +4,7 @@ require 'simplecov'
 unless ENV['NO_COVERAGE']
   SimpleCov.start 'rails' do
     add_group 'Concerns', '/app/concerns'
+    add_group 'Generators', '/lib/generators'
     add_filter 'lib/guts/version.rb' # No need to test version file... doesnt work.
     add_filter 'lib/tasks/guts_tasks.rake' # Inconsistant coverage reports, not sure why
     add_filter 'lib/tasks/guts_users.rake' # Inconsistant coverage reports, not sure why
@@ -20,6 +21,9 @@ require 'rails/test_help'
 
 # For mocking web requests
 require 'webmock/minitest'
+
+# For mocking objects
+require 'mocha/mini_test'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.

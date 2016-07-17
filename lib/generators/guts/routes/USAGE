@@ -1,0 +1,8 @@
+Description:
+  Adds mountable route to your routes.rb
+
+Example:
+  rails generate guts:routes --pathname=dashboard
+
+  This will create:
+    mount Guts::Engine => '/dashboard'
