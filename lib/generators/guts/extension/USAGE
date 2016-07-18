@@ -1,0 +1,7 @@
+Description:
+  Creates a skeleton for Guts extensions using Rails Engines
+
+Example:
+  rails generate guts:extension testimonials
+
+  This generates a skeleton in vendor/extensions/testimonials

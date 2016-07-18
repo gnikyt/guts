@@ -4,7 +4,7 @@ module Guts
     # Optional pathname to use for the mount route
     class_option :pathname,
                  desc: 'The path name for the admin panel',
-                 type: 'string',
+                 type: :string,
                  default: '/admin',
                  required: false
 
