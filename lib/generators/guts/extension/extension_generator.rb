@@ -1,5 +1,6 @@
 module Guts
   # Extension generator
+  # This generator has code based upon RefinaryCMS' generator
   class ExtensionGenerator < Rails::Generators::NamedBase
     source_root File.expand_path('../templates', __FILE__)
 
