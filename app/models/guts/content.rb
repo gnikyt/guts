@@ -5,10 +5,10 @@ module Guts
     include NavigatableConcern
     include TrackableConcern
     include MultisiteScopeConcern
-    
+
     validates :type, presence: true
     validates :title, presence: true, length: { minimum: 3 }
-    
+
     belongs_to :site
     belongs_to :type
     belongs_to :user, required: false
@@ -18,7 +18,7 @@ module Guts
     has_many :metafields, as: :fieldable, dependent: :destroy
     has_many :tracks, as: :object
 
-    friendly_id :title, use: [:slugged, :finders]
+    friendly_id :title, use: [:slugged, :scoped, :finders], scope: :site_id
     navigatable :'type.title', :title, format: '[:type.title] :title'
     trackable :create, :update, :destroy, fields: [:title, :visible, :tags, :slug]
   end

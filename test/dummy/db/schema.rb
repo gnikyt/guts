@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410203608) do
+ActiveRecord::Schema.define(version: 20160726010421) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160410203608) do
   end
 
   add_index "guts_categories", ["site_id"], name: "index_guts_categories_on_site_id"
-  add_index "guts_categories", ["slug"], name: "index_guts_categories_on_slug", unique: true
+  add_index "guts_categories", ["slug"], name: "index_guts_categories_on_slug"
 
   create_table "guts_categorizations", force: :cascade do |t|
     t.integer  "category_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20160410203608) do
   end
 
   add_index "guts_contents", ["site_id"], name: "index_guts_contents_on_site_id"
-  add_index "guts_contents", ["slug"], name: "index_guts_contents_on_slug", unique: true
+  add_index "guts_contents", ["slug"], name: "index_guts_contents_on_slug"
 
   create_table "guts_groups", force: :cascade do |t|
     t.string   "title"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20160410203608) do
   end
 
   add_index "guts_navigations", ["site_id"], name: "index_guts_navigations_on_site_id"
-  add_index "guts_navigations", ["slug"], name: "index_guts_navigations_on_slug", unique: true
+  add_index "guts_navigations", ["slug"], name: "index_guts_navigations_on_slug"
 
   create_table "guts_options", force: :cascade do |t|
     t.string   "key"
@@ -168,7 +168,7 @@ ActiveRecord::Schema.define(version: 20160410203608) do
   end
 
   add_index "guts_types", ["site_id"], name: "index_guts_types_on_site_id"
-  add_index "guts_types", ["slug"], name: "index_guts_types_on_slug", unique: true
+  add_index "guts_types", ["slug"], name: "index_guts_types_on_slug"
 
   create_table "guts_user_groups", force: :cascade do |t|
     t.integer  "user_id"
