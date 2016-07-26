@@ -11,7 +11,7 @@ class CreateGutsContents < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    
+
     add_index :guts_contents, :slug, unique: true
   end
 end
