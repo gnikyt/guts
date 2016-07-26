@@ -1,6 +1,6 @@
 # Version 1.3.1
 
-+ Added support to have scoped friendly_id to models if using MultiSite. This means siteA.com and siteB.com can both have a content type of "page" without UUID. To upgrade, please run `rake guts:install:migrations && rake db:migrate` which includes a migration to remove the uniqueness index on slug values.
++ Added support to have scoped friendly_id to models if using MultiSite. This means siteA.com and siteB.com can both have a content type of "page" without UUID. To upgrade, please run `bundle exec rake guts:install:migrations && bundle exec rake db:migrate RAILS_ENV=YOURRAILSENV` which includes a migration to remove the uniqueness index on slug values.
 
 # Version 1.3.0
 
