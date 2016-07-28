@@ -14,7 +14,7 @@ module Guts
 
       inject_into_file(
         'config/routes.rb',
-        %Q(\n  mount Guts::Engine => "#{options[:pathname]}"\n),
+        %(\n  mount Guts::Engine => "#{options[:pathname]}"\n),
         after: '.routes.draw do'
       )
     end

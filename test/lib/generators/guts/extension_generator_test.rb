@@ -32,23 +32,56 @@ module Guts
       assert_file "#{basepath}/lib/guts/homebrews/version.rb"
 
       # Confirm contents of Gemspec
-      assert_file "#{basepath}/guts-homebrews.gemspec", /guts-homebrew/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /guts\/homebrews\/version/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /Guts::Homebrews::VERSION/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /s.add_dependency 'guts', '~> #{Guts::VERSION}'/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /Tyler King/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /tyler.n.king@outlook.com/
-      assert_file "#{basepath}/guts-homebrews.gemspec", /GPL/
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{guts-homebrew}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{guts/homebrews/version}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{Guts::Homebrews::VERSION}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{s.add_dependency 'guts', '~> #{Guts::VERSION}'}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{Tyler King}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{tyler.n.king@outlook.com}
+      )
+      assert_file(
+        "#{basepath}/guts-homebrews.gemspec",
+        %r{GPL}
+      )
 
       # Confirm contents of controller
-      assert_file "#{basepath}/app/controllers/guts/homebrews/homebrews_controller.rb", /module Homebrews/
-      assert_file "#{basepath}/app/controllers/guts/homebrews/homebrews_controller.rb", /class HomebrewsController/
+      assert_file(
+        "#{basepath}/app/controllers/guts/homebrews/homebrews_controller.rb",
+        %r{module Homebrews}
+      )
+      assert_file(
+        "#{basepath}/app/controllers/guts/homebrews/homebrews_controller.rb",
+        %r{class HomebrewsController}
+      )
 
       # Confirm contents of routes
-      assert_file "#{basepath}/config/routes.rb", /:homebrews/
+      assert_file(
+        "#{basepath}/config/routes.rb",
+        %r{:homebrews}
+      )
 
       # Confirm contents of engine
-      assert_file "#{basepath}/lib/guts/homebrews/engine.rb", /isolate_namespace Guts::Homebrews/
+      assert_file(
+        "#{basepath}/lib/guts/homebrews/engine.rb",
+        %r{isolate_namespace Guts::Homebrews}
+      )
     end
   end
 end

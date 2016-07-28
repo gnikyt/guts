@@ -5,6 +5,8 @@ unless ENV['NO_COVERAGE']
   SimpleCov.start 'rails' do
     add_group 'Concerns', '/app/concerns'
     add_group 'Generators', '/lib/generators'
+
+    add_filter 'lib/generators/guts/extension/templates/' # No need to cover templates
     add_filter 'lib/guts/version.rb' # No need to test version file... doesnt work.
     add_filter 'lib/tasks/guts_tasks.rake' # Inconsistant coverage reports, not sure why
     add_filter 'lib/tasks/guts_users.rake' # Inconsistant coverage reports, not sure why
