@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.description       = '<%= extension_plural_name.titleize %> extension for Guts'
   s.summary           = '<%= extension_plural_name.titleize %> extension for Guts'
   s.authors           = <%= extension_authors %>
+  s.email             = <%= extension_author_emails %>
   s.files             = Dir[
     '{app,config,db,lib}/**/*',
     'LICENSE',
@@ -17,7 +18,7 @@ Gem::Specification.new do |s|
     'README.md'
   ]
   s.test_files        = Dir['test/**/*']
-  s.license           = 'MIT'
+  s.license           = '<%= extension_license %>'
 
   s.add_dependency 'guts', '~> <%= Guts::VERSION %>'
 end

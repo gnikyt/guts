@@ -11,6 +11,16 @@ module Guts
                  default: [],
                  required: false,
                  desc: 'Indicates authors of this extension'
+    class_option :author_emails,
+                 type: :array,
+                 default: [],
+                 required: false,
+                 desc: 'Indicates emails for the authors of this extension'
+    class_option :license,
+                 type: :string,
+                 default: 'MIT',
+                 required: false,
+                 desc: 'Indicates license of this extension'
 
     def create_extension
       say 'Generating Guts Extension', Color::BLUE
@@ -28,6 +38,14 @@ module Guts
 
     def extension_authors
       @extension_authors ||= options[:authors].presence
+    end
+
+    def extension_author_emails
+      @extension_author_emails ||= options[:author_emails].presence
+    end
+
+    def extension_license
+      @extension_license ||= options[:license].presence
     end
 
     def extension_class_name
@@ -91,6 +109,7 @@ module Guts
 
     def substitute_path_placeholders(path)
       Pathname.new path.to_s.gsub('extension_plural_name', extension_plural_name).
+                             gsub('extension_plural_class_name', extension_plural_class_name).
                              gsub('plural_name', plural_name).
                              gsub('singular_name', singular_name)
     end
