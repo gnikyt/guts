@@ -21,11 +21,11 @@ module Guts
     # Shows details about a single content
     def show
     end
-    
+
     # Editting of a content
     def edit
     end
-    
+
     # Creates a content through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
@@ -35,7 +35,7 @@ module Guts
 
       if @content.save
         flash[:notice] = "#{@content.type.title} was successfully created."
-        redirect_to contents_path(type: @content.type.slug)
+        redirect_to edit_content_path(@content)
       else
         render :new
       end
@@ -46,7 +46,7 @@ module Guts
     def update
       if @content.update(content_params)
         flash[:notice] = "#{@content.type.title} was successfully updated."
-        redirect_to contents_path(type: @content.type.slug)
+        redirect_to edit_content_path(@content)
       else
         render :edit
       end
@@ -56,13 +56,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @content.destroy
-      
+
       flash[:notice] = "#{@content.type.title} was successfully destroyed."
       redirect_to contents_path(type: @content.type.slug)
     end
 
     private
-    
+
     # Sets a content from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -94,7 +94,7 @@ module Guts
         category_ids: []
       )
     end
-  
+
     # Gets the per-page value to use
     # @note Default is 30
     # @private

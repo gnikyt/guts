@@ -68,13 +68,14 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 
 ### Screenshots
 
-Check out [this album](http://imgur.com/a/6dFLL) for some screenshots.
+Check out [this album](http://imgur.com/a/6dFLL) for some screenshots
 
 ## Todo
 
 + Create a project page
-+ Add configurable roles for users (suggestions?)
++ Add configurable roles for users (*suggestions?*)
 + Scope users and groups for multisite
++ Extensions generator (*now being worked on in extensions branch*)
 
 ## License
 

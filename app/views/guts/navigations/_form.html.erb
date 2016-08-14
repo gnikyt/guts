@@ -24,7 +24,7 @@
 
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <% unless @navigation.new_record? %>

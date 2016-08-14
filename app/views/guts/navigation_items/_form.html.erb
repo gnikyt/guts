@@ -24,7 +24,7 @@
 
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <div class="small-6 columns">
@@ -41,7 +41,7 @@
   <div class="small-6 columns">
     <%= f.label :value %>
     <%= f.select :navigatable_id, {}, {}, { data: { initial: @navigation_item.new_record? ? nil : @navigation_item.navigatable_id } } %>
-    
+
     <%= f.text_field :custom, { style: 'display: none' } %>
   </div>
 

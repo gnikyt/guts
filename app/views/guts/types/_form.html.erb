@@ -23,9 +23,17 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <% unless @type.new_record? %>

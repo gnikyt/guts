@@ -20,12 +20,12 @@
 
   <div class="small-12 columns">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
 
   <div class="small-12 columns">
     <%= f.label :domain %>
-    <%= f.text_field :domain %>
+    <%= f.text_field :domain, required: true %>
     <p class="help-text">Example: fr.domain.com</p>
   </div>
 <% end %>

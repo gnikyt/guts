@@ -18,9 +18,17 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :key %>
-    <%= f.text_field :key %>
+    <%= f.text_field :key, required: true %>
     <p class="help-text">Keys must be all lowercase with no spaces or special characters (example: facebook_url)</p>
   </div>
 

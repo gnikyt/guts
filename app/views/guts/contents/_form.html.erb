@@ -9,6 +9,14 @@
         <% end %>
       </div>
 
+      <% if notice %>
+        <div class="small-12 columns">
+          <div class="callout success notice">
+            <p><%= notice %></p>
+          </div>
+        </div>
+      <% end %>
+
       <% if @content.errors.any? %>
         <div class="small-12 columns">
           <div class="callout warning">
@@ -25,7 +33,7 @@
 
       <div class="small-12 columns">
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, required: true %>
       </div>
 
       <% unless @content.new_record? %>

@@ -15,7 +15,7 @@ module Guts
     def new
       @metafield = Metafield.new
     end
-    
+
     # Creates a metafield through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
@@ -23,7 +23,7 @@ module Guts
 
       if @metafield.save
         flash[:notice] = 'Metafield was successfully created.'
-        redirect_to polymorphic_path([@object, :metafields])
+        redirect_to edit_polymorphic_path([@object, @metafield])
       else
         render :new
       end
@@ -32,8 +32,8 @@ module Guts
     # Shows details about a single metafield
     def show
     end
-    
-    
+
+
     # Editing of a metafield
     def edit
     end
@@ -43,7 +43,7 @@ module Guts
     def update
       if @metafield.update metafield_params
         flash[:notice] = 'Metafield was successfully updated.'
-        redirect_to polymorphic_path([@object, :metafields])
+        redirect_to edit_polymorphic_path([@object, @metafield])
       else
         render :edit
       end
@@ -53,28 +53,28 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @metafield.destroy
-      
+
       flash[:notice] = 'Metafield was successfully destroyed.'
       redirect_to polymorphic_path([@object, :metafields])
     end
 
     private
-    
+
     # Sets a metafield from the database using `id` param
     # @note This is a `before_action` callback
     # @private
     def set_metafield
       @metafield = Metafield.find params[:id]
     end
-    
+
     # Determines the polymorphic object
     # @private
     def set_object
       fieldable_type = params[:fieldable_type]
-      
+
       param_name   = "#{fieldable_type.demodulize.underscore}_id"
       param_object = fieldable_type.constantize
-      
+
       @object = param_object.find(params[param_name])
     end
 

@@ -9,7 +9,7 @@ module Guts
     def index
       @groups = Group.all
     end
-    
+
     # Shows details about a single group
     def show
     end
@@ -30,7 +30,7 @@ module Guts
 
       if @group.save
         flash[:notice] = 'Group was successfully created.'
-        redirect_to groups_path
+        redirect_to edit_group_path(@group)
       else
         render :new
       end
@@ -41,7 +41,7 @@ module Guts
     def update
       if @group.update(group_params)
         flash[:notice] = 'Group was successfully updated.'
-        redirect_to groups_path
+        redirect_to edit_group_path(@group)
       else
         render :edit
       end
@@ -51,13 +51,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @group.destroy
-      
+
       flash[:notice] = 'Group was successfully destroyed.'
       redirect_to groups_url
     end
 
     private
-    
+
     # Sets a group from the database using `id` param
     # @note This is a `before_action` callback
     # @private

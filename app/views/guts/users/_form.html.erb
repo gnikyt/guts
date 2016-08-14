@@ -22,21 +22,29 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="small-12 columns">
     <%= f.label :email %>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, required: true %>
   </div>
   <div class="small-12 medium-6 columns">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, required: (@user.new_record? ? true : false) %>
   </div>
   <div class="small-12 medium-6 columns">
     <%= f.label :password_confirmation, 'Confirmation' %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, required: (@user.new_record? ? true : false) %>
   </div>
   <div class="small-12 columns">
     <%= f.label :groups %>

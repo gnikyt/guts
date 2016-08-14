@@ -30,7 +30,7 @@ module Guts
 
       if @category.save
         flash[:notice] = 'Category was successfully created.'
-        redirect_to categories_path
+        redirect_to edit_category_path(@category)
       else
         render :new
       end
@@ -41,7 +41,7 @@ module Guts
     def update
       if @category.update category_params
         flash[:notice] = 'Category was successfully updated.'
-        redirect_to categories_path
+        redirect_to edit_category_path(@category)
       else
         render :edit
       end
@@ -51,13 +51,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @category.destroy
-      
+
       flash[:notice] = 'Category was successfully destroyed.'
       redirect_to categories_path
     end
 
     private
-    
+
     # Sets a category from the database using `id` param
     # @note This is a `before_action` callback
     # @private

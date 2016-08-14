@@ -35,7 +35,8 @@ module Guts
       @user = User.new user_params
 
       if @user.save
-        redirect_to users_path, notice: 'User was successfully created.'
+        flash[:notice] = 'User was successfully created.'
+        redirect_to edit_user_path(@user)
       else
         render :new
       end
@@ -46,7 +47,7 @@ module Guts
     def update
       if @user.update(user_params)
         flash[:notice] = 'User was successfully updated.'
-        redirect_to users_path
+        redirect_to edit_user_path(@user)
       else
         render :edit
       end
@@ -56,7 +57,7 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @user.destroy
-      
+
       flash[:notice] = 'User was successfully destroyed.'
       redirect_to users_url
     end
@@ -69,12 +70,12 @@ module Guts
         log_in user
         flash.now[:notice] = "You are now logged in as #{user.name}."
       end
-      
+
       @users = User.all
     end
-    
+
     private
-    
+
     # Sets a user from the database using `id` param
     # @note This is a `before_action` callback
     # @private

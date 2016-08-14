@@ -1,3 +1,8 @@
+# Version 1.3.4
+
++ Changed `categories`, `contents`, `media`, `groups`, `options`, `types`, and `users` to redirect to edit screen on update or create for better usability
++ Updated forms to add `required=true` where needed
+
 # Version 1.3.2
 
 + Removed Gemfile.lock

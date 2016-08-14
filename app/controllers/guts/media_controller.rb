@@ -16,7 +16,7 @@ module Guts
                  Medium.paginate(page: params[:page], per_page: @per_page)
                end
     end
-    
+
     # Shows details about a single medium
     def show
     end
@@ -37,7 +37,7 @@ module Guts
 
       if @medium.save
         flash[:notice] = 'Media was successfully created.'
-        redirect_to polymorphic_path([@object, :media])
+        redirect_to edit_polymorphic_path([@object, @medium])
       else
         render :new
       end
@@ -48,7 +48,7 @@ module Guts
     def update
       if @medium.update(medium_params)
         flash[:notice] = 'Media was successfully updated.'
-        redirect_to polymorphic_path([@object, :media])
+        redirect_to edit_polymorphic_path([@object, @medium])
       else
         render :edit
       end
@@ -58,11 +58,11 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @medium.destroy
-      
+
       flash[:notice] = 'Media was successfully destroyed.'
       redirect_to polymorphic_path([@object, :media])
     end
-    
+
     # Handles showing the insert medium
     # allowing TinyMce to use it
     def editor_insert
@@ -70,7 +70,7 @@ module Guts
     end
 
     private
-  
+
     # Sets a medium from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -82,15 +82,15 @@ module Guts
     # @private
     def set_object
       filable_type = params[:filable_type]
-      
+
       return nil if filable_type.nil?
-      
+
       param_name   = "#{filable_type.demodulize.underscore}_id"
       param_object = filable_type.constantize
-      
+
       @object = param_object.find(params[param_name])
     end
-    
+
     # Permits medium params from forms
     # @private
     def medium_params

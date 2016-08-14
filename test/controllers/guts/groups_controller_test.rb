@@ -23,10 +23,10 @@ module Guts
         post :create, group: { slug: 'group-test', title: 'Group Test' }
       end
 
-      assert_redirected_to groups_path
+      assert_redirected_to edit_group_path(assigns(:group))
       assert_equal 'Group was successfully created.', flash[:notice]
     end
-    
+
     test 'should fail to create group and send back to new' do
       post :create, group: { title: '' }
       assert_template 'guts/groups/new'
@@ -44,10 +44,10 @@ module Guts
 
     test 'should update group' do
       patch :update, id: @group, group: { slug: @group.slug, title: @group.title }
-      assert_redirected_to groups_path
+      assert_redirected_to edit_group_path(assigns(:group))
       assert_equal 'Group was successfully updated.', flash[:notice]
     end
-    
+
     test 'should fail to update group and send back to edit' do
       patch :update, id: @group, group: { title: '' }
       assert_template 'guts/groups/edit'
