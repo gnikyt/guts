@@ -4,10 +4,10 @@ module Guts
       isolate_namespace Guts::<%= extension_plural_class_name %>
 
       ExtensionRegistry.register do |e|
-        e.name       = '<%= extension_plural_name %>'
-        e.menu_items = [{
-          '<%= extension_plural_name.titleize %>': 
-        }]
+        e.name  = '<%= extension_plural_name %>'
+        e.menus = {
+          :'<%= extension_plural_name.titleize %>' => Guts::Engine.routes.url_helpers.<%= plural_name %>_path
+        }
       end
     end
   end

@@ -83,5 +83,19 @@ module Guts
         %r{isolate_namespace Guts::Homebrews}
       )
     end
+
+    test 'extension registry should function' do
+      e_name = 'Homebrews'
+      e_menu = { :'Home Brews' => '/guts/homebrews' }
+
+      ExtensionRegistry.register do |e|
+        e.name  = e_name
+        e.menus = e_menu
+      end
+
+      assert_equal 1, ExtensionRegistry.extensions.size
+      assert_equal e_name, ExtensionRegistry.extensions.first.name
+      assert_equal e_menu, ExtensionRegistry.extensions.first.menus
+    end
   end
 end
