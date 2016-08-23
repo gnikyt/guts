@@ -1,3 +1,7 @@
+# Version 1.3.4
+
++ Fix for issue #3 where navigation items were showing wrong results
+
 # Version 1.3.3
 
 + Changed `categories`, `contents`, `media`, `groups`, `options`, `types`, and `users` to redirect to edit screen on update or create for better usability
