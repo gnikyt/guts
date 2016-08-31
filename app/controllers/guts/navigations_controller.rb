@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Navigations ontroller
   class NavigationsController < ApplicationController
-    before_action :set_navigation, only: [:show, :edit, :update, :destroy]
+    before_action :set_navigation, only: [:show, :edit, :update, :destroy, :reorder]
 
     # Displays a list of navigations
     def index
@@ -51,13 +51,25 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @navigation.destroy
-      
+
       flash[:notice] = 'Navigation was successfully destroyed.'
       redirect_to navigations_path
     end
 
+    # Updates sorting for a navigation
+    # @note This is an AJAX call
+    def reorder
+      ActiveRecord::Base.transaction do
+        @navigation.navigation_items.each do |item|
+          item.update_attribute(:position, params[:order].key(item.id.to_s).to_i)
+        end
+      end
+
+      render nothing: true, status: :ok
+    end
+
     private
-    
+
     # Sets a navigation from the database using `id` param
     # @note This is a `before_action` callback
     # @private

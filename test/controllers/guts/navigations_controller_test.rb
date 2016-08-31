@@ -26,7 +26,7 @@ module Guts
       assert_redirected_to navigations_path
       assert_equal 'Navigation was successfully created.', flash[:notice]
     end
-    
+
     test 'should fail to create navigation and send back to new' do
       post :create, navigation: { title: '' }
       assert_template 'guts/navigations/new'
@@ -47,10 +47,15 @@ module Guts
       assert_redirected_to navigations_path
       assert_equal 'Navigation was successfully updated.', flash[:notice]
     end
-    
+
     test 'should fail to update navigation and send back to edit' do
       patch :update, id: @navigation, navigation: { title: '' }
       assert_template 'guts/navigations/edit'
+    end
+
+    test 'should update positions' do
+      post :reorder, id: @navigation, order: { '1' => '1', '2' => '0' }
+      assert_response :success
     end
 
     test 'should destroy navigation' do

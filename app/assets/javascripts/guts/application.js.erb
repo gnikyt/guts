@@ -2,40 +2,53 @@
 //= require ./vendor/foundation
 //= require ./vendor/handlebars
 //= require ./vendor/sweetalert
+//= require ./vendor/sortable
 //= require tinymce-jquery
 //= require_directory .
+
+(function() {
+  var token = $('meta[name="csrf-token"]').attr('content');
+
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', token);
+    }
+  });
+
+  return token;
+})();
 
 jQuery(document).foundation();
 
 jQuery(document).ready(function($) {
-  $("#menu-toggle").click(function(e) {
+  $('#menu-toggle').click(function(e) {
     e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
+    $('#wrapper').toggleClass('toggled');
 
-    if ($("#wrapper").hasClass("toggled")) {
-      $(this).find("i").removeClass("fa-angle-left");
-      $(this).find("i").addClass("fa-angle-right");
+    if ($('#wrapper').hasClass('toggled')) {
+      $(this).find('i').removeClass('fa-angle-left');
+      $(this).find('i').addClass('fa-angle-right');
     } else {
-      $(this).find("i").removeClass("fa-angle-right");
-      $(this).find("i").addClass("fa-angle-left");
+      $(this).find('i').removeClass('fa-angle-right');
+      $(this).find('i').addClass('fa-angle-left');
     }
   });
-  
-  $(".destroy_resource").on("click", function(e) {
+
+  $('.destroy_resource').on('click', function(e) {
     e.preventDefault();
-    
+
     $that = $(this);
-    
+
     swal({
-      title: "Are you sure?",
-      text: "You will not be able to recover this after deleting...",
-      type: "warning",
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this after deleting...',
+      type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
       closeOnConfirm: true
     }, function() {
-      $that.parent().find("form").trigger("submit");
+      $that.parent().find('form').trigger('submit');
     });
   });
 });

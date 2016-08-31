@@ -241,11 +241,27 @@ textarea.tinymce {
 }
 
 /* Navigation */
-.nav_block .callout ul {
-  list-style: none;
+.nav_block {
+  .callout ul {
+    list-style: none;
 
-  li {
-    padding: 0.3rem 0;
+    li {
+      padding: 0.3rem 0;
+    }
+  }
+
+  .action_links {
+    float: right;
+  }
+
+  .handle {
+    margin-right: 5px;
+    cursor: move;
+  }
+
+  .sortable-ghost,
+  .sortable-chosen {
+    opacity: 0.4;
   }
 }
 

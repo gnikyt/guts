@@ -26,10 +26,11 @@
             <%= link_to 'Edit', edit_navigation_path(navigation), { class: 'warning button' } %>
             <%= link_to_destroy 'Destroy', navigation, { class: 'alert button' } %>
           </div>
-          <ul>
+          <ul class="sortable" data-url="<%= reorder_navigation_path navigation %>">
             <% if navigation.navigation_items.size > 0 %>
               <% navigation.navigation_items.each do |item| %>
-                <li>
+                <li class="item" data-id="<%= item.id %>">
+                  <i class="handle fa fa-reorder"></i>
                   <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.custom? ? 'Custom' : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.custom? %>
                   <div class="action_links">
                     <%= link_to 'Edit', edit_navigation_navigation_item_path(navigation, item) %>
