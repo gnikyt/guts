@@ -5,6 +5,7 @@ rvm:
   - 2.2
 env:
   - NO_COVERAGE=true
-  - RUBYOPT="-W0"
+script:
+  - bundle exec rake test RUBYOPT="-W0"
 before_script:
   - bundle exec rake db:migrate RAILS_ENV=test
