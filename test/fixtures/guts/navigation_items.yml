@@ -1,5 +1,4 @@
 test_navigation_item:
-  id: 1
   title: Test Nav Item
   custom: ~
   position: 0
@@ -7,7 +6,6 @@ test_navigation_item:
   navigatable: test_page (Guts::Content)
 
 test_navigation_item_two:
-  id: 2
   title: Test Nav Item
   custom: http://google.ca/
   position: 1

@@ -54,7 +54,25 @@ module Guts
     end
 
     test 'should update positions' do
-      post :reorder, id: @navigation, order: { '1' => '1', '2' => '0' }
+      get_positions = lambda do
+        @navigation.navigation_items.map { |ni| { id: ni.id, position: ni.position } }
+      end
+
+      # Get current positions of items
+      current_item_positions = get_positions.call
+
+      # Swap positions
+      post :reorder, id: @navigation, order: {
+        current_item_positions[1][:position].to_s => current_item_positions[0][:id].to_s,
+        current_item_positions[0][:position].to_s => current_item_positions[1][:id].to_s
+      }
+      @navigation.reload
+
+      # Grab new positions of items
+      new_item_positions = get_positions.call
+
+      assert_equal current_item_positions.first[:id], new_item_positions.last[:id]
+      assert_equal current_item_positions.last[:id], new_item_positions.first[:id]
       assert_response :success
     end
 

@@ -61,7 +61,8 @@ module Guts
     def reorder
       ActiveRecord::Base.transaction do
         @navigation.navigation_items.each do |item|
-          item.update_attribute(:position, params[:order].key(item.id.to_s).to_i)
+          find = params[:order].find { |k, v| v == item.id.to_s }
+          item.update_attribute(:position, find[0].to_i)
         end
       end
 

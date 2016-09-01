@@ -20,10 +20,10 @@
   <div class="small-12 columns">
     <% if @navigation_items.size > 0 %>
       <table>
-        <tbody>
+        <tbody class="sortable" data-url="<%= reorder_navigation_path @navigation %>">
           <% @navigation_items.each do |navigation_item| %>
-            <tr>
-              <td><%= navigation_item.title %></td>
+            <tr class="item" data-id="<%= navigation_item.id %>">
+              <td><i class="handle fa fa-reorder"></i> <%= navigation_item.title %></td>
               <td>
                 <small>
                   to: <%= navigation_item.custom? ? 'Custom' : navigation_item.navigatable.navigatable_format %> <%= "(#{navigation_item.custom})" if navigation_item.custom? %>
