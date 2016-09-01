@@ -1,3 +1,8 @@
+# Version 1.3.5
+
++ Added ENV var for TravisCI to surpress unneeded Ruby warnings
++ Sortable navigation items is now in place (drag and drop to reorder)
+
 # Version 1.3.4
 
 + Fix for issue #3 where navigation items were showing wrong results
