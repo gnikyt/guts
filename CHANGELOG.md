@@ -1,3 +1,8 @@
+# Version 1.3.6
+
++ Added methods to models for friendly_id so the slugs will update on title change.. previously, slugs would not update
++ Slug fields on all forms now are `readonly` and `disabled`
+
 # Version 1.3.5
 
 + Added ENV var for TravisCI to surpress unneeded Ruby warnings

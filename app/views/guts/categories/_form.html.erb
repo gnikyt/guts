@@ -38,7 +38,7 @@
   <% unless @category.new_record? %>
     <div class="small-12 columns">
       <%= f.label :slug %>
-      <%= f.text_field :slug %>
+      <%= f.text_field :slug, readonly: true, disabled: true %>
     </div>
   <% end %>
 <% end %>
