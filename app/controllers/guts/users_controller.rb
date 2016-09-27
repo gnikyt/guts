@@ -3,6 +3,8 @@ require_dependency 'guts/application_controller'
 module Guts
   # Users controller
   class UsersController < ApplicationController
+    include ControllerPermissionConcern
+
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     # Displays a list of users

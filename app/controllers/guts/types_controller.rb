@@ -3,6 +3,8 @@ require_dependency 'guts/application_controller'
 module Guts
   # Types controller
   class TypesController < ApplicationController
+    include ControllerPermissionConcern
+    
     before_action :set_type, only: [:show, :edit, :update, :destroy]
 
     # Display a list of types

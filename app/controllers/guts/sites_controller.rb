@@ -13,7 +13,7 @@ module Guts
     # Shows detaisl about a single site
     def show
     end
-    
+
     # Creation of a site
     def new
       @site = Site.new
@@ -53,39 +53,33 @@ module Guts
       @site.destroy
       redirect_to sites_url, notice: 'Site was successfully destroyed.'
     end
-    
+
     # Sets a site as default
     def set_default
       old_default = Site.find_by(default: true)
       old_default.update_attribute(:default, false) unless old_default.nil?
-      
+
       @site.update_attribute(:default, true)
-      
+
       flash[:notice] = 'Site was successfully set to default.'
       redirect_to sites_url
     end
-    
+
     # Removes a site as default
     def remove_default
       @site.update_attribute(:default, false)
-      
+
       flash[:notice] = 'Site was successfully changed to not default.'
       redirect_to sites_url
     end
 
     private
-    
+
     # Sets a site from the database using `id` param
     # @note This is a `before_action` callback
     # @private
     def set_site
       @site = Site.find params[:id]
-    end
-
-    # Permits site params from forms
-    # @private
-    def site_params
-      params.require(:site).permit(:name, :domain)
     end
   end
 end

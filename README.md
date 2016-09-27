@@ -15,7 +15,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', "~> 1.3"
+gem 'guts', "~> 1.4"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
@@ -32,8 +32,9 @@ Next, run:
 ``` bash
 bundle exec rake guts:install:migrations # installs Guts migrations
 bundle exec rake db:migrate # load migrations into your database
-bundle exec rake guts:db:seed # pre-configures some content type, groups, etc (creates an "Admins" group which is important)
-bundle exec rake guts:user:create[{name},{email},{password},true] # creates a user (replace the values)
+bundle exec rake guts:db:seed:all # pre-configures a few content types, groups, permissions for CanCanCan, etc
+bundle exec rake guts:user:create[{name},{email},{password}] # creates a user (replace the values)
+bundle exec rake guts:user:set_master[{email}] # allows user to access everything in the admin panel, should be done for initial user
 ```
 
 You will now be able to access Guts by visiting `/admin` in your Rails application.
@@ -64,18 +65,13 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 + Basic user management
 + Basic user groups
 + Basic session management
++ Databased permissions via CanCanCan
 + And more...
-
-### Screenshots
-
-Check out [this album](http://imgur.com/a/6dFLL) for some screenshots
 
 ## Todo
 
 + Create a project page
-+ Add configurable roles for users (*suggestions?*)
 + Scope users and groups for multisite
-+ Extensions generator (*now being worked on in extensions branch*)
 
 ## License
 
