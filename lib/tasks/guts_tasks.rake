@@ -25,13 +25,13 @@ namespace :guts do
         group.slug  = 'admins'
         group.save!
 
-        Rake::Task['guts:db:seed:permissions'].invoke
+        Rake::Task['guts:db:seed:authorizations'].invoke
 
         puts '[Guts] Database seeded'
       end
 
-      desc 'Seed permissions based on all current controllers'
-      task permissions: :environment do
+      desc 'Seed authorization rules based on all current controllers'
+      task authorizations: :environment do
         setup_permissions_for_controllers
       end
     end
@@ -88,10 +88,10 @@ def eval_cancan_action(action)
 end
 
 def write_permission(class_name, cancan_action, title, description, force_id_1 = false)
-  permission = Guts::Permission.where('subject_class = ? and action = ?', class_name, cancan_action).first
+  permission = Guts::Authorization.where('subject_class = ? and action = ?', class_name, cancan_action).first
 
   if not permission
-    permission               = Guts::Permission.new
+    permission               = Guts::Authorization.new
     permission.id            = 1 if force_id_1
     permission.subject_class = class_name
     permission.action        = cancan_action

@@ -1,6 +1,6 @@
-class CreateGutsPermissions < ActiveRecord::Migration
+class CreateGutsAuthorizations < ActiveRecord::Migration
   def change
-    create_table :guts_permissions do |t|
+    create_table :guts_authorizations do |t|
       t.string :title
       t.string :subject_class
       t.integer :subject_id

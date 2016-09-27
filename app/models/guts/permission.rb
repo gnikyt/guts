@@ -1,6 +1,6 @@
 module Guts
   class Permission < ActiveRecord::Base
-    has_many :assignments
-    has_many :users, through: :assignments
+    belongs_to :permissionable, polymorphic: true, required: true
+    belongs_to :authorization
   end
 end

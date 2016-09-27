@@ -26,9 +26,12 @@ ActiveRecord::Schema.define(version: 20160927044443) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
-  create_table "guts_assignments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "permission_id"
+  create_table "guts_authorizations", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subject_class"
+    t.integer  "subject_id"
+    t.string   "action"
+    t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -146,14 +149,14 @@ ActiveRecord::Schema.define(version: 20160927044443) do
   add_index "guts_options", ["site_id"], name: "index_guts_options_on_site_id"
 
   create_table "guts_permissions", force: :cascade do |t|
-    t.string   "title"
-    t.string   "subject_class"
-    t.integer  "subject_id"
-    t.string   "action"
-    t.text     "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "permissionable_id"
+    t.string   "permissionable_type"
+    t.integer  "authorization_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
+
+  add_index "guts_permissions", ["permissionable_type", "permissionable_id"], name: "index_perm_on_permissionable_type_and_permissionable"
 
   create_table "guts_sites", force: :cascade do |t|
     t.string   "name"

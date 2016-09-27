@@ -21,10 +21,11 @@ module Guts
     has_many :groups, through: :user_groups
     has_many :tracks, as: :object
     has_many :contents
-    has_many :assignments
-    has_many :permissions, through: :assignments
+    has_many :permissions, as: :permissionable, dependent: :destroy
 
-    trackable :create, :update, :destroy, fields: [:name, :group_id, :roles_mask]
+    delegate :can?, :cannot?, to: :ability
+
+    trackable :create, :update, :destroy, fields: [:name, :group_id]
 
     scope :in_group, -> (group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
@@ -33,6 +34,10 @@ module Guts
     # @return [String] cleaned email string
     def email=(email)
       self[:email] = email.downcase.strip
+    end
+
+    def ability
+      @ability ||= Guts::Ability.new self
     end
   end
 end

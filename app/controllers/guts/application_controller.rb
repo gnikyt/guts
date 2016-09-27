@@ -2,7 +2,6 @@ module Guts
   # Main inherited controller class
   # @abstract
   class ApplicationController < ActionController::Base
-    include ::CanCan::ControllerAdditions
     include SessionsHelper
     include MultisiteConcern
 

@@ -55,13 +55,13 @@ namespace :guts do
       user = Guts::User.find_by(email: args[:email])
       raise StandardError, '[Guts] User not found' unless user
 
-      permission = Guts::Permission.find_by(subject_class: 'all')
-      raise StandardError, '[Guts] Permission for "all" not found, have you ran permission seeding?' unless permission
+      authorization = Guts::Authorization.find_by(subject_class: 'all')
+      raise StandardError, '[Guts] Authorization entry for "all" not found, have you ran authorization seeding?' unless authorization
 
-      user.permissions << permission
+      user.permissions.build(authorization: authorization)
       user.save!
 
-      puts '[Guts] User is now a master'
+      puts '[Guts] User is now authorized for everything'
     end
   end
 end

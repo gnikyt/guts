@@ -1,15 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  subject_class: MyString
-  subject_id: 1
-  action: MyString
-  description: MyText
+  permissionable:
+  authorization_id:
 
 two:
-  title: MyString
-  subject_class: MyString
-  subject_id: 1
-  action: MyString
-  description: MyText
+  permissionable:
+  authorization_id:
