@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Sites controller
   class SitesController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_site, only: [:show, :set_default, :remove_default, :edit, :update, :destroy]
 
     # Displays a list of sites
@@ -80,6 +83,12 @@ module Guts
     # @private
     def set_site
       @site = Site.find params[:id]
+    end
+
+    # Permits site params from forms
+    # @private
+    def site_params
+      params.require(:site).permit(:name, :domain)
     end
   end
 end

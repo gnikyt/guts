@@ -36,6 +36,9 @@ module Guts
       self[:email] = email.downcase.strip
     end
 
+    # Gets the user's abilties
+    # @see Guts::Ability
+    # @return [Class] the abilities for this user
     def ability
       @ability ||= Guts::Ability.new self
     end

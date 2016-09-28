@@ -48,7 +48,7 @@ namespace :guts do
 
     desc 'Sets user as the main master for the admin panel'
     task :set_master, [:email] => :environment do |_, args|
-      if args.to_hash.size < 1
+      if args.to_hash.empty?
         raise ArgumentError, '[Guts] Please enter an email'
       end
 

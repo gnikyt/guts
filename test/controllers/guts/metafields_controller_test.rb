@@ -55,7 +55,6 @@ module Guts
       assert_template 'guts/metafields/new'
     end
 
-
     test 'should show metafield' do
       get :show, id: @metafield, content_id: @content.id, fieldable_type: 'Guts::Content'
       assert_response :success

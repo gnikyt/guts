@@ -18,7 +18,7 @@ module Guts
         log_in user
         redirect_to users_path
       else
-        flash.now[:notice] = 'Invalid login credentials'
+        flash.now[:alert] = 'Invalid login credentials'
         render :new
       end
     end
@@ -46,7 +46,7 @@ module Guts
         flash[:notice] = 'Your reset link has been sent to your inbox.'
         redirect_to new_session_path
       else
-        flash.now[:notice] = 'Invalid email address'
+        flash.now[:alert] = 'Invalid email address'
         render :forgot
       end
     end

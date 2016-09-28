@@ -4,7 +4,8 @@ module Guts
   # Media controller
   class MediaController < ApplicationController
     include ControllerPermissionConcern
-    
+
+    load_and_authorize_resource
     before_action :set_object
     before_action :set_medium, only: [:show, :edit, :update, :destroy, :editor_insert]
     before_action :set_per_page, only: [:index]

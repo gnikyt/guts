@@ -1,7 +1,11 @@
-one:
-  permissionable:
-  authorization_id:
+regular_user_permission:
+  permissionable: regular_user (Guts::User)
+  authorization: master_authorization
 
-two:
-  permissionable:
-  authorization_id:
+admin_user_permission:
+  permissionable: admin_user (Guts::User)
+  authorization: master_authorization
+
+group_permission:
+  permissionable: test_group (Guts::Group)
+  authorization: master_authorization

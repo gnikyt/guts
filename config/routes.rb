@@ -1,10 +1,13 @@
 Guts::Engine.routes.draw do
   # Master concerns... everything can have a metafield and file attached to it
-  concern(:fieldable) {|opts| resources :metafields, opts}
-  concern(:filable) {|opts| resources :media, opts}
+  concern(:fieldable) { |opts| resources :metafields, opts }
+  concern(:filable) { |opts| resources :media, opts }
 
   # Resources and routes
-  get '/', to: 'users#index'
+  get '/', to: 'index#index'
+
+  # Home
+  get :home, to: 'index#index'
 
   # Sites
   resources :sites do

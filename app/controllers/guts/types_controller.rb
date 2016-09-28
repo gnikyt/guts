@@ -4,7 +4,8 @@ module Guts
   # Types controller
   class TypesController < ApplicationController
     include ControllerPermissionConcern
-    
+
+    load_and_authorize_resource
     before_action :set_type, only: [:show, :edit, :update, :destroy]
 
     # Display a list of types

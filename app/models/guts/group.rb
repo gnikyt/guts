@@ -11,6 +11,7 @@ module Guts
     has_many :media, as: :filable, dependent: :destroy
     has_many :metafields, as: :fieldable, dependent: :destroy
     has_many :tracks, as: :object
+    has_many :permissions, as: :permissionable, dependent: :destroy
 
     friendly_id :title, use: [:slugged, :finders]
     trackable :create, :update, :destroy, fields: [:title]

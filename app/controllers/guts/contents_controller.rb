@@ -4,7 +4,8 @@ module Guts
   # Contents controller
   class ContentsController < ApplicationController
     include ControllerPermissionConcern
-    
+
+    load_and_authorize_resource
     before_action :set_content, only: [:show, :edit, :update, :destroy]
     before_action :set_type
     before_action :set_per_page, only: [:index]

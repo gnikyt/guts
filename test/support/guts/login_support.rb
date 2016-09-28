@@ -1,7 +1,7 @@
 # Login a admin user before testing controllers
 module ActionController
   class TestCase
-    include Guts::SessionsHelper
+    include Guts::SessionConcern
 
     setup do
       user = guts_users :admin_user

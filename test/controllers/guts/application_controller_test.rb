@@ -3,19 +3,14 @@ require 'test_helper'
 module Guts
   class ApplicationControllerTest < ActionController::TestCase
     setup do
-      @controller = Guts::UsersController.new
+      @controller = Guts::IndexController.new
       @routes     = Engine.routes
     end
-    
+
     test 'should look for layout_hook file from Rails app' do
-      get :index
-      assert_equal true, @response.body.include?('See you in the after')
-    end
-    
-    test 'should redirect for logged in user not in admin groups' do
       log_in guts_users(:regular_user)
       get :index
-      assert_redirected_to new_session_path
+      assert_equal true, @response.body.include?('See you in the after')
     end
 
     test 'should redirect for non logged in user' do
