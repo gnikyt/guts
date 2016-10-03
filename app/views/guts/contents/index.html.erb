@@ -34,13 +34,7 @@
         </tbody>
       </table>
     <% else %>
-    <p>No <%= @type.title.pluralize(2).downcase %> content has been added.</p>
+      <p>No permissions have been assigned.</p>
     <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="small-12 columns">
-    <%= will_paginate @options %>
   </div>
 </div>

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Guts
-  class AssignmentTest < ActiveSupport::TestCase
+  class AuthorizationTest < ActiveSupport::TestCase
     # test "the truth" do
     #   assert true
     # end

@@ -66,7 +66,7 @@ module Guts
     end
 
     # Allows switching of users by passing `user_id` in params
-    # @see Guts::SessionsHelper#log_in
+    # @see Guts::SessionsConcern#log_in
     def switch_user
       if request.post?
         user = User.find(params[:user_id])

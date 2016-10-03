@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Permissions<% if @object.try(:title) || @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || 'N/A' %></span><% end %></h1>
+    <%= link_to 'New', new_polymorphic_path([@object, :permission]), class: 'button' %>
+    <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <% if @object.permissions.size > 0 %>
+      <table>
+        <thead>
+          <th>Feature</th>
+          <th>Permission</th>
+          <th>Date Assigned</th>
+          <th>&nbsp;</th>
+        </thead>
+        <tbody>
+          <% @object.permissions.each do |permission| %>
+            <tr>
+              <td>
+                <% if permission.authorization.subject_class == 'all' %>
+                  All Features
+                <% else %>
+                  <%= permission.authorization.subject_class.gsub(/Guts::/, '').pluralize %>
+                <% end %>
+              </td>
+              <td>
+                <%= permission.authorization.description.titleize %>
+              </td>
+              <td>
+                <%= permission.created_at.strftime("%b #{permission.created_at.day.ordinalize}, %Y") %>
+              </td>
+              <td class="action_links">
+                <%= link_to_destroy 'Revoke', polymorphic_path([@object, permission])%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No navigation items have been added.</p>
+    <% end %>
+  </div>
+</div>

@@ -320,3 +320,14 @@ textarea.tinymce {
 label[for="content_categories"] ~ div:not(:last-of-type) input {
   margin-bottom: 0;
 }
+
+/* Authorizations */
+#permission_authorization_ids {
+  max-height: 300px;
+  height: 300px;
+
+  option {
+    margin: 0.3em 0;
+    padding: 0.3em;
+  }
+}
