@@ -3,6 +3,10 @@ module Guts
   class Authorization < ActiveRecord::Base
     has_many :permissions
 
+    validates :subject_class, presence: true
+    validates :action, presence: true
+    validates_numericality_of :subject_id, allow_nil: true
+
     # Shows a class with an action
     # @returns [String] compiled string with class, action, and ID (if present)
     def class_with_action

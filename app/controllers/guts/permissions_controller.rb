@@ -22,15 +22,19 @@ module Guts
     def create
       begin
         ActiveRecord::Base.transaction do
+          # Takes the custom authorization field from the form and loops
+          # and merges it into ther permission_params
           params[:authorization_ids].each do |id|
             @permission = Permission.new permission_params.merge(authorization_id: id)
-            @permission.save
+            @permission.save!
           end
         end
 
+        # Success, all done
         flash[:notice] = 'Permission was successfully granted.'
         redirect_to polymorphic_path([@object, :permissions])
       rescue ActiveRecord::RecordInvalid => invalid
+        # Something did not validate
         render :new
       end
     end
