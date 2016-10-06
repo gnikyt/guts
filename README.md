@@ -71,7 +71,7 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 ## Todo
 
 + Create a project page
-+ Scope users and groups for multisite
++ Scope users and groups for multisite (not sure how to handle this yet)
 
 ## License
 

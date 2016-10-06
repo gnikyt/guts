@@ -6,6 +6,7 @@
       <%= link_to "Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning' %>
       <%= link_to "Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button' %>
       <%= link_to "Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert' %>
+      <%= link_to "Permissions (#{@group.permissions.size})", group_permissions_path(@group), class: 'hollow button secondary' %>
     <% end %>
   </div>
 

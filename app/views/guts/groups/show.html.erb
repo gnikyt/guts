@@ -17,6 +17,14 @@
         <td><%= @group.slug %></td>
       </tr>
       <tr>
+        <td><strong>Permissions</strong></td>
+        <td>
+          <% @group.permissions.each do |permission| %>
+            <u><%= clean_subject_class permission.authorization.subject_class %>:</u> <%= permission.authorization.action %><br>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td><strong>Created</strong></td>
         <td><%= @group.created_at %></td>
       </tr>

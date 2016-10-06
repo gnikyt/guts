@@ -27,6 +27,8 @@
               <td><%= user.email %></td>
               <td><%= user.groups.map(&:title).join(', ') %></td>
               <td align="right" class="action_links">
+                <%= link_to 'Full Info', user_path(user) %>
+                <%= link_to 'Permissions', user_permissions_path(user) %>
                 <%= link_to 'Edit', edit_user_path(user) %>
                 <%= link_to_destroy 'Destroy', user %>
               </td>

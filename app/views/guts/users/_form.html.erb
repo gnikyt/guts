@@ -5,6 +5,7 @@
     <% unless @user.new_record? %>
     <%= link_to "Metafields (#{@user.metafields.size})", user_metafields_path(@user), class: 'hollow button' %>
     <%= link_to "Media (#{@user.media.size})", user_media_path(@user), class: 'hollow button alert' %>
+    <%= link_to "Permissions (#{@user.permissions.size})", user_permissions_path(@user), class: 'hollow button secondary' %>
     <% end %>
   </div>
 

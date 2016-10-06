@@ -14,7 +14,9 @@ module Guts
 
     # Assigning a permission to an object
     def new
-      @permission = Permission.new
+      @permission     = Permission.new
+      @authorizations = Authorization.all
+      @grouped_auths  = @authorizations.group_by(&:subject_class)
     end
 
     # Creates a permission for an object
@@ -44,7 +46,7 @@ module Guts
       permission = @object.permissions.find { |p| p.id == params[:id].to_i }
       permission.destroy if permission
 
-      flash[:notice] = permission ? 'Permission was revoked.' : 'Error Revoking Permission.'
+      flash[:notice] = permission ? 'Permission was revoked.' : 'Error revoking permission.'
       redirect_to polymorphic_path([@object, :permissions])
     end
 

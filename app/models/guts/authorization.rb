@@ -5,7 +5,7 @@ module Guts
 
     validates :subject_class, presence: true
     validates :action, presence: true
-    validates_numericality_of :subject_id, allow_nil: true
+    validates :subject_id, numericality: { only_integer: true }, allow_nil: true
 
     # Shows a class with an action
     # @returns [String] compiled string with class, action, and ID (if present)

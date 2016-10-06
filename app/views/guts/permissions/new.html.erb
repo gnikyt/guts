@@ -25,10 +25,22 @@
       </div>
     <% end %>
 
-    <div class="small-12 columns">
-      <%= f.label :authorizations %>
-      <%= select_tag :authorization_ids, options_from_collection_for_select(Guts::Authorization.all, :id, :class_with_action_cleaner), multiple: true, required: true %>
-    </div>
+    <% if @grouped_auths %>
+      <% @grouped_auths.each do |title, auths| %>
+        <div class="small-12 columns">
+          <fieldset>
+            <legend><%= clean_subject_class title %></legend>
+
+            <% auths.each do |auth| %>
+              <%= label_tag do %>
+                <%= check_box_tag 'authorization_ids[]', auth.id %>
+                <%= auth.action.titleize %>
+              <% end %>
+            <% end %>
+          </fieldset>
+        </div>
+      <% end %>
+    <% end %>
 
     <div class="hide">
       <%= f.text_field :permissionable_id, value: @object.id %>
