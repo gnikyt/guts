@@ -1,0 +1,8 @@
+<% if lookup_context.exists?('layout_hook', ['guts/application'], true) %>
+  <%= render 'layout_hook' %>
+<% end %>
+
+<title>Dashboard &mdash; <%= controller_name.humanize %></title>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag 'guts/application', media: 'all' %>
+<%= yield :head %>

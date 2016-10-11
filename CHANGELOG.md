@@ -1,3 +1,9 @@
+# Version 1.4.0
+*See UPGRADING.md as this is a breaking release*
+
++ Introduced basic permissions/authorizations for users through the CanCanCan gem
++ Groups are no longer used to manage who can see the admin panel, everything is ran through CanCanCan instead
+
 # Version 1.3.6
 
 + Added methods to models for friendly_id so the slugs will update on title change.. previously, slugs would not update
