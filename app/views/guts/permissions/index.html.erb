@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Permissions<% if @object.try(:title) || @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || 'N/A' %></span><% end %></h1>
-    <%= link_to 'New', new_polymorphic_path([@object, :permission]), class: 'button' %>
+    <%= link_to('New', new_polymorphic_path([@object, :permission]), class: 'button') if can? :create, Guts::Permission %>
     <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
   </div>
 </div>
@@ -43,7 +43,7 @@
                 <%= permission.created_at.strftime("%b #{permission.created_at.day.ordinalize}, %Y") %>
               </td>
               <td class="action_links">
-                <%= link_to_destroy 'Revoke', polymorphic_path([@object, permission])%>
+                <%= link_to_destroy('Revoke', polymorphic_path([@object, permission])) if can? :delete, Guts::Permission %>
               </td>
             </tr>
           <% end %>

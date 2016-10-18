@@ -1,6 +1,6 @@
 <%= form_for([@object, @medium]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Medium) || can?(:create, Guts::Medium) %>
     <% unless @medium.new_record? %>
       <%= link_to 'View', @medium.file.url(:original), class: 'warning hollow button', target: '_blank' %>
     <% end %>
