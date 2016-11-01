@@ -1,6 +1,6 @@
 <%= form_for(@option) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Option) || can?(:create, Guts::Option) %>
     <%= link_to 'Back', options_path, class: 'secondary hollow button' %>
   </div>
 
@@ -18,9 +18,17 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :key %>
-    <%= f.text_field :key %>
+    <%= f.text_field :key, required: true %>
     <p class="help-text">Keys must be all lowercase with no spaces or special characters (example: facebook_url)</p>
   </div>
 

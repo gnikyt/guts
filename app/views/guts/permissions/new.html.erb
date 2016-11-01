@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Assign Permission<% if @object.try(:title) || @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) %></span><% end %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for([@object, @permission]) do |f| %>
+    <div class="small-12 columns">
+      <%= f.submit 'Save', class: 'success button' %>
+      <%= link_to 'Back', url_for([@object, :permissions]), class: 'secondary hollow button' %>
+    </div>
+
+    <% if @permission.errors.any? %>
+      <div class="small-12 columns">
+        <div class="callout warning">
+          <h5><%= pluralize(@permission.errors.count, 'error') %> prohibited this content from being saved:</h5>
+
+          <ul>
+            <% @permission.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @grouped_auths %>
+      <% @grouped_auths.each do |title, auths| %>
+        <div class="small-12 columns">
+          <fieldset>
+            <legend><%= clean_subject_class title %></legend>
+
+            <% auths.each do |auth| %>
+              <%= label_tag do %>
+                <%= check_box_tag 'authorization_ids[]', auth.id %>
+                <%= auth.action.titleize %>
+              <% end %>
+            <% end %>
+          </fieldset>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="hide">
+      <%= f.text_field :permissionable_id, value: @object.id %>
+      <%= f.text_field :permissionable_type, value: @object.class %>
+    </div>
+  <% end %>
+</div>

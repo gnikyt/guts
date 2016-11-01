@@ -1,6 +1,6 @@
 <%= form_for(@site) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Site) || can?(:create, Guts::Site) %>
     <%= link_to 'Back', sites_path, class: 'secondary hollow button' %>
   </div>
 
@@ -20,12 +20,12 @@
 
   <div class="small-12 columns">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
 
   <div class="small-12 columns">
     <%= f.label :domain %>
-    <%= f.text_field :domain %>
+    <%= f.text_field :domain, required: true %>
     <p class="help-text">Example: fr.domain.com</p>
   </div>
 <% end %>

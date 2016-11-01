@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Navigation Items<% if @navigation %> <span class="sub_title">for <%= @navigation.title %></span><% end %></h1>
-    <%= link_to 'New', (@navigation.nil? ? new_navigation_item_path : new_navigation_navigation_item_path(@navigation)), class: 'button' %>
+    <%= link_to('New', (@navigation.nil? ? new_navigation_item_path : new_navigation_navigation_item_path(@navigation)), class: 'button') if can? :create, Guts::NavigationItem %>
     <%= link_to 'Back', navigations_path, class: 'hollow button secondary' %>
   </div>
 </div>
@@ -20,18 +20,18 @@
   <div class="small-12 columns">
     <% if @navigation_items.size > 0 %>
       <table>
-        <tbody>
+        <tbody class="sortable" data-url="<%= reorder_navigation_path @navigation %>">
           <% @navigation_items.each do |navigation_item| %>
-            <tr>
-              <td><%= navigation_item.title %></td>
+            <tr class="item" data-id="<%= navigation_item.id %>">
+              <td><i class="handle fa fa-reorder"></i> <%= navigation_item.title %></td>
               <td>
                 <small>
                   to: <%= navigation_item.custom? ? 'Custom' : navigation_item.navigatable.navigatable_format %> <%= "(#{navigation_item.custom})" if navigation_item.custom? %>
                 </small>
               </td>
               <td class="action_links">
-                <%= link_to 'Edit', edit_navigation_navigation_item_path(navigation_item.navigation, navigation_item) %>
-                <%= link_to_destroy 'Destroy', navigation_navigation_item_path(navigation_item.navigation, navigation_item) %>
+                <%= link_to('Edit', edit_navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if can? :update, Guts::NavigationItem %>
+                <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if can? :delete, Guts::NavigationItem %>
               </td>
             </tr>
           <% end %>

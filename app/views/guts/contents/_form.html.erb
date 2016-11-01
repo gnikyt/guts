@@ -2,12 +2,20 @@
   <div class="small-12 medium-8 columns">
     <div class="row">
       <div class="small-12 columns">
-        <%= f.submit "Save #{@type.title}", class: 'success button' %>
+        <%= f.submit("Save #{@type.title}", class: 'success button') if can?(:create, Guts::Content) || can?(:update, Guts::Content) %>
         <% unless @content.new_record? %>
-          <%= link_to "Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: 'hollow button' %>
-          <%= link_to "Media (#{@content.media.size})", content_media_path(@content), class: 'hollow button secondary' %>
+          <%= link_to("Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: 'hollow button') if can? :read, Guts::Metafield %>
+          <%= link_to("Media (#{@content.media.size})", content_media_path(@content), class: 'hollow button secondary') if can? :read, Guts::Medium %>
         <% end %>
       </div>
+
+      <% if notice %>
+        <div class="small-12 columns">
+          <div class="callout success notice">
+            <p><%= notice %></p>
+          </div>
+        </div>
+      <% end %>
 
       <% if @content.errors.any? %>
         <div class="small-12 columns">
@@ -25,13 +33,13 @@
 
       <div class="small-12 columns">
         <%= f.label :title %>
-        <%= f.text_field :title %>
+        <%= f.text_field :title, required: true %>
       </div>
 
       <% unless @content.new_record? %>
         <div class="small-12 columns">
           <%= f.label :slug %>
-          <%= f.text_field :slug %>
+          <%= f.text_field :slug, readonly: true, disabled: true %>
         </div>
       <% end %>
 

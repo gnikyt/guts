@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Options controller
   class OptionsController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_option, only: [:show, :edit, :update, :destroy]
     before_action :set_per_page, only: [:index]
 
@@ -31,18 +34,18 @@ module Guts
 
       if @option.save
         flash[:notice] = 'Option was successfully created.'
-        redirect_to options_path
+        redirect_to edit_option_path(@option)
       else
         render :new
       end
     end
-    
+
     # Updates an option through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
       if @option.update option_params
         flash[:notice] = 'Option was successfully updated.'
-        redirect_to options_path
+        redirect_to edit_option_path(@option)
       else
         render :edit
       end
@@ -51,13 +54,13 @@ module Guts
     # Destroys an option
     def destroy
       @option.destroy
-      
+
       flash[:notice] = 'Option was successfully destroyed.'
       redirect_to options_path
     end
 
     private
-    
+
     # Sets a coption from the database using `id` param
     # @note This is a `before_action` callback
     # @private
@@ -70,7 +73,7 @@ module Guts
     def option_params
       params.require(:option).permit(:key, :value, :site_id)
     end
-    
+
     # Gets the per-page value to use
     # @note Default is 30
     # @private

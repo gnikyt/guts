@@ -1,0 +1,13 @@
+master_authorization:
+  title: Everything
+  subject_class: all
+  subject_id:
+  action: manage
+  description: All operations
+
+type_authorization:
+  title:
+  subject_class: Guts::Type
+  subject_id: 3
+  action: manage
+  description: All operations

@@ -3,15 +3,18 @@ require_dependency 'guts/application_controller'
 module Guts
   # Navigation Items controller
   class NavigationItemsController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_navigation_item, only: [:show, :edit, :update, :destroy]
     before_action :set_navigation
     before_action :set_navigatable_models, exclude: [:destroy]
 
     # Displays a list of navigation items
     def index
-      @navigation_items = NavigationItem.all
+      @navigation_items = @navigation.try(:navigation_items) || NavigationItem.all
     end
-    
+
     # Shows a single navigation item
     def show
     end
@@ -53,11 +56,11 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @navigation_item.destroy
-      
+
       flash[:notice] = 'Navigation item was successfully destroyed.'
       redirect_to navigation_navigation_items_path(@navigation)
     end
-    
+
     # Generates a list of navigatable objects from the model provided
     # @see Guts::NavigatableConcern
     # @return [Object] JSON of navigatable objects
@@ -65,19 +68,19 @@ module Guts
       model   = params[:model].constantize
       is_nav  = @navigatable.map { |m| m[:name] }.include?(params[:model])
       objects = model.all.map { |obj| { id: obj.id, format: obj.navigatable_format } } if is_nav
-      
+
       render json: objects
     end
 
     private
-    
+
     # Sets a navigation from the database using `id` param
     # @note This is a `before_action` callback
     # @private
     def set_navigation_item
       @navigation_item = NavigationItem.find params[:id]
     end
-    
+
     # Sets a navigation parent from the database using `navigation_id` param
     # @note This is a `before_action` callback
     # @private
@@ -102,13 +105,13 @@ module Guts
         :site_id
       )
     end
-    
+
     # Forces module load models so we can determine who is navigatable
     # @see Guts::NavigatableConcern
     # @private
     def set_navigatable_models
       Dir["#{Guts::Engine.root}/app/models/**/*.rb"].each { |model| require model }
-      
+
       @navigatable = ActiveRecord::Base
                      .descendants
                      .map(&:name)

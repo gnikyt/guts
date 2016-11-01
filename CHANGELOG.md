@@ -1,3 +1,28 @@
+# Version 1.4.0
+*See UPGRADING.md as this is a breaking release*
+
++ Introduced basic permissions/authorizations for users through the CanCanCan gem
++ Groups are no longer used to manage who can see the admin panel, everything is ran through CanCanCan instead
+
+# Version 1.3.6
+
++ Added methods to models for friendly_id so the slugs will update on title change.. previously, slugs would not update
++ Slug fields on all forms now are `readonly` and `disabled`
+
+# Version 1.3.5
+
++ Added ENV var for TravisCI to surpress unneeded Ruby warnings
++ Sortable navigation items is now in place (drag and drop to reorder)
+
+# Version 1.3.4
+
++ Fix for issue #3 where navigation items were showing wrong results
+
+# Version 1.3.3
+
++ Changed `categories`, `contents`, `media`, `groups`, `options`, `types`, and `users` to redirect to edit screen on update or create for better usability
++ Updated forms to add `required=true` where needed
+
 # Version 1.3.2
 
 + Removed Gemfile.lock

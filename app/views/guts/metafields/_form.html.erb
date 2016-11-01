@@ -1,6 +1,6 @@
 <%= form_for([@object, @metafield]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Metafield) || can?(:create, Guts::Metafield) %>
     <%= link_to 'Back', url_for([@object, :metafields]), class: 'secondary hollow button' %>
   </div>
 
@@ -18,9 +18,17 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :key %>
-    <%= f.text_field :key %>
+    <%= f.text_field :key, required: true %>
   </div>
 
   <div class="small-12 columns">

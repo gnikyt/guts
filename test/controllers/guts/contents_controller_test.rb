@@ -13,7 +13,7 @@ module Guts
       assert_response :success
       assert_not_nil assigns(:contents)
     end
-    
+
     test 'should get new' do
       get :new, type: @type.slug
       assert_response :success
@@ -32,15 +32,15 @@ module Guts
              }
       end
 
-      assert_redirected_to contents_path(type: @type.slug)
+      assert_redirected_to edit_content_path(assigns(:content))
       assert flash[:notice].include?('successfully created')
     end
-    
+
     test 'should fail to create content item and send back to new' do
       post :create, type: @type.slug, content: { title: '' }
       assert_template 'guts/contents/new'
     end
-    
+
     test 'should show content' do
       get :show, id: @content
       assert_response :success
@@ -50,10 +50,10 @@ module Guts
       get :edit, id: @content
       assert_response :success
     end
-    
+
     test 'should update content' do
       patch :update, id: @content, content: { slug: @content.slug, title: @content.title }
-      assert_redirected_to contents_path(type: @content.type.slug)
+      assert_redirected_to edit_content_path(assigns(:content))
       assert flash[:notice].include?('successfully updated')
     end
 
@@ -70,7 +70,7 @@ module Guts
       assert_redirected_to contents_path(type: @content.type.slug)
       assert flash[:notice].include?('successfully destroyed')
     end
-    
+
     test 'should allow for custom paginated limit' do
       get :index, per_page: 100, type: @type
       assert_equal 100, assigns(:per_page).to_i

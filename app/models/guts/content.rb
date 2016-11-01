@@ -21,5 +21,11 @@ module Guts
     friendly_id :title, use: [:slugged, :scoped, :finders], scope: :site_id
     navigatable :'type.title', :title, format: '[:type.title] :title'
     trackable :create, :update, :destroy, fields: [:title, :visible, :tags, :slug]
+
+    # Updates slug if title changes
+    # @return [Boolean]
+    def should_generate_new_friendly_id?
+      title_changed?
+    end
   end
 end

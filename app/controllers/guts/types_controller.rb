@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Types controller
   class TypesController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_type, only: [:show, :edit, :update, :destroy]
 
     # Display a list of types
@@ -24,13 +27,13 @@ module Guts
     end
 
     # Creates a type through post
-    # @note Redirects to #index if successfull or re-renders #new if not    
+    # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @type = Type.new type_params
 
       if @type.save
         flash[:notice] = 'Type was successfully created.'
-        redirect_to types_path
+        redirect_to edit_type_path(@type)
       else
         render :new
       end
@@ -41,7 +44,7 @@ module Guts
     def update
       if @type.update type_params
         flash[:notice] = 'Type was successfully updated.'
-        redirect_to types_path
+        redirect_to edit_type_path(@type)
       else
         render :edit
       end
@@ -51,13 +54,13 @@ module Guts
     # @note Redirects to #index on success
     def destroy
       @type.destroy
-      
+
       flash[:notice] = 'Type was successfully destroyed.'
       redirect_to types_path
     end
 
     private
-    
+
     # Sets a type from the database using `id` param
     # @note This is a `before_action` callback
     # @private

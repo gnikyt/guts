@@ -4,10 +4,10 @@ test_navigation_item:
   position: 0
   navigation: test_navigation
   navigatable: test_page (Guts::Content)
-  
+
 test_navigation_item_two:
   title: Test Nav Item
   custom: http://google.ca/
-  position: 0
+  position: 1
   navigation: test_navigation
   navigatable: ~

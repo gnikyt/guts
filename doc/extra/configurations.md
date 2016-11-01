@@ -52,10 +52,3 @@ These configurations can be overwritten.
   "image/gif"
 ]
 ```
-
-`config.admin_groups` returns a list of user groups allowed to access the admin panel.
-
-``` ruby
-["Admins"]
-```
-

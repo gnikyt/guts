@@ -1,11 +1,12 @@
 <%= form_for(@group) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:create, Guts::Group) || can?(:update, Guts::Group) %>
     <%= link_to 'Back', groups_path, class: 'secondary hollow button' %>
     <% unless @group.new_record? %>
-      <%= link_to "Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning' %>
-      <%= link_to "Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button' %>
-      <%= link_to "Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert' %>
+      <%= link_to("Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning') if can? :read, Guts::User %>
+      <%= link_to("Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button') if can? :read, Guts::Metafield %>
+      <%= link_to("Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert') if can? :read, Guts::Medium %>
+      <%= link_to("Permissions (#{@group.permissions.size})", group_permissions_path(@group), class: 'hollow button secondary') if can? :read, Guts::Permission %>
     <% end %>
   </div>
 
@@ -23,15 +24,23 @@
     </div>
   <% end %>
 
+  <% if notice %>
+    <div class="small-12 columns">
+      <div class="callout success notice">
+        <p><%= notice %></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <% unless @group.new_record? %>
     <div class="small-12 columns">
       <%= f.label :slug %>
-      <%= f.text_field :slug %>
+      <%= f.text_field :slug, readonly: true, disabled: true %>
     </div>
   <% end %>
 <% end %>

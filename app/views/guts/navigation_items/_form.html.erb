@@ -1,10 +1,10 @@
 <%= form_for([@navigation, @navigation_item]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::NavigationItem) || can?(:create, Guts::NavigationItem) %>
     <%= link_to 'Back', (@navigation.nil? ? navigations_path : navigation_navigation_items_path(@navigation)), class: 'secondary hollow button' %>
     <% unless @navigation_item.new_record? %>
-    <%= link_to "Metafields (#{@navigation_item.metafields.size})", (@navigation.nil? ? navigation_item_metafields_path : navigation_navigation_item_metafields_path(@navigation, @navigation_item)), class: 'hollow button' %>
-    <%= link_to "Media (#{@navigation_item.media.size})", (@navigation.nil? ? navigation_item_media_path : navigation_navigation_item_media_path(@navigation, @navigation_item)), class: 'hollow button warning' %>
+      <%= link_to("Metafields (#{@navigation_item.metafields.size})", (@navigation.nil? ? navigation_item_metafields_path : navigation_navigation_item_metafields_path(@navigation, @navigation_item)), class: 'hollow button') if can? :read, Guts::Metafield %>
+      <%= link_to("Media (#{@navigation_item.media.size})", (@navigation.nil? ? navigation_item_media_path : navigation_navigation_item_media_path(@navigation, @navigation_item)), class: 'hollow button warning') if can? :read, Guts::Medium %>
     <% end %>
   </div>
 
@@ -24,7 +24,7 @@
 
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <div class="small-6 columns">
@@ -41,7 +41,7 @@
   <div class="small-6 columns">
     <%= f.label :value %>
     <%= f.select :navigatable_id, {}, {}, { data: { initial: @navigation_item.new_record? ? nil : @navigation_item.navigatable_id } } %>
-    
+
     <%= f.text_field :custom, { style: 'display: none' } %>
   </div>
 

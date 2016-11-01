@@ -23,10 +23,10 @@ module Guts
         post :create, category: { slug: 'cat-test', title: 'Cat Test' }
       end
 
-      assert_redirected_to categories_path
+      assert_redirected_to edit_category_path(assigns(:category))
       assert_equal 'Category was successfully created.', flash[:notice]
     end
-    
+
     test 'should fail to create category and send back to new' do
       post :create, category: { title: '' }
       assert_template 'guts/categories/new'
@@ -44,10 +44,10 @@ module Guts
 
     test 'should update category' do
       patch :update, id: @category, category: { slug: @category.slug, title: @category.title }
-      assert_redirected_to categories_path
+      assert_redirected_to edit_category_path(assigns(:category))
       assert_equal 'Category was successfully updated.', flash[:notice]
     end
-    
+
     test 'should fail to update category and send back to edit' do
       patch :update, id: @category, category: { title: '' }
       assert_template 'guts/categories/edit'

@@ -13,7 +13,7 @@ module Guts
       assert_response :success
       assert_not_nil assigns(:users)
     end
-    
+
     test 'should get index with group' do
       get :index, group: @group.id
       assert_response :success
@@ -35,15 +35,15 @@ module Guts
         }
       end
 
-      assert_redirected_to users_path
+      assert_redirected_to edit_user_path(assigns(:user))
       assert_equal 'User was successfully created.', flash[:notice]
     end
-    
+
     test 'should fail to create user and send back to new' do
       post :create, user: { name: '', email: '' }
       assert_template 'guts/users/new'
     end
-    
+
     test 'should create user with group' do
       assert_difference('User.count') do
         post :create, user: {
@@ -55,10 +55,10 @@ module Guts
         }
       end
 
-      assert_redirected_to users_path
+      assert_redirected_to edit_user_path(assigns(:user))
       assert_equal 'User was successfully created.', flash[:notice]
     end
-    
+
     test 'should show user' do
       get :show, id: @user
       assert_response :success
@@ -71,10 +71,10 @@ module Guts
 
     test 'should update user' do
       patch :update, id: @user, user: { name: @user.name }
-      assert_redirected_to users_path
+      assert_redirected_to edit_user_path(assigns(:user))
       assert_equal 'User was successfully updated.', flash[:notice]
     end
-    
+
     test 'should fail to update user and send back to edit' do
       patch :update, id: @user, user: { name: '', email: '' }
       assert_template 'guts/users/edit'
@@ -88,7 +88,7 @@ module Guts
       assert_redirected_to users_path
       assert_equal 'User was successfully destroyed.', flash[:notice]
     end
-    
+
     test 'should switch user by ID' do
       post :switch_user, user_id: @user.id
       assert flash[:notice].include?('now logged in')

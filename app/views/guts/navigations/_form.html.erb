@@ -1,10 +1,10 @@
 <%= form_for(@navigation) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Navigation) || can?(:create, Guts::Navigation) %>
     <%= link_to 'Back', navigations_path, class: 'secondary hollow button' %>
     <% unless @navigation.new_record? %>
-      <%= link_to "Metafields (#{@navigation.metafields.size})", navigation_metafields_path(@navigation), class: 'hollow button' %>
-      <%= link_to "Media (#{@navigation.media.size})", navigation_media_path(@navigation), class: 'hollow button warning' %>
+      <%= link_to("Metafields (#{@navigation.metafields.size})", navigation_metafields_path(@navigation), class: 'hollow button') if can? :read, Guts::Metafield %>
+      <%= link_to("Media (#{@navigation.media.size})", navigation_media_path(@navigation), class: 'hollow button warning') if can? :read, Guts::Medium %>
     <% end %>
   </div>
 
@@ -24,13 +24,13 @@
 
   <div class="small-12 columns">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <% unless @navigation.new_record? %>
     <div class="small-12 columns">
       <%= f.label :slug %>
-      <%= f.text_field :slug %>
+      <%= f.text_field :slug, readonly: true, disabled: true %>
     </div>
   <% end %>
 
