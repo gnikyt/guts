@@ -1,6 +1,6 @@
 <%= form_for(@option) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit 'Save', class: 'success button' %>
+    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Option) || can?(:create, Guts::Option) %>
     <%= link_to 'Back', options_path, class: 'secondary hollow button' %>
   </div>
 

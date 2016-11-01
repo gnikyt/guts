@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726010421) do
+ActiveRecord::Schema.define(version: 20160927044443) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20160726010421) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "guts_authorizations", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subject_class"
+    t.integer  "subject_id"
+    t.string   "action"
+    t.text     "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "guts_categories", force: :cascade do |t|
     t.string   "title"
@@ -137,6 +147,16 @@ ActiveRecord::Schema.define(version: 20160726010421) do
   end
 
   add_index "guts_options", ["site_id"], name: "index_guts_options_on_site_id"
+
+  create_table "guts_permissions", force: :cascade do |t|
+    t.integer  "permissionable_id"
+    t.string   "permissionable_type"
+    t.integer  "authorization_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "guts_permissions", ["permissionable_type", "permissionable_id"], name: "index_perm_on_permissionable_type_and_permissionable"
 
   create_table "guts_sites", force: :cascade do |t|
     t.string   "name"

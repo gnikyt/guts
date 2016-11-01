@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Categories</h1>
-    <%= link_to 'New', new_category_path, class: 'button' %>
+    <%= link_to('New', new_category_path, class: 'button') if can? :create, Guts::Category %>
   </div>
 </div>
 
@@ -25,8 +25,8 @@
               <td><%= category.title %></td>
               <td><%= pluralize category.categorizations.size, 'record', 'records' %></td>
               <td align="right" class="action_links">
-                <%= link_to 'Edit', edit_category_path(category) %>
-                <%= link_to_destroy 'Destroy', category %>
+                <%= link_to('Edit', edit_category_path(category)) if can? :update, Guts::Category %>
+                <%= link_to_destroy('Destroy', category) if can? :delete, Guts::Category %>
               </td>
             </tr>
           <% end %>

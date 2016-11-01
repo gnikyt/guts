@@ -8,6 +8,8 @@ unless ENV['NO_COVERAGE']
     add_filter 'lib/guts/version.rb' # No need to test version file... doesnt work.
     add_filter 'lib/tasks/guts_tasks.rake' # Inconsistant coverage reports, not sure why
     add_filter 'lib/tasks/guts_users.rake' # Inconsistant coverage reports, not sure why
+    add_filter 'lib/tasks/guts_db.rake' # Inconsistant coverage reports, not sure why
+    add_filter 'lib/generators/guts/install/install_generator.rb' # Can't find any possible way to test this...
   end
 end
 

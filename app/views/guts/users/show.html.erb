@@ -21,6 +21,14 @@
         <td><%= @user.groups.collect(&:title).join(', ') %></td>
       </tr>
       <tr>
+        <td><strong>Permissions</strong></td>
+        <td>
+          <% @user.permissions.each do |permission| %>
+            <u><%= clean_subject_class permission.authorization.subject_class %>:</u> <%= permission.authorization.action %><br>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
         <td><strong>Created</strong></td>
         <td><%= @user.created_at %></td>
       </tr>

@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Options controller
   class OptionsController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_option, only: [:show, :edit, :update, :destroy]
     before_action :set_per_page, only: [:index]
 

@@ -3,22 +3,11 @@ module Guts
   # @attr [Object] current_user the current user's object record
   # @note This is also used by the controllers
   module SessionsHelper
-    # Set the User's ID to the session
-    # @param [Object] user the user's object record
-    def log_in(user)
-      session[:user_id] = user.id
-    end
-    
-    # Logs the user out by deleting the session
-    def log_out
-      session.delete :user_id
-      @current_user = nil
-    end
-
-    # Gets the current user's record
-    # @return [Object] the user object
+    # Simple wrapper for grabbing the current user from the controller
+    # instance variable
+    # @return [Object] the current user object
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
+      @current_user
     end
 
     # Determins if the user is logged in

@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Navigation Items controller
   class NavigationItemsController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_navigation_item, only: [:show, :edit, :update, :destroy]
     before_action :set_navigation
     before_action :set_navigatable_models, exclude: [:destroy]

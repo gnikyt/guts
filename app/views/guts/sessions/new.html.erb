@@ -5,15 +5,23 @@
       <%= f.submit 'Login', { class: 'button' } %>
       <%= link_to 'Forgot Password?', forgot_session_path, { class: 'hollow button secondary' } %>
     </div>
-  
+
     <% if flash[:notice] %>
       <div class="small-12 columns">
-        <div class="callout alert">
+        <div class="callout info">
           <%= flash[:notice] %>
         </div>
       </div>
     <% end %>
-  
+
+    <% if flash[:alert] %>
+      <div class="small-12 columns">
+        <div class="callout alert">
+          <%= flash[:alert] %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="small-12 medium-6 columns">
       <%= f.label :email %>
       <%= f.email_field :email %>

@@ -1,10 +1,14 @@
 Guts::Engine.routes.draw do
   # Master concerns... everything can have a metafield and file attached to it
-  concern(:fieldable) {|opts| resources :metafields, opts}
-  concern(:filable) {|opts| resources :media, opts}
+  concern(:fieldable) { |opts| resources :metafields, opts }
+  concern(:filable) { |opts| resources :media, opts }
+  concern(:permissionable) { |opts| resources :permissions, { only: [:index, :destroy, :create, :new]}.merge(opts) }
 
   # Resources and routes
-  get '/', to: 'users#index'
+  get '/', to: 'index#index'
+
+  # Home
+  get :home, to: 'index#index'
 
   # Sites
   resources :sites do
@@ -21,6 +25,7 @@ Guts::Engine.routes.draw do
   resources :users do
     concerns :fieldable, fieldable_type: 'Guts::User'
     concerns :filable, filable_type: 'Guts::User'
+    concerns :permissionable, permissionable_type: 'Guts::User'
 
     match :switch_user, on: :collection, via: [:get, :post]
   end
@@ -29,6 +34,7 @@ Guts::Engine.routes.draw do
   resources :groups do
     concerns :fieldable, fieldable_type: 'Guts::Group'
     concerns :filable, filable_type: 'Guts::Group'
+    concerns :permissionable, permissionable_type: 'Guts::Group'
   end
 
   # Categories

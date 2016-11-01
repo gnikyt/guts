@@ -3,6 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Categories controller
   class CategoriesController < ApplicationController
+    include ControllerPermissionConcern
+
+    load_and_authorize_resource
     before_action :set_category, only: [:show, :edit, :update, :destroy]
 
     # Displays a list of categories
