@@ -64,12 +64,12 @@ module Guts
     def reorder
       ActiveRecord::Base.transaction do
         @navigation.navigation_items.each do |item|
-          find = params[:order].find { |k, v| v == item.id.to_s }
+          find = params[:order].select { |k, v| v == item.id.to_s }
           item.update_attribute(:position, find[0].to_i)
         end
       end
 
-      render nothing: true, status: :ok
+      head :ok
     end
 
     private
