@@ -71,7 +71,7 @@ module Guts
     # Permits category params from forms
     # @private
     def category_params
-      params.require(:category).permit(:title, :slug)
+      params.require(:category).permit(:title)
     end
   end
 end

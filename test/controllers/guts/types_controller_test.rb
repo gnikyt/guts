@@ -22,7 +22,6 @@ module Guts
       assert_difference('Type.count') do
         post :create, params: {
           type: {
-            slug: 'controller-type',
             title: 'Controller Type'
           }
         }

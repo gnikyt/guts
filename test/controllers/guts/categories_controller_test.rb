@@ -20,7 +20,7 @@ module Guts
 
     test 'should create category' do
       assert_difference('Category.count') do
-        post :create, params: { category: { slug: 'cat-test', title: 'Cat Test' } }
+        post :create, params: { category: { title: 'Cat Test' } }
       end
 
       assert_redirected_to edit_category_path(assigns(:category))

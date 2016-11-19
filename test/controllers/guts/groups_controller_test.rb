@@ -22,7 +22,6 @@ module Guts
       assert_difference('Group.count') do
         post :create, params: {
           group: {
-            slug: 'group-test',
             title: 'Group Test'
           }
         }
@@ -51,13 +50,12 @@ module Guts
       patch :update, params: {
         id: @group,
         group: {
-          slug: @group.slug,
           title: @group.title
         }
       }
 
-      assert_redirected_to edit_group_path(assigns(:group))
       assert_equal 'Group was successfully updated.', flash[:notice]
+      assert_redirected_to edit_group_path(assigns(:group))
     end
 
     test 'should fail to update group and send back to edit' do

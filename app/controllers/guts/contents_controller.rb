@@ -89,7 +89,6 @@ module Guts
     def content_params
       params.require(:content).permit(
         :title,
-        :slug,
         :content,
         :visible,
         :tags,

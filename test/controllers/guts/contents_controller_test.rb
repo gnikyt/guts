@@ -24,7 +24,6 @@ module Guts
         post :create, params: {
           type: @type.slug,
           content: {
-            slug: 'demo-page',
             title: 'Demo Page',
             visible: true,
             contents: 'Content',

@@ -71,7 +71,7 @@ module Guts
     # Permits group params from forms
     # @private
     def group_params
-      params.require(:group).permit(:title, :slug)
+      params.require(:group).permit(:title)
     end
   end
 end
