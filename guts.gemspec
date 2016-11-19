@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Tyler King']
   s.email       = ['tyler.n.king@outlook.com']
   s.homepage    = 'http://tylerking.me/'
-  s.summary     = 'A mountable, multisite, CMS engine for Rails 4'
-  s.description = 'A mountable, multisite, CMS engine for Rails 4'\
+  s.summary     = 'A mountable, multisite, CMS engine for Rails 5'
+  s.description = 'A mountable, multisite, CMS engine for Rails 5'\
                   'with a basic dashboard interface for your projects'
   s.license     = 'bsd-3-clause'
 

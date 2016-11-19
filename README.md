@@ -4,7 +4,7 @@
 [![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
 [![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
-A mountable, multisite, CMS engine for Rails 4.
+A mountable, multisite, CMS engine for Rails 5.
 
 ### Intensions
 
@@ -15,7 +15,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', "~> 1.4"
+gem 'guts', "~> 2.0"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 
@@ -70,7 +70,7 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 
 ## Todo
 
-+ Create a project page
++ Translations
 + Scope users and groups for multisite (not sure how to handle this yet)
 
 ## License

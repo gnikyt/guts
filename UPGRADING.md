@@ -1,3 +1,7 @@
+# Version 1.4 to 2.0
+
+No steps required. However, please read CHANGELOG entry.
+
 # Version 1.3 to 1.4
 
 Several breaking changes are in this version.
