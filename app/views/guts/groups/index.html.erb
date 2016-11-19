@@ -23,7 +23,7 @@
           <% @groups.each do |group| %>
             <tr>
               <td><%= group.title %></td>
-              <td><%= link_to pluralize(group.users.size, 'user', 'users'), users_path(group: group.id) %></td>
+              <td><%= link_to pluralize(group.users.size, 'user', plural: 'users'), users_path(group: group.id) %></td>
               <td align="right" class="action_links">
                 <%= link_to 'Full Info', group_path(group) %>
                 <%= link_to('Permissions', group_permissions_path(group)) if can? :read, Guts::Permission %>
