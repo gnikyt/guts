@@ -15,7 +15,7 @@ module Guts
     end
 
     test 'should get index with group' do
-      get :index, group: @group.id
+      get :index, params: { group: @group.id }
       assert_response :success
       assert_not_nil assigns(:users)
     end
@@ -27,11 +27,13 @@ module Guts
 
     test 'should create user without group' do
       assert_difference('User.count') do
-        post :create, user: {
-          name: 'Some User',
-          email: 'some_user@domain.com',
-          password: 'xyz123',
-          password_confirmation: 'xyz123'
+        post :create, params: {
+          user: {
+            name: 'Some User',
+            email: 'some_user@domain.com',
+            password: 'xyz123',
+            password_confirmation: 'xyz123'
+          }
         }
       end
 
@@ -40,18 +42,26 @@ module Guts
     end
 
     test 'should fail to create user and send back to new' do
-      post :create, user: { name: '', email: '' }
+      post :create, params: {
+        user: {
+          name: '',
+          email: ''
+        }
+      }
+
       assert_template 'guts/users/new'
     end
 
     test 'should create user with group' do
       assert_difference('User.count') do
-        post :create, user: {
-          name: 'Some User',
-          email: 'some_user@domain.com',
-          password: 'xyz123',
-          password_confirmation: 'xyz123',
-          group_ids: [@group.id]
+        post :create, params: {
+          user: {
+            name: 'Some User',
+            email: 'some_user@domain.com',
+            password: 'xyz123',
+            password_confirmation: 'xyz123',
+            group_ids: [@group.id]
+          }
         }
       end
 
@@ -60,29 +70,40 @@ module Guts
     end
 
     test 'should show user' do
-      get :show, id: @user
+      get :show, params: { id: @user }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @user
+      get :edit, params: { id: @user }
       assert_response :success
     end
 
     test 'should update user' do
-      patch :update, id: @user, user: { name: @user.name }
+      patch :update, params: {
+        id: @user,
+        user: { name: @user.name }
+      }
+
       assert_redirected_to edit_user_path(assigns(:user))
       assert_equal 'User was successfully updated.', flash[:notice]
     end
 
     test 'should fail to update user and send back to edit' do
-      patch :update, id: @user, user: { name: '', email: '' }
+      patch :update, params: {
+        id: @user,
+        user: {
+          name: '',
+          email: ''
+        }
+      }
+
       assert_template 'guts/users/edit'
     end
 
     test 'should destroy user' do
       assert_difference('User.count', -1) do
-        delete :destroy, id: @user
+        delete :destroy, params: { id: @user }
       end
 
       assert_redirected_to users_path
@@ -90,7 +111,7 @@ module Guts
     end
 
     test 'should switch user by ID' do
-      post :switch_user, user_id: @user.id
+      post :switch_user, params: { user_id: @user.id }
       assert flash[:notice].include?('now logged in')
       assert_response :success
       assert_not_nil assigns(:users)

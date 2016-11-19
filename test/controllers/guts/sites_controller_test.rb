@@ -21,63 +21,79 @@ module Guts
 
     test 'should create site' do
       assert_difference('Site.count') do
-        post :create, site: { domain: @site.domain, name: @site.name }
+        post :create, params: {
+          site: {
+            domain: @site.domain,
+            name: @site.name
+          }
+        }
       end
 
       assert_redirected_to sites_path
       assert_equal 'Site was successfully created.', flash[:notice]
     end
-    
+
     test 'should fail to create site and send back to new' do
-      post :create, site: { name: '' }
+      post :create, params: { site: { name: '' } }
       assert_template 'guts/sites/new'
     end
 
     test 'should show site' do
-      get :show, id: @site
+      get :show, params: { id: @site }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @site
+      get :edit, params: { id: @site }
       assert_response :success
     end
 
     test 'should update site' do
-      patch :update, id: @site, site: { domain: @site.domain, name: @site.name }
+      patch :update, params: {
+        id: @site,
+        site: {
+          domain: @site.domain,
+          name: @site.name
+        }
+      }
+
       assert_redirected_to sites_path
       assert_equal 'Site was successfully updated.', flash[:notice]
     end
-    
+
     test 'should fail to update site and send back to edit' do
-      patch :update, id: @site, site: { name: '' }
+      patch :update, params: {
+        id: @site,
+        site: { name: '' }
+      }
+
       assert_template 'guts/sites/edit'
     end
 
     test 'should destroy site' do
       assert_difference('Site.count', -1) do
-        delete :destroy, id: @site
+        delete :destroy, params: { id: @site }
       end
 
       assert_redirected_to sites_path
       assert_equal 'Site was successfully destroyed.', flash[:notice]
     end
-    
+
     test 'should set default site' do
-      get :set_default, id: @site2
+      get :set_default, params: { id: @site2 }
       @site2.reload
       @site.reload
-      
+
       assert_equal true, @site2.default?
       assert_equal false, @site.default?
       assert_redirected_to sites_path
       assert_equal 'Site was successfully set to default.', flash[:notice]
     end
-    
+
     test 'should remove default site' do
-      get :remove_default, id: @site
+      get :remove_default, params: { id: @site }
       @site.reload
-      
+
       assert_equal false, @site.default?
       assert_redirected_to sites_path
       assert_equal 'Site was successfully changed to not default.', flash[:notice]

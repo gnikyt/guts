@@ -20,7 +20,9 @@ module Guts
 
     test 'should create navigation' do
       assert_difference('Navigation.count') do
-        post :create, navigation: { title: 'Nav Test' }
+        post :create, params: {
+          navigation: { title: 'Nav Test' }
+        }
       end
 
       assert_redirected_to navigations_path
@@ -28,28 +30,39 @@ module Guts
     end
 
     test 'should fail to create navigation and send back to new' do
-      post :create, navigation: { title: '' }
+      post :create, params: {
+        navigation: { title: '' }
+      }
+
       assert_template 'guts/navigations/new'
     end
 
     test 'should show navigation' do
-      get :show, id: @navigation
+      get :show, params: { id: @navigation }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @navigation
+      get :edit, params: { id: @navigation }
       assert_response :success
     end
 
     test 'should update navigation' do
-      patch :update, id: @navigation, navigation: { title: @navigation.title }
+      patch :update, params: {
+        id: @navigation,
+        navigation: { title: @navigation.title }
+      }
+
       assert_redirected_to navigations_path
       assert_equal 'Navigation was successfully updated.', flash[:notice]
     end
 
     test 'should fail to update navigation and send back to edit' do
-      patch :update, id: @navigation, navigation: { title: '' }
+      patch :update, params: {
+        id: @navigation,
+        navigation: { title: '' }
+      }
+
       assert_template 'guts/navigations/edit'
     end
 
@@ -62,9 +75,12 @@ module Guts
       current_item_positions = get_positions.call
 
       # Swap positions
-      post :reorder, id: @navigation, order: {
-        current_item_positions[1][:position].to_s => current_item_positions[0][:id].to_s,
-        current_item_positions[0][:position].to_s => current_item_positions[1][:id].to_s
+      post :reorder, params: {
+        id: @navigation,
+        order: {
+          current_item_positions[1][:position].to_s => current_item_positions[0][:id].to_s,
+          current_item_positions[0][:position].to_s => current_item_positions[1][:id].to_s
+        }
       }
       @navigation.reload
 
@@ -78,7 +94,7 @@ module Guts
 
     test 'should destroy navigation' do
       assert_difference('Navigation.count', -1) do
-        delete :destroy, id: @navigation
+        delete :destroy, params: { id: @navigation }
       end
 
       assert_redirected_to navigations_path
