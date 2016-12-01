@@ -22,23 +22,21 @@ module Guts
     # Creates a permission for an object
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
-      begin
-        ActiveRecord::Base.transaction do
-          # Takes the custom authorization field from the form and loops
-          # and merges it into ther permission_params
-          params[:authorization_ids].each do |id|
-            @permission = Permission.new permission_params.merge(authorization_id: id)
-            @permission.save!
-          end
+      ActiveRecord::Base.transaction do
+        # Takes the custom authorization field from the form and loops
+        # and merges it into ther permission_params
+        params[:authorization_ids].each do |id|
+          @permission = Permission.new permission_params.merge(authorization_id: id)
+          @permission.save!
         end
-
-        # Success, all done
-        flash[:notice] = 'Permission was successfully granted.'
-        redirect_to polymorphic_path([@object, :permissions])
-      rescue ActiveRecord::RecordInvalid => invalid
-        # Something did not validate
-        render :new
       end
+
+      # Success, all done
+      flash[:notice] = 'Permission was successfully granted.'
+      redirect_to polymorphic_path([@object, :permissions])
+    rescue ActiveRecord::RecordInvalid => _
+      # Something did not validate
+      render :new
     end
 
     # Revokes a permission

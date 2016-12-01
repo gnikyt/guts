@@ -25,7 +25,7 @@ module Guts
     # @param [Symbol] key the option key to look up
     # @return [Object] the option record
     def self.for_key(key)
-      find_by_key key
+      find_by key: key
     end
   end
 end

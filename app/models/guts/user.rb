@@ -27,7 +27,7 @@ module Guts
 
     trackable :create, :update, :destroy, fields: [:name, :group_id]
 
-    scope :in_group, -> (group) { includes(:groups).where(guts_groups: { id: group.id }) }
+    scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
     # Setter override for email to downcase and strip email before database
     # @param [String] email the email to set
