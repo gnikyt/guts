@@ -60,9 +60,8 @@ module Guts
 
       param_name   = "#{permissionable_type.demodulize.underscore}_id"
       param_object = permissionable_type.constantize
-      finder       = param_object.respond_to?(:friendly) ? param_object.friendly : param_object
 
-      @object = finder.find(params[param_name])
+      @object = param_object.find(params[param_name])
     end
 
     # Permits permissions from forms

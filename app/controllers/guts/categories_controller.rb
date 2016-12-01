@@ -65,7 +65,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_category
-      @category = Category.friendly.find params[:id]
+      @category = Category.find params[:id]
     end
 
     # Permits category params from forms

@@ -78,7 +78,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_navigation
-      @navigation = Navigation.friendly.find params[:id]
+      @navigation = Navigation.find params[:id]
     end
 
     # Permits navigation params from forms

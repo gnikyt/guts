@@ -86,7 +86,7 @@ module Guts
     # @private
     def set_navigation
       @navigation = if params[:navigation_id]
-                      Navigation.friendly.find params[:navigation_id]
+                      Navigation.find params[:navigation_id]
                     else
                       @navigation_item.try :navigation
                     end

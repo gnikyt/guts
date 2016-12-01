@@ -7,7 +7,8 @@ module Guts
     end
 
     test 'should not create without title' do
-      content = Content.new
+      content      = Content.new
+      content.type = guts_types :page_type
 
       assert_not content.save
     end
@@ -22,6 +23,7 @@ module Guts
     test 'should not create with title less than three characters' do
       content       = Content.new
       content.title = '12'
+      content.type  = guts_types :page_type
 
       assert_not content.save
     end
@@ -29,7 +31,8 @@ module Guts
     test 'should create slug for title' do
       content       = Content.new
       content.title = 'How to win an XBOX'
-      content.save
+      content.type  = guts_types :page_type
+      content.save!
 
       assert_equal 'how-to-win-an-xbox', content.slug
     end

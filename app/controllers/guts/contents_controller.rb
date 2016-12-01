@@ -70,7 +70,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_content
-      @content = Content.friendly.find params[:id]
+      @content = Content.find params[:id]
     end
 
     # Sets the type from either params or current content object
@@ -80,7 +80,7 @@ module Guts
       @type = if @content && !@content.new_record?
                 @content.type
               else
-                Type.friendly.find params[:type]
+                Type.find params[:type]
               end
     end
 

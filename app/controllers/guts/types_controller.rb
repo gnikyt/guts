@@ -65,7 +65,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_type
-      @type = Type.friendly.find params[:id]
+      @type = Type.find params[:id]
     end
 
     # Permits type params from forms

@@ -9,7 +9,7 @@ module Guts
 
     test 'should set current site and current site should be nil' do
       get :index
-      assert_equal nil, assigns('current_site')
+      assert_nil assigns('current_site')
     end
 
     test 'should set current site with actual site' do

@@ -65,7 +65,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_group
-      @group = Group.friendly.find params[:id]
+      @group = Group.find params[:id]
     end
 
     # Permits group params from forms
