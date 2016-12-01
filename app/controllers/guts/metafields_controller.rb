@@ -5,9 +5,9 @@ module Guts
   class MetafieldsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_object
     before_action :set_metafield, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     # Displays a list of metafields
     def index
@@ -77,8 +77,9 @@ module Guts
 
       param_name   = "#{fieldable_type.demodulize.underscore}_id"
       param_object = fieldable_type.constantize
+      finder       = param_object.respond_to?(:friendly) ? param_object.friendly : param_object
 
-      @object = param_object.find(params[param_name])
+      @object = finder.find(params[param_name])
     end
 
     # Permits metafield params from forms

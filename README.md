@@ -15,7 +15,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', "~> 2.0"
+gem 'guts', "~> 2.0.0"
 # or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
 ```
 

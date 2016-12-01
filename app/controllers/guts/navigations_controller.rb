@@ -5,8 +5,8 @@ module Guts
   class NavigationsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_navigation, only: [:show, :edit, :update, :destroy, :reorder]
+    load_and_authorize_resource
 
     # Displays a list of navigations
     def index
@@ -78,7 +78,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_navigation
-      @navigation = Navigation.find params[:id]
+      @navigation = Navigation.friendly.find params[:id]
     end
 
     # Permits navigation params from forms

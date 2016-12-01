@@ -5,8 +5,8 @@ module Guts
   class CategoriesController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_category, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     # Displays a list of categories
     def index
@@ -65,7 +65,7 @@ module Guts
     # @note This is a `before_action` callback
     # @private
     def set_category
-      @category = Category.find params[:id]
+      @category = Category.friendly.find params[:id]
     end
 
     # Permits category params from forms

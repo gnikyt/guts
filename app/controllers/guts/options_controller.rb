@@ -5,10 +5,10 @@ module Guts
   class OptionsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_option, only: [:show, :edit, :update, :destroy]
     before_action :set_per_page, only: [:index]
-
+    load_and_authorize_resource
+    
     # Display a list of options
     def index
       @options = Option.paginate(page: params[:page], per_page: @per_page)
