@@ -4,7 +4,7 @@
 + Rails 4 has been dropped
   + Due to some breaking changes and deprecations in Rails 5, Guts can not support Rails 4 and Rails 5 at the same time without a lot of conditional if statements. It was decided to move all code to Rails 5. Guts <2.0 will still be on a Rails 4 codebase.
 + `friendly_id` >= 5.2 is now required (only version which works with Rails 5)
-+ Tracker is now removed in favor of `paper_trail` Gem as is it more suiting and useful
++ Removal of Tracker since its not useful; possible switch to `paper_trail` in future
 
 # Version 1.4.0
 *See UPGRADING.md as this is a breaking release*
