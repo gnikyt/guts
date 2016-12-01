@@ -1,8 +1,6 @@
 module Guts
   # User model
   class User < ActiveRecord::Base
-    include TrackableConcern
-
     # Regex to test email against for validation
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -24,8 +22,6 @@ module Guts
     has_many :permissions, as: :permissionable, dependent: :destroy
 
     delegate :can?, :cannot?, to: :ability
-
-    trackable :create, :update, :destroy, fields: [:name, :group_id]
 
     scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 

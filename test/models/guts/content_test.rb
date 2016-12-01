@@ -67,10 +67,6 @@ module Guts
       assert_operator content.metafields.size, :>, 0
     end
 
-    test 'should be trackable' do
-      assert_equal true, Content.methods.include?(:trackable)
-    end
-
     test 'should return user' do
       content = guts_contents :test_page
       assert_not_nil content.user

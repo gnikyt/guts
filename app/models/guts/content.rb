@@ -3,7 +3,6 @@ module Guts
   class Content < ActiveRecord::Base
     extend FriendlyId
     include NavigatableConcern
-    include TrackableConcern
     include MultisiteScopeConcern
 
     validates :type, presence: true
@@ -20,7 +19,6 @@ module Guts
 
     friendly_id :title, use: [:slugged, :scoped, :finders], scope: :site_id
     navigatable :'type.title', :title, format: '[:type.title] :title'
-    trackable :create, :update, :destroy, fields: [:title, :visible, :tags, :slug]
 
     # Updates slug if title changes
     # @return [Boolean]

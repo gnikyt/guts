@@ -52,12 +52,6 @@
 
     <%= yield :menu_links %>
 
-    <% if can? :read, Guts::Tracker %>
-      <li class="<%= 'active' if menu_active? :trackers %>">
-        <%= link_to 'Logs', trackers_path %>
-      </li>
-    <% end %>
-
     <% if can? :read, Guts::Option %>
       <li class="<%= 'active' if menu_active? :options %>">
         <%= link_to 'Options', options_path %>

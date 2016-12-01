@@ -1,7 +1,6 @@
 module Guts
   # Option model
   class Option < ActiveRecord::Base
-    include TrackableConcern
     include MultisiteScopeConcern
 
     # Regex for replacing key values with
@@ -11,8 +10,6 @@ module Guts
 
     belongs_to :site
     has_many :tracks, as: :object
-
-    trackable :create, :update, :destroy, fields: [:value]
 
     # Setter override for setting key
     # @param [String] key the option key

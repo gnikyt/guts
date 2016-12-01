@@ -88,7 +88,4 @@ Guts::Engine.routes.draw do
     post :forgot_token, to: 'sessions#forgot_token', as: :forgot_token_session
     get '/reset_password/:token', to: 'sessions#reset_password', as: :reset_password_session
   end
-
-  # Tracker/Log
-  get :trackers, to: 'trackers#index'
 end

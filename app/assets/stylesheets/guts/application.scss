@@ -286,25 +286,6 @@ textarea.tinymce {
   }
 }
 
-/* Tracker */
-.track {
-  font-size: 0.90em;
-  padding: 0.5rem 0;
-
-  &.odd {
-    background-color: $light-grey-color;
-  }
-
-  .time {
-    font-weight: 500;
-  }
-
-  pre {
-    font-style: italic;
-    margin-top: 0.5rem;
-  }
-}
-
 /* Pagination */
 .pagination {
   text-align: center;

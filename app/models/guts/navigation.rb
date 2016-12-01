@@ -2,7 +2,6 @@ module Guts
   # Navigation model
   class Navigation < ActiveRecord::Base
     extend FriendlyId
-    include TrackableConcern
     include MultisiteScopeConcern
 
     validates :title, presence: true
@@ -14,7 +13,6 @@ module Guts
     has_many :metafields, as: :fieldable, dependent: :destroy
 
     friendly_id :title, use: [:slugged, :scoped, :finders], scope: :site_id
-    trackable :create, :update, :destroy, fields: [:title]
 
     # Updates slug if title changes
     # @return [Boolean]

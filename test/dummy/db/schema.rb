@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927044443) do
+ActiveRecord::Schema.define(version: 20161201021539) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -19,12 +18,11 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "guts_authorizations", force: :cascade do |t|
     t.string   "title"
@@ -43,10 +41,9 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_guts_categories_on_site_id"
+    t.index ["slug"], name: "index_guts_categories_on_slug"
   end
-
-  add_index "guts_categories", ["site_id"], name: "index_guts_categories_on_site_id"
-  add_index "guts_categories", ["slug"], name: "index_guts_categories_on_slug"
 
   create_table "guts_categorizations", force: :cascade do |t|
     t.integer  "category_id"
@@ -66,19 +63,17 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_guts_contents_on_site_id"
+    t.index ["slug"], name: "index_guts_contents_on_slug"
   end
-
-  add_index "guts_contents", ["site_id"], name: "index_guts_contents_on_site_id"
-  add_index "guts_contents", ["slug"], name: "index_guts_contents_on_slug"
 
   create_table "guts_groups", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_guts_groups_on_slug", unique: true
   end
-
-  add_index "guts_groups", ["slug"], name: "index_guts_groups_on_slug", unique: true
 
   create_table "guts_media", force: :cascade do |t|
     t.string   "title"
@@ -94,10 +89,9 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.integer  "site_id"
+    t.index ["filable_type", "filable_id"], name: "index_guts_media_on_filable_type_and_filable_id"
+    t.index ["site_id"], name: "index_guts_media_on_site_id"
   end
-
-  add_index "guts_media", ["filable_type", "filable_id"], name: "index_guts_media_on_filable_type_and_filable_id"
-  add_index "guts_media", ["site_id"], name: "index_guts_media_on_site_id"
 
   create_table "guts_metafields", force: :cascade do |t|
     t.string   "key"
@@ -107,10 +101,9 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "site_id"
+    t.index ["fieldable_type", "fieldable_id"], name: "index_guts_metafields_on_fieldable_type_and_fieldable_id"
+    t.index ["site_id"], name: "index_guts_metafields_on_site_id"
   end
-
-  add_index "guts_metafields", ["fieldable_type", "fieldable_id"], name: "index_guts_metafields_on_fieldable_type_and_fieldable_id"
-  add_index "guts_metafields", ["site_id"], name: "index_guts_metafields_on_site_id"
 
   create_table "guts_navigation_items", force: :cascade do |t|
     t.string   "title"
@@ -122,10 +115,9 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "site_id"
+    t.index ["navigatable_type", "navigatable_id"], name: "index_nav_items_on_nav_with_type_and_id"
+    t.index ["site_id"], name: "index_guts_navigation_items_on_site_id"
   end
-
-  add_index "guts_navigation_items", ["navigatable_type", "navigatable_id"], name: "index_nav_items_on_nav_with_type_and_id"
-  add_index "guts_navigation_items", ["site_id"], name: "index_guts_navigation_items_on_site_id"
 
   create_table "guts_navigations", force: :cascade do |t|
     t.string   "title"
@@ -133,10 +125,9 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_guts_navigations_on_site_id"
+    t.index ["slug"], name: "index_guts_navigations_on_slug"
   end
-
-  add_index "guts_navigations", ["site_id"], name: "index_guts_navigations_on_site_id"
-  add_index "guts_navigations", ["slug"], name: "index_guts_navigations_on_slug"
 
   create_table "guts_options", force: :cascade do |t|
     t.string   "key"
@@ -144,9 +135,8 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_guts_options_on_site_id"
   end
-
-  add_index "guts_options", ["site_id"], name: "index_guts_options_on_site_id"
 
   create_table "guts_permissions", force: :cascade do |t|
     t.integer  "permissionable_id"
@@ -154,9 +144,8 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.integer  "authorization_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.index ["permissionable_type", "permissionable_id"], name: "index_perm_on_permissionable_type_and_permissionable"
   end
-
-  add_index "guts_permissions", ["permissionable_type", "permissionable_id"], name: "index_perm_on_permissionable_type_and_permissionable"
 
   create_table "guts_sites", force: :cascade do |t|
     t.string   "name"
@@ -166,29 +155,15 @@ ActiveRecord::Schema.define(version: 20160927044443) do
     t.boolean  "default",    default: false
   end
 
-  create_table "guts_trackers", force: :cascade do |t|
-    t.integer  "object_id"
-    t.string   "object_type"
-    t.text     "params"
-    t.text     "action"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "site_id"
-  end
-
-  add_index "guts_trackers", ["object_type", "object_id"], name: "index_guts_trackers_on_object_type_and_object_id"
-  add_index "guts_trackers", ["site_id"], name: "index_guts_trackers_on_site_id"
-
   create_table "guts_types", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "site_id"
+    t.index ["site_id"], name: "index_guts_types_on_site_id"
+    t.index ["slug"], name: "index_guts_types_on_slug"
   end
-
-  add_index "guts_types", ["site_id"], name: "index_guts_types_on_site_id"
-  add_index "guts_types", ["slug"], name: "index_guts_types_on_slug"
 
   create_table "guts_user_groups", force: :cascade do |t|
     t.integer  "user_id"
