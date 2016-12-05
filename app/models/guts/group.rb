@@ -2,7 +2,6 @@ module Guts
   # Group model
   class Group < ActiveRecord::Base
     extend FriendlyId
-    include TrackableConcern
 
     validates :title, presence: true, length: { minimum: 3 }
 
@@ -14,7 +13,6 @@ module Guts
     has_many :permissions, as: :permissionable, dependent: :destroy
 
     friendly_id :title, use: [:slugged, :finders]
-    trackable :create, :update, :destroy, fields: [:title]
 
     # Updates slug if title changes
     # @return [Boolean]

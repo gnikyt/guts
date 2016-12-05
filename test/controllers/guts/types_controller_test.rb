@@ -20,7 +20,11 @@ module Guts
 
     test 'should create type' do
       assert_difference('Type.count') do
-        post :create, type: { slug: 'controller-type', title: 'Controller Type' }
+        post :create, params: {
+          type: {
+            title: 'Controller Type'
+          }
+        }
       end
 
       assert_redirected_to edit_type_path(assigns(:type))
@@ -28,34 +32,45 @@ module Guts
     end
 
     test 'should fail to create type and send back to new' do
-      post :create, type: { title: '' }
+      post :create, params: { type: { title: '' } }
       assert_template 'guts/types/new'
     end
 
     test 'should show type' do
-      get :show, id: @type
+      get :show, params: { id: @type }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @type
+      get :edit, params: { id: @type }
       assert_response :success
     end
 
     test 'should update type' do
-      patch :update, id: @type, type: { slug: @type.slug, title: @type.title }
+      patch :update, params: {
+        id: @type,
+        type: {
+          slug: @type.slug,
+          title: @type.title
+        }
+      }
+
       assert_redirected_to edit_type_path(assigns(:type))
       assert_equal 'Type was successfully updated.', flash[:notice]
     end
 
     test 'should fail to edit type and send back to edit' do
-      patch :update, id: @type, type: { title: '' }
+      patch :update, params: {
+        id: @type,
+        type: { title: '' }
+      }
+
       assert_template 'guts/types/edit'
     end
 
     test 'should destroy type' do
       assert_difference('Type.count', -1) do
-        delete :destroy, id: @type
+        delete :destroy, params: { id: @type }
       end
 
       assert_redirected_to types_path

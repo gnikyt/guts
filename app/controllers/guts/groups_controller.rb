@@ -5,8 +5,8 @@ module Guts
   class GroupsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_group, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     # Displays a list of groups
     def index
@@ -71,7 +71,7 @@ module Guts
     # Permits group params from forms
     # @private
     def group_params
-      params.require(:group).permit(:title, :slug)
+      params.require(:group).permit(:title)
     end
   end
 end

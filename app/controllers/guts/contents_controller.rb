@@ -5,10 +5,10 @@ module Guts
   class ContentsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_content, only: [:show, :edit, :update, :destroy]
     before_action :set_type
     before_action :set_per_page, only: [:index]
+    load_and_authorize_resource
 
     # Displays a list of contents
     # @note This method must have a type set
@@ -89,7 +89,6 @@ module Guts
     def content_params
       params.require(:content).permit(
         :title,
-        :slug,
         :content,
         :visible,
         :tags,

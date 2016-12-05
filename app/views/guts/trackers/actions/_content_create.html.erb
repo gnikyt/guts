@@ -1,5 +1,0 @@
-<% if track.object.nil? %>
-  Content <u>that no longer exists (#<%= track.object_id.to_s %>)</u>, was created
-<% else %>
-  Content <u><%= track.object.title %> in <%= track.object.type.title %></u> was created
-<% end %>

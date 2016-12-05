@@ -20,7 +20,7 @@ module Guts
 
     test 'should create category' do
       assert_difference('Category.count') do
-        post :create, category: { slug: 'cat-test', title: 'Cat Test' }
+        post :create, params: { category: { title: 'Cat Test' } }
       end
 
       assert_redirected_to edit_category_path(assigns(:category))
@@ -28,34 +28,45 @@ module Guts
     end
 
     test 'should fail to create category and send back to new' do
-      post :create, category: { title: '' }
+      post :create, params: { category: { title: '' } }
       assert_template 'guts/categories/new'
     end
 
     test 'should show category' do
-      get :show, id: @category
+      get :show, params: { id: @category }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @category
+      get :edit, params: { id: @category }
       assert_response :success
     end
 
     test 'should update category' do
-      patch :update, id: @category, category: { slug: @category.slug, title: @category.title }
+      patch :update, params: {
+        id: @category,
+        category: {
+          slug: @category.slug,
+          title: @category.title
+        }
+      }
+
       assert_redirected_to edit_category_path(assigns(:category))
       assert_equal 'Category was successfully updated.', flash[:notice]
     end
 
     test 'should fail to update category and send back to edit' do
-      patch :update, id: @category, category: { title: '' }
+      patch :update, params: {
+        id: @category,
+        category: { title: '' }
+      }
+
       assert_template 'guts/categories/edit'
     end
 
     test 'should destroy category' do
       assert_difference('Category.count', -1) do
-        delete :destroy, id: @category
+        delete :destroy, params: { id: @category }
       end
 
       assert_redirected_to categories_path

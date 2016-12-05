@@ -11,7 +11,7 @@ module Guts
   def self.configure
     yield configuration
   end
-  
+
   # Configuration class for Guts
   class Configuration
     # Getter and setter method for configuration

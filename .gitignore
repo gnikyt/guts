@@ -15,3 +15,4 @@ Gemfile.lock
 /test/dummy/.sass-cache
 /test/dummy/public/system/guts
 /guts-*.gem
+/gemfiles/*.lock

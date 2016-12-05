@@ -34,9 +34,5 @@ module Guts
 
       assert_operator group.metafields.size, :>, 0
     end
-
-    test 'should be trackable' do
-      assert_equal true, Group.methods.include?(:trackable)
-    end
   end
 end

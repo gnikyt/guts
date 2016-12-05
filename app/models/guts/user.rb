@@ -1,8 +1,6 @@
 module Guts
   # User model
   class User < ActiveRecord::Base
-    include TrackableConcern
-
     # Regex to test email against for validation
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -25,9 +23,9 @@ module Guts
 
     delegate :can?, :cannot?, to: :ability
 
-    trackable :create, :update, :destroy, fields: [:name, :group_id]
+    scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
-    scope :in_group, -> (group) { includes(:groups).where(guts_groups: { id: group.id }) }
+    alias_attribute :title, :name
 
     # Setter override for email to downcase and strip email before database
     # @param [String] email the email to set

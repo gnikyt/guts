@@ -62,9 +62,6 @@ form {
 /* Wrapper & Sidebar */
 #wrapper {
   padding-left: 0;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.25s ease;
-  -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 
   &.toggled {
@@ -90,9 +87,6 @@ form {
   margin-left: -250px;
   overflow-y: auto;
   background: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -137,9 +131,6 @@ textarea.tinymce {
       color: #999999;
       padding: 8px 20px;
       transition: background-color 250ms linear, padding 250ms linear;
-      -webkit-transition: background-color 250ms linear, padding 250ms linear;
-      -moz-transition: background-color 250ms linear, padding 250ms linear;
-      -ms-transition: background-color 250ms linear, padding 250ms linear;
 
       &:hover {
         padding-left: 30px;
@@ -195,9 +186,6 @@ textarea.tinymce {
     left: 50%;
     white-space: nowrap;
     transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
   }
 }
 
@@ -286,25 +274,6 @@ textarea.tinymce {
   }
 }
 
-/* Tracker */
-.track {
-  font-size: 0.90em;
-  padding: 0.5rem 0;
-
-  &.odd {
-    background-color: $light-grey-color;
-  }
-
-  .time {
-    font-weight: 500;
-  }
-
-  pre {
-    font-style: italic;
-    margin-top: 0.5rem;
-  }
-}
-
 /* Pagination */
 .pagination {
   text-align: center;
@@ -329,5 +298,31 @@ label[for="content_categories"] ~ div:not(:last-of-type) input {
   option {
     margin: 0.3em 0;
     padding: 0.3em;
+  }
+}
+
+/* Permissions */
+#auth-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+
+  & > fieldset {
+    flex: 0 1 25%;
+    padding: 1em;
+
+    label.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    label {
+      a {
+        font-size: 0.6em;
+      }
+    }
   }
 }

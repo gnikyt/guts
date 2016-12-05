@@ -5,8 +5,8 @@ module Guts
   class NavigationsController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_navigation, only: [:show, :edit, :update, :destroy, :reorder]
+    load_and_authorize_resource
 
     # Displays a list of navigations
     def index
@@ -64,12 +64,12 @@ module Guts
     def reorder
       ActiveRecord::Base.transaction do
         @navigation.navigation_items.each do |item|
-          find = params[:order].find { |k, v| v == item.id.to_s }
+          find = params[:order].select { |_, v| v == item.id.to_s }
           item.update_attribute(:position, find[0].to_i)
         end
       end
 
-      render nothing: true, status: :ok
+      head :ok
     end
 
     private

@@ -20,7 +20,12 @@ module Guts
 
     test 'should create option' do
       assert_difference('Option.count') do
-        post :create, option: { key: 'Testing Key', value: '123' }
+        post :create, params: {
+          option: {
+            key: 'Testing Key',
+            value: '123'
+          }
+        }
       end
 
       assert_redirected_to edit_option_path(assigns(:option))
@@ -28,34 +33,42 @@ module Guts
     end
 
     test 'should fail to create option and send back to new' do
-      post :create, option: { key: '' }
+      post :create, params: { option: { key: '' } }
       assert_template 'guts/options/new'
     end
 
     test 'should show option' do
-      get :show, id: @option
+      get :show, params: { id: @option }
       assert_response :success
     end
 
     test 'should get edit' do
-      get :edit, id: @option
+      get :edit, params: { id: @option }
       assert_response :success
     end
 
     test 'should update option' do
-      patch :update, id: @option, option: { value: 'Hey!' }
+      patch :update, params: {
+        id: @option,
+        option: { value: 'Hey!' }
+      }
+
       assert_redirected_to edit_option_path(assigns(:option))
       assert_equal 'Option was successfully updated.', flash[:notice]
     end
 
     test 'should fail to edit option and send back to edit' do
-      patch :update, id: @option, option: { key: '' }
+      patch :update, params: {
+        id: @option,
+        option: { key: '' }
+      }
+
       assert_template 'guts/options/edit'
     end
 
     test 'should destroy option' do
       assert_difference('Option.count', -1) do
-        delete :destroy, id: @option
+        delete :destroy, params: { id: @option }
       end
 
       assert_redirected_to options_path
@@ -63,7 +76,7 @@ module Guts
     end
 
     test 'should allow for custom paginated limit' do
-      get :index, per_page: 100
+      get :index, params: { per_page: 100 }
       assert_equal 100, assigns(:per_page).to_i
     end
   end

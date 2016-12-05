@@ -5,8 +5,8 @@ module Guts
   class TypesController < ApplicationController
     include ControllerPermissionConcern
 
-    load_and_authorize_resource
     before_action :set_type, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     # Display a list of types
     def index
@@ -71,7 +71,7 @@ module Guts
     # Permits type params from forms
     # @private
     def type_params
-      params.require(:type).permit(:title, :slug, :site_id)
+      params.require(:type).permit(:title, :site_id)
     end
   end
 end

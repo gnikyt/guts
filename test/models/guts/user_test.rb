@@ -61,10 +61,6 @@ module Guts
       assert_operator user.metafields.size, :>, 0
     end
 
-    test 'should be trackable' do
-      assert_equal true, User.methods.include?(:trackable)
-    end
-
     test 'should have abilities' do
       user = guts_users :admin_user
 
