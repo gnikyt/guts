@@ -25,6 +25,8 @@ module Guts
 
     scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
+    alias_attribute :title, :name
+
     # Setter override for email to downcase and strip email before database
     # @param [String] email the email to set
     # @return [String] cleaned email string

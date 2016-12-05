@@ -1,6 +1,6 @@
 <div class="row">
   <div class="small-12 columns">
-    <h1>Assign Permission<% if @object.try(:title) || @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) %></span><% end %></h1>
+    <h1>Assign Permission<% if @object.title %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.title %></span><% end %></h1>
   </div>
 </div>
 
@@ -26,20 +26,23 @@
     <% end %>
 
     <% if @grouped_auths %>
-      <% @grouped_auths.each do |title, auths| %>
-        <div class="small-12 columns">
+      <div id="auth-list">
+        <% @grouped_auths.each do |title, auths| %>
           <fieldset>
             <legend><%= clean_subject_class title %></legend>
 
+            <% current_auth_ids = current_user.permissions.map(&:authorization_id) %>
             <% auths.each do |auth| %>
-              <%= label_tag do %>
-                <%= check_box_tag 'authorization_ids[]', auth.id %>
+              <% has_auth = current_auth_ids.include?(auth.id) %>
+              <%= label_tag(nil, nil, class: has_auth ? 'disabled' : '') do %>
+                <%= check_box_tag 'authorization_ids[]', auth.id, nil, { disabled: has_auth } %>
                 <%= auth.action.titleize %>
+                <%= link_to('(More)', polymorphic_path([:additional, @object, :permissions], authorization_id: auth.id)) unless title == 'all' %>
               <% end %>
             <% end %>
           </fieldset>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
 
     <div class="hide">

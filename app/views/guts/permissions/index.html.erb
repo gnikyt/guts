@@ -1,6 +1,6 @@
 <div class="row">
   <div class="small-12 columns">
-    <h1>Permissions<% if @object.try(:title) || @object.try(:name) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || @object.try(:name) || 'N/A' %></span><% end %></h1>
+    <h1>Permissions<% if @object.title %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || 'N/A' %></span><% end %></h1>
     <%= link_to('New', new_polymorphic_path([@object, :permission]), class: 'button') if can? :create, Guts::Permission %>
     <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
   </div>
@@ -34,6 +34,10 @@
                   All Features
                 <% else %>
                   <%= permission.authorization.subject_class.gsub(/Guts::/, '').pluralize %>
+                <% end %>
+
+                <% if permission.authorization.subject_id %>
+                  <small>for ID: <%= permission.authorization.subject_id %></small>
                 <% end %>
               </td>
               <td>

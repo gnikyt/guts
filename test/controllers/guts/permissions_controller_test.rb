@@ -57,7 +57,7 @@ module Guts
         authorization_ids: [guts_authorizations(:type_authorization).id]
       }
 
-      assert_template 'guts/permissions/new'
+      assert_redirected_to new_polymorphic_path([@user, :permission])
     end
 
     test 'should revoke permission' do
@@ -84,6 +84,47 @@ module Guts
 
       assert_redirected_to polymorphic_path([@user, :permissions])
       assert_equal 'Error revoking permission.', flash[:notice]
+    end
+
+    test 'should get additional' do
+      get :additional, params: {
+        permissionable_type: 'Guts::User',
+        user_id: @user.id,
+        authorization_id: guts_authorizations(:type_authorization).id
+      }
+
+      assert_response :success
+      assert_not_nil assigns(:permission)
+      assert_not_nil assigns(:objects)
+    end
+
+    test 'should create additional permission' do
+      assert_difference('Authorization.count') do
+        post :additional_create, params: {
+          user_id: @user.id,
+          permissionable_type: 'Guts::User',
+          permission: {
+            permissionable_type: 'Guts::User',
+            permissionable_id: @user.id
+          },
+          authorization_id: guts_authorizations(:type_authorization).id,
+          subject_id: guts_types(:page_type).id
+        }
+      end
+
+      assert_redirected_to polymorphic_path([@user, :permissions])
+      assert_equal 'Permission was successfully granted.', flash[:notice]
+    end
+
+    test 'should not create additional permission' do
+      post :additional_create, params: {
+        user_id: @user.id,
+        permissionable_type: 'Guts::User',
+        permission: { a_girl_knows: nil },
+        authorization_id: guts_authorizations(:type_authorization).id
+      }
+
+      assert_redirected_to polymorphic_path([:additional, @user, :permissions])
     end
   end
 end

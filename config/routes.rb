@@ -2,7 +2,12 @@ Guts::Engine.routes.draw do
   # Master concerns... everything can have a metafield and file attached to it
   concern(:fieldable) { |opts| resources :metafields, opts }
   concern(:filable) { |opts| resources :media, opts }
-  concern(:permissionable) { |opts| resources :permissions, { only: [:index, :destroy, :create, :new]}.merge(opts) }
+  concern(:permissionable) do |opts|
+    resources :permissions, { only: [:index, :destroy, :create, :new] }.merge(opts) do
+      get '/additional', action: :additional, on: :collection
+      post '/additional', action: :additional_create, on: :collection
+    end
+  end
 
   # Resources and routes
   get '/', to: 'index#index'
