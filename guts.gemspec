@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = 'guts'
   s.version     = Guts::VERSION
   s.authors     = ['Tyler King']
-  s.email       = ['tyler.n.king@outlook.com']
-  s.homepage    = 'http://tylerking.me/'
+  s.email       = ['tyler.n.king@gmail.com']
+  s.homepage    = 'https://github.com/tyler-king/guts'
   s.summary     = 'A mountable, multisite, CMS engine for Rails 5'
   s.description = 'A mountable, multisite, CMS engine for Rails 5'\
                   'with a basic dashboard interface for your projects'
