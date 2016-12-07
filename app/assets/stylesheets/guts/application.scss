@@ -326,3 +326,8 @@ label[for="content_categories"] ~ div:not(:last-of-type) input {
     }
   }
 }
+
+/* TinyMCE mode */
+.toggle-tinymce {
+  font-size: 0.8em;
+}

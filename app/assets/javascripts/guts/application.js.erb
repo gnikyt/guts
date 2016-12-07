@@ -51,4 +51,18 @@ jQuery(document).ready(function($) {
       $that.parent().find('form').trigger('submit');
     });
   });
+
+  $('.toggle-tinymce').on('click', function(e) {
+    e.preventDefault();
+
+    var editorID = $(this).data('editor-id');
+    var editor   = tinymce.EditorManager.get(editorID);
+
+    if (editor) {
+      editor.remove();
+    } else {
+      editor = tinymce.EditorManager.createEditor(editorID, tinyMCE.settings);
+      editor.render();
+    }
+  });
 });

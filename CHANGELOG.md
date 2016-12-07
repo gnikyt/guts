@@ -6,6 +6,7 @@
 + `friendly_id` >= 5.2 is now required (only version which works with Rails 5)
 + Removal of Tracker since its not useful; possible switch to `paper_trail` in future
 + Added fine-grain permissions per-object
++ Toggle editor mode for TinyMCE added, you can turn on and off the editor
 
 # Version 1.4.0
 *See UPGRADING.md as this is a breaking release*
