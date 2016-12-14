@@ -1,3 +1,8 @@
+# Version 2.0.1
+
++ Fix to bug on add permissions page to use object permissions not current user's permissions
++ Fixed some wording on permissions index page
+
 # Version 2.0
 
 + Code is now updated for Rails 5

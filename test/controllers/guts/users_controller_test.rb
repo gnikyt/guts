@@ -38,7 +38,7 @@ module Guts
       end
 
       assert_redirected_to edit_user_path(assigns(:user))
-      assert_equal 'User was successfully created.', flash[:notice]
+      assert_equal 'User was successfully created. Don\'t forget to add permissions.', flash[:notice]
     end
 
     test 'should fail to create user and send back to new' do
@@ -66,7 +66,7 @@ module Guts
       end
 
       assert_redirected_to edit_user_path(assigns(:user))
-      assert_equal 'User was successfully created.', flash[:notice]
+      assert_equal 'User was successfully created. Don\'t forget to add permissions.', flash[:notice]
     end
 
     test 'should show user' do

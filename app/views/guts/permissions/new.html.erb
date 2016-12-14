@@ -31,7 +31,7 @@
           <fieldset>
             <legend><%= clean_subject_class title %></legend>
 
-            <% current_auth_ids = current_user.permissions.map(&:authorization_id) %>
+            <% current_auth_ids = @object.permissions.map(&:authorization_id) %>
             <% auths.each do |auth| %>
               <% has_auth = current_auth_ids.include?(auth.id) %>
               <%= label_tag(nil, nil, class: has_auth ? 'disabled' : '') do %>

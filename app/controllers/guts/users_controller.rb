@@ -38,7 +38,7 @@ module Guts
       @user = User.new user_params
 
       if @user.save
-        flash[:notice] = 'User was successfully created.'
+        flash[:notice] = 'User was successfully created. Don\'t forget to add permissions.'
         redirect_to edit_user_path(@user)
       else
         render :new
