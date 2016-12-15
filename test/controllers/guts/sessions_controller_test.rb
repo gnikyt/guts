@@ -29,7 +29,7 @@ module Guts
         }
       }
 
-      assert_redirected_to users_path
+      assert_redirected_to home_path
     end
 
     test 'should log the user out' do

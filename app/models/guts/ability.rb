@@ -8,6 +8,9 @@ module Guts
     def initialize(user)
       user ||= Guts::User.new
 
+      # Allow anyone logged in to see the index page
+      can(:read, :index) unless user.new_record?
+
       # Loop over group permissions first
       user.groups.each do |group|
         group.permissions.each do |permission|

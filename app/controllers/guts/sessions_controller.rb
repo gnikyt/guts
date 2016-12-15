@@ -16,7 +16,7 @@ module Guts
 
       if user && user.authenticate(params[:session][:password])
         log_in user
-        redirect_to users_path
+        redirect_to home_path
       else
         flash.now[:alert] = 'Invalid login credentials'
         render :new

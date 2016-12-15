@@ -1,3 +1,7 @@
+# Version 2.0.2
+
++ Logging in a fresh user with no permissions set, will no longer say access denied... it will now display the welcome screen for all
+
 # Version 2.0.1
 
 + Fix to bug on add permissions page to use object permissions not current user's permissions
