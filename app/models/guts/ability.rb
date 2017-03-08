@@ -6,6 +6,13 @@ module Guts
     # Initializes the user's abilities
     # @param [Object|Nil] user the user object
     def initialize(user)
+      # Call standard abilities... easier to override with decorator
+      standard_abilities user
+    end
+
+    # Standard ability handler (makes it easier to override)
+    # @param [Object|Nil] user the user object
+    def standard_abilities(user)
       user ||= Guts::User.new
 
       # Allow anyone logged in to see the index page
