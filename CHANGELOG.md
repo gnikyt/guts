@@ -1,3 +1,9 @@
+# Version 2.1.0
+
++ Abilities model for CanCanCan now extracts default abilities into its own method for easier overwriting. See `docs/extra/permissions.md`.
++ Extracted TinyMCE toggler into a helper method for better re-usability
++ Metafield entries are defaulted to plain-text input on-load now, previously it loaded TinyMCE
+
 # Version 2.0.2
 
 + Logging in a fresh user with no permissions set, will no longer say access denied... it will now display the welcome screen for all

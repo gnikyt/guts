@@ -53,5 +53,14 @@ module Guts
 
       assert form_html.include?('type[site_id]')
     end
+
+    test 'should return link for toggling tinymce' do
+      result = toggle_tinymce 'field_value'
+
+      assert result.include?('href="#"')
+      assert result.include?('Toggle Editor Mode')
+      assert result.include?('class="toggle-tinymce"')
+      assert result.include?('data-editor-id="field_value"')
+    end
   end
 end

@@ -52,5 +52,12 @@ module Guts
     def current_site_form_field(f)
       f.hidden_field :site_id, value: @current_site.try(:id)
     end
+
+    # Helper to toggle TinyMCE editor on a field
+    # @param [String] id the DOM ID to target
+    # @return [String] html for link
+    def toggle_tinymce(id)
+      link_to 'Toggle Editor Mode', '#', class: 'toggle-tinymce', data: { 'editor-id' => id }
+    end
   end
 end
