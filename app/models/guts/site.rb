@@ -10,7 +10,6 @@ module Guts
     has_many :navigation_items
     has_many :navigation_metafields
     has_many :metafields, as: :fieldable
-    has_many :tracks, as: :object
     has_many :media, as: :filable
     has_many :options
 

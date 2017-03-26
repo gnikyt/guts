@@ -3,15 +3,16 @@ require_dependency 'guts/application_controller'
 module Guts
   # Categories controller
   class CategoriesController < ApplicationController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: %i(show edit update destroy)
 
     # Displays a list of categories
     def index
-      @categories = Category.all
+      @categories = policy_scope(Category)
     end
 
     # Shows details about a single category
     def show
+      authorize @category
     end
 
     # Creation of a new category
@@ -21,12 +22,14 @@ module Guts
 
     # Editing for a category
     def edit
+      authorize @category
     end
 
     # Creates a category through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @category = Category.new category_params
+      authorize @category
 
       if @category.save
         flash[:notice] = 'Category was successfully created.'
@@ -39,6 +42,8 @@ module Guts
     # Updates a category through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @category
+
       if @category.update category_params
         flash[:notice] = 'Category was successfully updated.'
         redirect_to edit_category_path(@category)
@@ -50,6 +55,7 @@ module Guts
     # Destroys a category
     # @note Redirects to #index on success
     def destroy
+      authorize @category
       @category.destroy
 
       flash[:notice] = 'Category was successfully destroyed.'

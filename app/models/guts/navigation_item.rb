@@ -18,7 +18,7 @@ module Guts
     # Determines if the navigation item has a custom link
     # @return [Boolean]
     def custom?
-      self[:navigatable_type].nil? || self[:navigatable_type].empty?
+      self[:navigatable_type].blank?
     end
 
     private

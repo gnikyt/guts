@@ -5,7 +5,7 @@ module Guts
     extend ActiveSupport::Concern
 
     included do
-      protected
+      private
 
       # Set the User's ID to the session
       # @param [Object] user the user's object record

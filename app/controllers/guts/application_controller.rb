@@ -11,15 +11,13 @@ module Guts
 
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-    protected
+    private
 
     # Gets the current user's record
     # @return [Object] the user object
     def current_user
       @current_user ||= User.find_by(id: session[:user_id])
     end
-
-    private
 
     # Sends the user to the login screen if not authorized
     def user_not_authorized

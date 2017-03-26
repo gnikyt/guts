@@ -9,7 +9,6 @@ module Guts
     validates :title, presence: true, length: { minimum: 3 }
 
     belongs_to :filable, polymorphic: true, required: false
-    has_many :tracks, as: :object
     has_attached_file(
       :file,
       source_file_options: { all: '-auto-orient' },
