@@ -1,6 +1,6 @@
 module Guts
   # Type model
-  class Type < ActiveRecord::Base
+  class Type < ApplicationRecord
     extend FriendlyId
     include NavigatableConcern
     include MultisiteScopeConcern

@@ -1,6 +1,6 @@
 module Guts
   # User model
-  class User < ActiveRecord::Base
+  class User < ApplicationRecord
     # Regex to test email against for validation
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

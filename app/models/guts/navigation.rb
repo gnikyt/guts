@@ -1,6 +1,6 @@
 module Guts
   # Navigation model
-  class Navigation < ActiveRecord::Base
+  class Navigation < ApplicationRecord
     extend FriendlyId
     include MultisiteScopeConcern
 

@@ -1,6 +1,6 @@
 module Guts
   # Category model
-  class Category < ActiveRecord::Base
+  class Category < ApplicationRecord
     extend FriendlyId
     include NavigatableConcern
     include MultisiteScopeConcern
@@ -9,7 +9,6 @@ module Guts
 
     belongs_to :site
     has_many :categorizations
-    has_many :tracks, as: :object
     has_many :contents, through: :categorizations
     has_many :media, as: :filable, dependent: :destroy
     has_many :metafields, as: :fieldable, dependent: :destroy

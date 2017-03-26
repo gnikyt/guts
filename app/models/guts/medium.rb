@@ -1,6 +1,6 @@
 module Guts
   # Medium model which utilizes PaperClip
-  class Medium < ActiveRecord::Base
+  class Medium < ApplicationRecord
     include MultisiteScopeConcern
 
     # Regex used for sizing_only_images

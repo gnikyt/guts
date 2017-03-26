@@ -1,6 +1,6 @@
 module Guts
   # Option model
-  class Option < ActiveRecord::Base
+  class Option < ApplicationRecord
     include MultisiteScopeConcern
 
     # Regex for replacing key values with

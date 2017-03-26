@@ -5,6 +5,7 @@ module Guts
   class IndexController < ApplicationController
     # Displays the welcome page
     def index
+      authorize [:guts, :index], :index?
     end
   end
 end

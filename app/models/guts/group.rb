@@ -1,6 +1,6 @@
 module Guts
   # Group model
-  class Group < ActiveRecord::Base
+  class Group < ApplicationRecord
     extend FriendlyId
 
     validates :title, presence: true, length: { minimum: 3 }

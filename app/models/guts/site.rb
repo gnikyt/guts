@@ -1,6 +1,6 @@
 module Guts
   # Site model
-  class Site < ActiveRecord::Base
+  class Site < ApplicationRecord
     validates :name, presence: true
     validates :domain, presence: true
 

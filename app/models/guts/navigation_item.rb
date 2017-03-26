@@ -1,6 +1,6 @@
 module Guts
   # Navigation item model
-  class NavigationItem < ActiveRecord::Base
+  class NavigationItem < ApplicationRecord
     include MultisiteScopeConcern
 
     before_create :set_position
