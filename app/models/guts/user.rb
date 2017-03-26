@@ -21,8 +21,6 @@ module Guts
     has_many :contents
     has_many :permissions, as: :permissionable, dependent: :destroy
 
-    delegate :can?, :cannot?, to: :ability
-
     scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
     alias_attribute :title, :name
@@ -32,13 +30,6 @@ module Guts
     # @return [String] cleaned email string
     def email=(email)
       self[:email] = email.downcase.strip
-    end
-
-    # Gets the user's abilties
-    # @see Guts::Ability
-    # @return [Class] the abilities for this user
-    def ability
-      @ability ||= Guts::Ability.new self
     end
   end
 end

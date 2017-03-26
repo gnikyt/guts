@@ -3,10 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Sites controller
   class SitesController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_site, only: [:show, :set_default, :remove_default, :edit, :update, :destroy]
-    load_and_authorize_resource
 
     # Displays a list of sites
     def index

@@ -3,10 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Groups controller
   class GroupsController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_group, only: [:show, :edit, :update, :destroy]
-    load_and_authorize_resource
 
     # Displays a list of groups
     def index

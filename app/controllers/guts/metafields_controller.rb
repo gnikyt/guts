@@ -3,11 +3,8 @@ require_dependency 'guts/application_controller'
 module Guts
   # Metafields controller
   class MetafieldsController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_object
     before_action :set_metafield, only: [:show, :edit, :update, :destroy]
-    load_and_authorize_resource
 
     # Displays a list of metafields
     def index

@@ -3,12 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Media controller
   class MediaController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_object
     before_action :set_medium, only: [:show, :edit, :update, :destroy, :editor_insert]
     before_action :set_per_page, only: [:index]
-    load_and_authorize_resource
 
     # Displays a list of media
     # @note Depending on the object passed (polymorphic)

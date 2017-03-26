@@ -3,10 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Navigations ontroller
   class NavigationsController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_navigation, only: [:show, :edit, :update, :destroy, :reorder]
-    load_and_authorize_resource
 
     # Displays a list of navigations
     def index

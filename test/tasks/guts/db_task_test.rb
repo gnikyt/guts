@@ -25,18 +25,10 @@ module Guts
 
     test 'test_2' do
       out, = capture_io do
-        Rake::Task['guts:db:seed:authorizations'].invoke
-      end
-
-      assert_equal '[Guts] Authorizations seeded', out.chomp
-    end
-
-    test 'test_3' do
-      out, = capture_io do
         Rake::Task['guts:db:seed:all'].invoke
       end
 
-      assert_equal "[Guts] Authorizations seeded\n[Guts] Database seeded", out.chomp
+      assert_equal '[Guts] Database seeded', out.chomp
     end
   end
 end

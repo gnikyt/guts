@@ -3,10 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Categories controller
   class CategoriesController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_category, only: [:show, :edit, :update, :destroy]
-    load_and_authorize_resource
 
     # Displays a list of categories
     def index

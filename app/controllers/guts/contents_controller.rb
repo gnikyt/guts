@@ -3,12 +3,9 @@ require_dependency 'guts/application_controller'
 module Guts
   # Contents controller
   class ContentsController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_content, only: [:show, :edit, :update, :destroy]
     before_action :set_type
     before_action :set_per_page, only: [:index]
-    load_and_authorize_resource
 
     # Displays a list of contents
     # @note This method must have a type set

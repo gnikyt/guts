@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201021539) do
+ActiveRecord::Schema.define(version: 20170326140450) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -22,16 +22,6 @@ ActiveRecord::Schema.define(version: 20161201021539) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
-  end
-
-  create_table "guts_authorizations", force: :cascade do |t|
-    t.string   "title"
-    t.string   "subject_class"
-    t.integer  "subject_id"
-    t.string   "action"
-    t.text     "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
   end
 
   create_table "guts_categories", force: :cascade do |t|
@@ -139,12 +129,13 @@ ActiveRecord::Schema.define(version: 20161201021539) do
   end
 
   create_table "guts_permissions", force: :cascade do |t|
-    t.integer  "permissionable_id"
+    t.string   "resource"
+    t.string   "grant"
     t.string   "permissionable_type"
-    t.integer  "authorization_id"
+    t.integer  "permissionable_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.index ["permissionable_type", "permissionable_id"], name: "index_perm_on_permissionable_type_and_permissionable"
+    t.index ["permissionable_type", "permissionable_id"], name: "index_permissions_on_permissionable_type_and_permissionable"
   end
 
   create_table "guts_sites", force: :cascade do |t|
@@ -179,6 +170,16 @@ ActiveRecord::Schema.define(version: 20161201021539) do
     t.string   "password_token"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string   "item_type",                     null: false
+    t.integer  "item_id",                       null: false
+    t.string   "event",                         null: false
+    t.string   "whodunnit"
+    t.text     "object",     limit: 1073741823
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
 end
