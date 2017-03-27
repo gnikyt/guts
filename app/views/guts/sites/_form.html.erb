@@ -1,6 +1,6 @@
 <%= form_for(@site) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Site) || can?(:create, Guts::Site) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :site]).create? || policy([:guts, :site]).update? %>
     <%= link_to 'Back', sites_path, class: 'secondary hollow button' %>
   </div>
 
