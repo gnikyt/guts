@@ -3,30 +3,34 @@ require_dependency 'guts/application_controller'
 module Guts
   # Groups controller
   class GroupsController < ApplicationController
-    before_action :set_group, only: [:show, :edit, :update, :destroy]
+    before_action :set_group, only: %i(show edit update destroy)
 
     # Displays a list of groups
     def index
-      @groups = Group.all
+      @groups = policy_scope(Group).all
     end
 
     # Shows details about a single group
     def show
+      authorize @group
     end
 
     # Creation of a new group
     def new
       @group = Group.new
+      authorize @group
     end
 
     # Editing for a group
     def edit
+      authorize @group
     end
 
     # Creates a group through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @group = Group.new group_params
+      authorize @group
 
       if @group.save
         flash[:notice] = 'Group was successfully created.'
@@ -39,6 +43,8 @@ module Guts
     # Updates a group through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @group
+
       if @group.update(group_params)
         flash[:notice] = 'Group was successfully updated.'
         redirect_to edit_group_path(@group)
@@ -50,6 +56,7 @@ module Guts
     # Destroys a group
     # @note Redirects to #index on success
     def destroy
+      authorize @group
       @group.destroy
 
       flash[:notice] = 'Group was successfully destroyed.'

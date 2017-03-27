@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>User Groups</h1>
-    <%= link_to('New', new_group_path, class: 'button') if can? :create, Guts::Group %>
+    <%= link_to('New', new_group_path, class: 'button') if policy([:guts, :group]).create? %>
   </div>
 </div>
 
@@ -26,9 +26,9 @@
               <td><%= link_to pluralize(group.users.size, 'user', plural: 'users'), users_path(group: group.id) %></td>
               <td align="right" class="action_links">
                 <%= link_to 'Full Info', group_path(group) %>
-                <%= link_to('Permissions', group_permissions_path(group)) if can? :read, Guts::Permission %>
-                <%= link_to('Edit', edit_group_path(group)) if can? :update, Guts::Group %>
-                <%= link_to_destroy('Destroy', group) if can? :delete, Guts::Group %>
+                <%= link_to('Permissions', group_permissions_path(group)) if policy([:guts, :permission]).index? %>
+                <%= link_to('Edit', edit_group_path(group)) if policy([:guts, :group]).update? %>
+                <%= link_to_destroy('Destroy', group) if policy([:guts, :group]).destroy? %>
               </td>
             </tr>
           <% end %>
