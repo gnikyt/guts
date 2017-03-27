@@ -1,10 +1,10 @@
 <%= form_for(@category) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:create, Guts::Category) || can?(:update, Guts::Category) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :category]).create? || policy([:guts, :category]).update? %>
     <%= link_to 'Back', categories_path, class: 'secondary hollow button' %>
     <% unless @category.new_record? %>
-      <%= link_to("Metafields (#{@category.metafields.size})", category_metafields_path(@category), class: 'hollow button') if can? :read, Guts::Metafield %>
-      <%= link_to("Media (#{@category.media.size})", category_media_path(@category), class: 'hollow button warning') if can? :read, Guts::Medium %>
+      <%= link_to("Metafields (#{@category.metafields.size})", category_metafields_path(@category), class: 'hollow button') if policy([:guts, :metafield]).index? %>
+      <%= link_to("Media (#{@category.media.size})", category_media_path(@category), class: 'hollow button warning') if policy([:guts, :medium]).index? %>
     <% end %>
   </div>
 

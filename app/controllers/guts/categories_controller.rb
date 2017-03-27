@@ -7,7 +7,7 @@ module Guts
 
     # Displays a list of categories
     def index
-      @categories = policy_scope(Category)
+      @categories = policy_scope(Category).all
     end
 
     # Shows details about a single category

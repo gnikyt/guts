@@ -7,7 +7,10 @@ module Guts
     # Initilization for a policy
     # @param [Object|nil] user the user's object
     # @param [Object|nil] record the record from the database
+    # @raise [Pundit::NotAuthorizedError] if user is not logged in
     def initialize(user, record)
+      raise Pundit::NotAuthorizedError unless user
+
       @user = user
       @record = record
     end
@@ -15,7 +18,7 @@ module Guts
     # Index method policy
     # @return [Boolean] allowed or denied
     def index?
-      false
+      standard_check :index?
     end
 
     # Show method policy
@@ -27,7 +30,7 @@ module Guts
     # Create method policy
     # @return [Boolean] allowed or denied
     def create?
-      false
+      standard_check :create?
     end
 
     # New method policy
@@ -39,7 +42,7 @@ module Guts
     # Update method policy
     # @return [Boolean] allowed or denied
     def update?
-      false
+      standard_check :update?
     end
 
     # Edit method policy
@@ -51,7 +54,7 @@ module Guts
     # Destroy method policy
     # @return [Boolean] allowed or denied
     def destroy?
-      false
+      standard_check :destory?
     end
 
     # Scope for policy
@@ -85,24 +88,35 @@ module Guts
     # @param [Symbol] resource the resource (controller) to check
     # @param [Symbol] method the method for the resource
     # @return [Boolean] accepted or denied
-    def user_grant?(resource, method)
-      @user.grant? resource, method
+    def user_grants?(resource, method)
+      @user.grants? resource, method
     end
 
     # Checks if a user's groups are granted access to a resource and method
     # @param [Symbol] resource the resource (controller) to check
     # @param [Symbol] method the method for the resource
     # @return [Boolean] accepted or denied
-    def groups_grant?(resource, method)
+    def groups_grants?(resource, method)
       @user.groups.any? do |group|
-        group.grant? resource, method
+        group.grants? resource, method
       end
     end
 
     # Checks if user is in the admin's group
     # @return [Boolean]
     def is_admin?
-      @user.groups.map(&:slug).include? :admins
+      @user.groups.map(&:slug).include? 'admins'
+    end
+
+    # DRY code for checking methods
+    # @param [Symbol] method the method to check
+    # @return [Boolean]
+    def standard_check(method)
+      class_name = self.class.to_s.gsub('Policy', '').gsub('::', '_').underscore.to_sym
+
+      is_admin? ||
+        user_grants?(class_name, method) ||
+        groups_grants?(class_name, method)
     end
   end
 end
