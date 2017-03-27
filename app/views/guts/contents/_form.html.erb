@@ -2,10 +2,10 @@
   <div class="small-12 medium-8 columns">
     <div class="row">
       <div class="small-12 columns">
-        <%= f.submit("Save #{@type.title}", class: 'success button') if can?(:create, Guts::Content) || can?(:update, Guts::Content) %>
+        <%= f.submit("Save #{@type.title}", class: 'success button') if policy([:guts, :content]).create? || policy([:guts, :content]).update? %>
         <% unless @content.new_record? %>
-          <%= link_to("Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: 'hollow button') if can? :read, Guts::Metafield %>
-          <%= link_to("Media (#{@content.media.size})", content_media_path(@content), class: 'hollow button secondary') if can? :read, Guts::Medium %>
+          <%= link_to("Metafields (#{@content.metafields.size})", content_metafields_path(@content), class: 'hollow button') if policy([:guts, :metafield]).index? %>
+          <%= link_to("Media (#{@content.media.size})", content_media_path(@content), class: 'hollow button secondary') if policy([:guts, :medium]).index? %>
         <% end %>
       </div>
 
@@ -72,6 +72,6 @@
     </div>
   </aside>
 
-  <input type="hidden" name="type" value="<%= @type.slug %>">
+  <%= hidden_field_tag :type, @type.slug %>
   <%= current_site_form_field f %>
 <% end %>

@@ -85,6 +85,7 @@ module Guts
     private
 
     # Checks if a user is granted access to a resource and method
+    # @private
     # @param [Symbol] resource the resource (controller) to check
     # @param [Symbol] method the method for the resource
     # @return [Boolean] accepted or denied
@@ -93,6 +94,7 @@ module Guts
     end
 
     # Checks if a user's groups are granted access to a resource and method
+    # @private
     # @param [Symbol] resource the resource (controller) to check
     # @param [Symbol] method the method for the resource
     # @return [Boolean] accepted or denied
@@ -103,12 +105,14 @@ module Guts
     end
 
     # Checks if user is in the admin's group
+    # @private
     # @return [Boolean]
     def is_admin?
       @user.groups.map(&:slug).include? 'admins'
     end
 
     # DRY code for checking methods
+    # @private
     # @param [Symbol] method the method to check
     # @return [Boolean]
     def standard_check(method)

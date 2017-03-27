@@ -18,6 +18,7 @@ module Guts
     # Creation of a new category
     def new
       @category = Category.new
+      authorize @category
     end
 
     # Editing for a category

@@ -24,6 +24,7 @@ module Guts
     private
 
     # Sets the position (ordering) for a navigation item before creation
+    # @private
     def set_position
       max_position = Navigation.find(self[:navigation_id]).navigation_items.maximum(:position) || -1
 
