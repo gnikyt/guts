@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Options</h1>
-    <%= link_to('New', new_option_path, class: 'button') if can? :create, Guts::Option %>
+    <%= link_to('New', new_option_path, class: 'button') if policy([:guts, :option]).create? %>
   </div>
 </div>
 
@@ -24,8 +24,8 @@
             <tr>
               <td><%= opt.key %></td>
               <td align="right" class="action_links">
-                <%= link_to('Edit', edit_option_path(opt)) if can? :update, Guts::Option %>
-                <%= link_to_destroy('Destroy', opt) if can? :delete, Guts::Option %>
+                <%= link_to('Edit', edit_option_path(opt)) if policy([:guts, :option]).update? %>
+                <%= link_to_destroy('Destroy', opt) if policy([:guts, :option]).destroy? %>
               </td>
             </tr>
           <% end %>

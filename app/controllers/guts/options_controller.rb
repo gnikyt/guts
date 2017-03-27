@@ -3,31 +3,35 @@ require_dependency 'guts/application_controller'
 module Guts
   # Options controller
   class OptionsController < ApplicationController
-    before_action :set_option, only: [:show, :edit, :update, :destroy]
-    before_action :set_per_page, only: [:index]
+    before_action :set_option, only: %i(show edit update destroy)
+    before_action :set_per_page, only: :index
     
     # Display a list of options
     def index
-      @options = Option.paginate(page: params[:page], per_page: @per_page)
+      @options = policy_scope(Option).paginate(page: params[:page], per_page: @per_page)
     end
 
     # Show a single options
     def show
+      authorize @option
     end
 
     # Creation of a new option
     def new
       @option = Option.new
+      authorize @option
     end
 
     # Editing of an option
     def edit
+      authorize @option
     end
 
     # Creates an option through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @option = Option.new option_params
+      authorize @option
 
       if @option.save
         flash[:notice] = 'Option was successfully created.'
@@ -40,6 +44,8 @@ module Guts
     # Updates an option through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @option
+
       if @option.update option_params
         flash[:notice] = 'Option was successfully updated.'
         redirect_to edit_option_path(@option)
@@ -50,6 +56,7 @@ module Guts
 
     # Destroys an option
     def destroy
+      authorize @option
       @option.destroy
 
       flash[:notice] = 'Option was successfully destroyed.'
