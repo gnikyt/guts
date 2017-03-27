@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Users<%= " for #{@group.title}" if @group %></h1>
-    <%= link_to('New', new_user_path, class: 'button') if can? :create, Guts::User %>
+    <%= link_to('New', new_user_path, class: 'button') if policy([:guts, :user]).create? %>
   </div>
 </div>
 
@@ -28,9 +28,9 @@
               <td><%= user.groups.map(&:title).join(', ') %></td>
               <td align="right" class="action_links">
                 <%= link_to 'Full Info', user_path(user) %>
-                <%= link_to('Permissions', user_permissions_path(user)) if can? :read, Guts::Permission %>
-                <%= link_to('Edit', edit_user_path(user)) if can? :update, Guts::User %>
-                <%= link_to_destroy('Destroy', user) if can? :delete, Guts::User %>
+                <%= link_to('Permissions', user_permissions_path(user)) if policy([:guts, :permission]).index? %>
+                <%= link_to('Edit', edit_user_path(user)) if policy([:guts, :user]).update? %>
+                <%= link_to_destroy('Destroy', user) if policy([:guts, :user]).destroy? %>
               </td>
             </tr>
           <% end %>
@@ -38,7 +38,7 @@
       </table>
     <% else %>
       <% if @group %>
-    <p>There are no users for this group (<%= @group.title %>).</p>
+        <p>There are no users for this group (<%= @group.title %>).</p>
       <% else %>
         <p>There are no users added.</p>
       <% end %>

@@ -24,7 +24,7 @@
         <td><strong>Permissions</strong></td>
         <td>
           <% @user.permissions.each do |permission| %>
-            <u><%= clean_subject_class permission.authorization.subject_class %>:</u> <%= permission.authorization.action %><br>
+            <strong><%= permission.resource.humanize.titlize %></strong>: <%= permission.grant.humanize.titlize %>
           <% end %>
         </td>
       </tr>

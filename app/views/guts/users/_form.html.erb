@@ -1,11 +1,11 @@
 <%= form_for(@user) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::User) || can?(:create, Guts::User) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :user]).create? || policy([:guts, :user]).update? %>
     <%= link_to 'Back', users_path, class: 'secondary hollow button' %>
     <% unless @user.new_record? %>
-      <%= link_to("Metafields (#{@user.metafields.size})", user_metafields_path(@user), class: 'hollow button') if can? :read, Guts::Metafield %>
-      <%= link_to("Media (#{@user.media.size})", user_media_path(@user), class: 'hollow button alert') if can? :read, Guts::Medium %>
-      <%= link_to("Permissions (#{@user.permissions.size})", user_permissions_path(@user), class: 'hollow button secondary') if can? :read, Guts::Permission %>
+      <%= link_to("Metafields (#{@user.metafields.size})", user_metafields_path(@user), class: 'hollow button') if policy([:guts, :metafield]).index? %>
+      <%= link_to("Media (#{@user.media.size})", user_media_path(@user), class: 'hollow button alert') if policy([:guts, :medium]).index? %>
+      <%= link_to("Permissions (#{@user.permissions.size})", user_permissions_path(@user), class: 'hollow button secondary') if policy([:guts, :permission]).index? %>
     <% end %>
   </div>
 
@@ -49,6 +49,6 @@
   </div>
   <div class="small-12 columns">
     <%= f.label :groups %>
-    <%= f.collection_select :group_ids, Guts::Group.all, :id, :title, {}, { multiple: true } %>
+    <%= f.collection_select :group_ids, policy_scope(Guts::Group).all, :id, :title, {}, { multiple: true } %>
   </div>
 <% end %>

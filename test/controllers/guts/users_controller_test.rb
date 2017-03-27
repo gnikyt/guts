@@ -4,7 +4,7 @@ module Guts
   class UsersControllerTest < ActionController::TestCase
     setup do
       @user   = guts_users :admin_user
-      @group  = guts_groups :test_group
+      @group  = guts_groups :admins
       @routes = Engine.routes
     end
 

@@ -3,36 +3,40 @@ require_dependency 'guts/application_controller'
 module Guts
   # Users controller
   class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: %i(show edit update destroy)
 
     # Displays a list of users
     # @note Filterable by group by passing `group` param
     def index
       if params[:group]
-        @group = Group.find params[:group]
-        @users = User.in_group(@group)
+        @group = policy_scope(Group).find params[:group]
+        @users = policy_scope(User).in_group(@group)
       else
-        @users = User.all
+        @users = policy_scope(User).all
       end
     end
 
     # Show details about a single user
     def show
+      authorize @user
     end
 
     # Creation of a new user
     def new
       @user = User.new
+      authorize @user
     end
 
     # Editing of a user
     def edit
+      authorize @user
     end
 
     # Creates a user through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @user = User.new user_params
+      authorize @user
 
       if @user.save
         flash[:notice] = 'User was successfully created. Don\'t forget to add permissions.'
@@ -45,6 +49,8 @@ module Guts
     # Updates a user through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @user
+
       if @user.update(user_params)
         flash[:notice] = 'User was successfully updated.'
         redirect_to edit_user_path(@user)
@@ -56,6 +62,7 @@ module Guts
     # Destroys a single user
     # @note Redirects to #index on success
     def destroy
+      authorize @user
       @user.destroy
 
       flash[:notice] = 'User was successfully destroyed.'
@@ -65,13 +72,15 @@ module Guts
     # Allows switching of users by passing `user_id` in params
     # @see Guts::SessionsConcern#log_in
     def switch_user
+      authorize User, :switch_user?
+
       if request.post?
         user = User.find(params[:user_id])
         log_in user
         flash.now[:notice] = "You are now logged in as #{user.name}."
       end
 
-      @users = User.all
+      @users = policy_scope(User).all
     end
 
     private
