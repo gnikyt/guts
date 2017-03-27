@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Navigation Items<% if @navigation %> <span class="sub_title">for <%= @navigation.title %></span><% end %></h1>
-    <%= link_to('New', (@navigation.nil? ? new_navigation_item_path : new_navigation_navigation_item_path(@navigation)), class: 'button') if can? :create, Guts::NavigationItem %>
+    <%= link_to('New', (@navigation.nil? ? new_navigation_item_path : new_navigation_navigation_item_path(@navigation)), class: 'button') if policy([:guts, :navigation_item]).create? %>
     <%= link_to 'Back', navigations_path, class: 'hollow button secondary' %>
   </div>
 </div>
@@ -30,8 +30,8 @@
                 </small>
               </td>
               <td class="action_links">
-                <%= link_to('Edit', edit_navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if can? :update, Guts::NavigationItem %>
-                <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if can? :delete, Guts::NavigationItem %>
+                <%= link_to('Edit', edit_navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if policy([:guts, :navigation_item]).update? %>
+                <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if policy([:guts, :navigation_item]).destroy? %>
               </td>
             </tr>
           <% end %>

@@ -60,7 +60,7 @@
 
       <div class="small-12 columns">
         <%= f.label :categories %>
-        <%= f.collection_check_boxes :category_ids, Guts::Category.all, :id, :title do |cb| %>
+        <%= f.collection_check_boxes :category_ids, policy_scope(Guts::Category).all, :id, :title do |cb| %>
           <div><%= cb.check_box %> <%= cb.label %></div>
         <% end %>
       </div>
