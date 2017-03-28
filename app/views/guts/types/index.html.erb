@@ -20,16 +20,7 @@
     <% if @types.size > 0 %>
       <table>
         <tbody>
-          <% @types.each do |type| %>
-            <tr>
-              <td><%= type.title %></td>
-              <td><%= pluralize type.contents.size, 'record', plural: 'records' %></td>
-              <td align="right" class="action_links">
-                <%= link_to('Edit', edit_type_path(type)) if policy([:guts, :type]).update? %>
-                <%= link_to_destroy('Destroy', type) if policy([:guts, :type]).destroy? %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'type_row', collection: @types %>
         </tbody>
       </table>
     <% else %>

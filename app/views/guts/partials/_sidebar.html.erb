@@ -48,8 +48,8 @@
 
     <li>&nbsp;</li>
 
-    <li>
-      <a href="<%= destroy_session_path %>">Log out <small><%= current_user.name %></small></a>
+    <li id="current-user">
+      <a href="<%= destroy_session_path %>"><%= gravatar_for current_user %> <%= current_user.name %> <small>Logout</small></a>
     </li>
   </ul>
 <% end %>

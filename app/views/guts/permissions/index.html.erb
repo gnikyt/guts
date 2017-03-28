@@ -27,22 +27,7 @@
           <th>&nbsp;</th>
         </thead>
         <tbody>
-          <% @object.permissions.each do |permission| %>
-            <tr>
-              <td>
-                <%= permission.resource.humanize.titleize %>
-              </td>
-              <td>
-                <%= permission.grant.humanize.titleize %>
-              </td>
-              <td>
-                <%= permission.created_at.strftime("%b #{permission.created_at.day.ordinalize}, %Y") %>
-              </td>
-              <td class="action_links">
-                <%= link_to_destroy('Revoke', polymorphic_path([@object, permission])) if policy([:guts, :permission]).destroy? %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'permission_row', collection: @object.permissions %>
         </tbody>
       </table>
     <% else %>

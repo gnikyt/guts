@@ -20,15 +20,7 @@
     <% if @options.size > 0 %>
       <table>
         <tbody>
-          <% @options.each do |opt| %>
-            <tr>
-              <td><%= opt.key %></td>
-              <td align="right" class="action_links">
-                <%= link_to('Edit', edit_option_path(opt)) if policy([:guts, :option]).update? %>
-                <%= link_to_destroy('Destroy', opt) if policy([:guts, :option]).destroy? %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'option_row', collection: @options %>
         </tbody>
       </table>
     <% else %>

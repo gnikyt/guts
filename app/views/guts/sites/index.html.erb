@@ -20,23 +20,7 @@
     <% if @sites.size > 0 %>
       <table>
         <tbody>
-          <% @sites.each do |site| %>
-            <tr>
-              <td><% if site.default? %><strong>Default:</strong> <% end %><%= site.name %></td>
-              <td><%= site.domain %></td>
-              <td align="right" class="action_links">
-                <% if policy([:guts, :site]).update? %>
-                  <% if site.default? %>
-                    <%= link_to('Remove Default', remove_default_site_path(site)) %>
-                  <% else %>
-                    <%= link_to('Set as Default', set_default_site_path(site)) %>
-                  <% end %>
-                  <%= link_to('Edit', edit_site_path(site)) %>
-                <% end %>
-                <%= link_to_destroy('Destroy', site) if policy([:guts, :site]).destroy? %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'site_row', collection: @types %>
         </tbody>
       </table>
     <% else %>
