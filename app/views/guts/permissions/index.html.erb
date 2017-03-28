@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Permissions<% if @object.title %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || 'N/A' %></span><% end %></h1>
-    <%= link_to('New', new_polymorphic_path([@object, :permission]), class: 'button') if can? :create, Guts::Permission %>
+    <%= link_to('New', new_polymorphic_path([@object, :permission]), class: 'button') if policy([:guts, :permission]).create? %>
     <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
   </div>
 </div>
@@ -21,8 +21,8 @@
     <% if @object.permissions.size > 0 %>
       <table>
         <thead>
-          <th>Feature</th>
-          <th>Permission</th>
+          <th>Resource</th>
+          <th>Grant</th>
           <th>Date Assigned</th>
           <th>&nbsp;</th>
         </thead>
@@ -30,24 +30,16 @@
           <% @object.permissions.each do |permission| %>
             <tr>
               <td>
-                <% if permission.authorization.subject_class == 'all' %>
-                  All Features
-                <% else %>
-                  <%= permission.authorization.subject_class.gsub(/Guts::/, '').pluralize %>
-                <% end %>
-
-                <% if permission.authorization.subject_id %>
-                  <small>for ID: <%= permission.authorization.subject_id %></small>
-                <% end %>
+                <%= permission.resource.humanize.titleize %>
               </td>
               <td>
-                <%= permission.authorization.description.titleize %>
+                <%= permission.grant.humanize.titleize %>
               </td>
               <td>
                 <%= permission.created_at.strftime("%b #{permission.created_at.day.ordinalize}, %Y") %>
               </td>
               <td class="action_links">
-                <%= link_to_destroy('Revoke', polymorphic_path([@object, permission])) if can? :delete, Guts::Permission %>
+                <%= link_to_destroy('Revoke', polymorphic_path([@object, permission])) if policy([:guts, :permission]).destroy? %>
               </td>
             </tr>
           <% end %>

@@ -6,7 +6,6 @@ module Guts
 
     setup do
       @user   = guts_users :admin_user
-      @group  = guts_groups :test_group
       @routes = Engine.routes
     end
 
@@ -28,12 +27,11 @@ module Guts
 
       assert_response :success
       assert_not_nil assigns(:permission)
-      assert_not_nil assigns(:authorizations)
-      assert_not_nil assigns(:grouped_auths)
+      assert_not_nil assigns(:policies)
     end
 
-    test 'should create permission' do
-      assert_difference('Permission.count') do
+    test 'should create permissions' do
+      assert_difference('Permission.count', 2) do
         post :create, params: {
           user_id: @user.id,
           permissionable_type: 'Guts::User',
@@ -41,7 +39,10 @@ module Guts
             permissionable_type: 'Guts::User',
             permissionable_id: @user.id
           },
-          authorization_ids: [guts_authorizations(:type_authorization).id]
+          grants: {
+            type: ['index'],
+            user: ['destroy']
+          }
         }
       end
 
@@ -53,8 +54,13 @@ module Guts
       post :create, params: {
         user_id: @user.id,
         permissionable_type: 'Guts::User',
-        permission: { a_girl_knows: nil },
-        authorization_ids: [guts_authorizations(:type_authorization).id]
+        permission: {
+          permissionable_type: 'Guts::User',
+          permissionable_id: @user.id
+        },
+        grants: {
+          type: [nil]
+        }
       }
 
       assert_redirected_to new_polymorphic_path([@user, :permission])
@@ -73,10 +79,10 @@ module Guts
       assert_equal 'Permission was revoked.', flash[:notice]
     end
 
-    test 'should not revoke permission if invalid' do
+    test 'should not revoke permission if it does not belong to the object' do
       assert_difference('Permission.count', 0) do
         delete :destroy, params: {
-          id: guts_permissions(:group_permission).id,
+          id: guts_permissions(:permission_two).id,
           user_id: @user.id,
           permissionable_type: 'Guts::User'
         }
@@ -84,47 +90,6 @@ module Guts
 
       assert_redirected_to polymorphic_path([@user, :permissions])
       assert_equal 'Error revoking permission.', flash[:notice]
-    end
-
-    test 'should get additional' do
-      get :additional, params: {
-        permissionable_type: 'Guts::User',
-        user_id: @user.id,
-        authorization_id: guts_authorizations(:type_authorization).id
-      }
-
-      assert_response :success
-      assert_not_nil assigns(:permission)
-      assert_not_nil assigns(:objects)
-    end
-
-    test 'should create additional permission' do
-      assert_difference('Authorization.count') do
-        post :additional_create, params: {
-          user_id: @user.id,
-          permissionable_type: 'Guts::User',
-          permission: {
-            permissionable_type: 'Guts::User',
-            permissionable_id: @user.id
-          },
-          authorization_id: guts_authorizations(:type_authorization).id,
-          subject_id: guts_types(:page_type).id
-        }
-      end
-
-      assert_redirected_to polymorphic_path([@user, :permissions])
-      assert_equal 'Permission was successfully granted.', flash[:notice]
-    end
-
-    test 'should not create additional permission' do
-      post :additional_create, params: {
-        user_id: @user.id,
-        permissionable_type: 'Guts::User',
-        permission: { a_girl_knows: nil },
-        authorization_id: guts_authorizations(:type_authorization).id
-      }
-
-      assert_redirected_to polymorphic_path([:additional, @user, :permissions])
     end
   end
 end

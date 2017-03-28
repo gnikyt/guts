@@ -1,0 +1,9 @@
+permission_one:
+  resource: type
+  grant: index
+  permissionable: admin_user (Guts::User)
+
+permission_two:
+  resource: type
+  grant: destroy
+  permissionable: admins (Guts::Group)

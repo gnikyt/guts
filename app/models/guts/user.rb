@@ -36,7 +36,7 @@ module Guts
     # @param [Symbol] method the method for the resource
     # @return [Boolean] if user has access to resource and method
     def grants?(resource, method)
-      grants = self[:permissions].where(resource: resource).pluck(:grant)
+      grants = self.permissions.where(resource: resource).pluck(:grant)
       grants.include? method
     end
   end

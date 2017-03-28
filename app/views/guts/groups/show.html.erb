@@ -20,7 +20,7 @@
         <td><strong>Permissions</strong></td>
         <td>
           <% @group.permissions.each do |permission| %>
-            <strong><%= permission.resource.humanize.titlize %></strong>: <%= permission.grant.humanize.titlize %>
+            <strong><%= permission.resource.humanize.titleize %></strong>: <%= permission.grant.humanize.titleize %>
           <% end %>
         </td>
       </tr>

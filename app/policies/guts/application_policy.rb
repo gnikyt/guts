@@ -116,7 +116,7 @@ module Guts
     # @param [Symbol] method the method to check
     # @return [Boolean]
     def standard_check(method)
-      class_name = self.class.to_s.gsub('Policy', '').gsub('::', '_').underscore.to_sym
+      class_name = self.class.to_s.gsub('Policy', '').demodulize.underscore.to_sym
 
       is_admin? ||
         user_grants?(class_name, method) ||
