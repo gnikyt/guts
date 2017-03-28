@@ -24,13 +24,13 @@ module Guts
     end
 
     test 'should return users for group' do
-      group = guts_groups :test_group
+      group = guts_groups :admins
 
       assert_operator group.users.size, :>, 0
     end
 
     test 'should return metafields for group' do
-      group = guts_groups :test_group
+      group = guts_groups :admins
 
       assert_operator group.metafields.size, :>, 0
     end

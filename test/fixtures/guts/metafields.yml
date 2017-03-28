@@ -16,7 +16,7 @@ metafield_for_user:
 metafield_for_group:
   key: Test Metafield 4
   value: Test Value 4
-  fieldable: test_group (Guts::Group)
+  fieldable: admins (Guts::Group)
   
 metafield_for_category:
   key: Test Metafield 5

@@ -50,7 +50,7 @@ module Guts
 
     test 'should belong to a group' do
       user  = guts_users :admin_user
-      group = guts_groups :test_group
+      group = guts_groups :admins
 
       assert_includes user.groups, group
     end
@@ -59,14 +59,6 @@ module Guts
       user = guts_users :admin_user
 
       assert_operator user.metafields.size, :>, 0
-    end
-
-    test 'should have abilities' do
-      user = guts_users :admin_user
-
-      assert user.respond_to?(:can?)
-      assert user.respond_to?(:cannot?)
-      assert_instance_of Ability, user.ability
     end
   end
 end
