@@ -19,13 +19,13 @@ module Guts
       title_changed?
     end
 
-    # Determines if a group has permission to a resource and type
-    # @param [Symbol] resource the resource (controller) name
-    # @param [Symbol] method the method for the resource
-    # @return [Boolean] if group has access to resource and method
+    # Determines if a user has permission to a resource and type
+    # @param [Symbol|String] resource the resource (controller) name
+    # @param [Symbol|String] method the method for the resource
+    # @return [Boolean] if user has access to resource and method
     def grants?(resource, method)
-      grants = self[:permissions].where(resource: resource).pluck(:grant)
-      grants.include? method
+      grants = permissions.where(resource: resource.to_s).pluck(:grant)
+      grants.include? method.to_s.delete('?')
     end
   end
 end

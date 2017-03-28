@@ -2,7 +2,11 @@ module Guts
   # Base application policies for Pundit
   # @abstract
   class ApplicationPolicy
-    attr_reader :user, :record
+    # @return [Object|nil] the user's object
+    attr_reader :user
+    
+    # @return [Object|nil] the record from the database
+    attr_reader :record
 
     # Initilization for a policy
     # @param [Object|nil] user the user's object
@@ -65,7 +69,11 @@ module Guts
 
     # Scope class for policy
     class Scope
-      attr_reader :user, :scope
+      # @return [Object|nil] the user's object
+      attr_reader :user
+
+      # @param [Object|nil] scope the scope object
+      attr_reader :scope
 
       # Initilization for scope
       # @param [Object|nil] user the user's object

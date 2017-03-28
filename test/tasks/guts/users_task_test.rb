@@ -96,5 +96,39 @@ module Guts
       
       assert_equal '[Guts] Please enter a password and an email', exception.message
     end
+
+    test 'should not set user a master if missing information' do
+      exception = assert_raises ArgumentError do
+        capture_io do
+          Rake::Task['guts:user:set_master'].invoke
+        end
+      end
+      
+      assert_equal '[Guts] Please enter an email', exception.message
+    end
+
+    test 'should not set user a master if user does not exist' do
+      exception = assert_raises StandardError do
+        capture_io do
+          Rake::Task['guts:user:set_master'].invoke('non-existant@cool.com')
+        end
+      end
+      
+      assert_equal '[Guts] User not found', exception.message
+    end
+
+    test 'should set user as a master' do
+      out, = capture_io do
+        Rake::Task['guts:user:create'].invoke(
+          'Tom Jonesy',
+          'tom.jonesy@gmail.com',
+          'password',
+          true
+        )
+        Rake::Task['guts:user:set_master'].invoke('tom.jonesy@gmail.com')
+      end
+      
+      assert out.chomp.include?('[Guts] User is now authorized for everything')
+    end
   end
 end

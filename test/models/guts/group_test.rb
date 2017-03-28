@@ -34,5 +34,12 @@ module Guts
 
       assert_operator group.metafields.size, :>, 0
     end
+
+    test 'should check grants' do
+      group = guts_groups :admins
+
+      assert_equal false, group.grants?(:non_existant_resource, :non_existant_method)
+      assert_equal true, group.grants?(:type, :destroy) # From fixture
+    end
   end
 end

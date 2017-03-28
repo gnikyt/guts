@@ -60,5 +60,12 @@ module Guts
 
       assert_operator user.metafields.size, :>, 0
     end
+
+    test 'should check grants' do
+      user = guts_users :admin_user
+
+      assert_equal false, user.grants?(:non_existant_resource, :non_existant_method)
+      assert_equal true, user.grants?(:type, :index) # From fixture
+    end
   end
 end
