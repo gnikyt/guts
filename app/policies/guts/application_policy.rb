@@ -94,7 +94,7 @@ module Guts
 
     # Checks if a user is granted access to a resource and method
     # @private
-    # @param [Symbol|String|Class|Array] resource the resource (controller) to check
+    # @param [Symbol|Class|Array] resource the resource (controller) to check
     # @param [Symbol|String] method the method for the resource
     # @return [Boolean] accepted or denied
     def user_granted?(resource, method)
@@ -103,7 +103,7 @@ module Guts
 
     # Checks if a user's groups are granted access to a resource and method
     # @private
-    # @param [Symbol|String|Class|Array] resource the resource (controller) to check
+    # @param [Symbol|Class|Array] resource the resource (controller) to check
     # @param [Symbol|String] method the method for the resource
     # @return [Boolean] accepted or denied
     def groups_granted?(resource, method)
@@ -124,7 +124,7 @@ module Guts
     # @param [Symbol|String] method the method to check
     # @return [Boolean]
     def standard_check(method)
-      class_name = self.class.to_s.remove('Policy')
+      class_name = self.class.to_s.remove('Policy').constantize
 
       admin? || user_granted?(class_name, method) || groups_granted?(class_name, method)
     end
