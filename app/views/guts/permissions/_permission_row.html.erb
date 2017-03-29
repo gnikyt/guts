@@ -1,9 +1,9 @@
 <tr>
   <td>
-    <%= permission_row.resource.humanize.titleize %>
+    <%= permission_row.resource %>
   </td>
   <td>
-    <%= permission_row.grant.humanize.titleize %>
+    <%= permission_row.grant %>
   </td>
   <td>
     <%= permission_row.created_at.strftime("%b #{permission_row.created_at.day.ordinalize}, %Y") %>

@@ -18,7 +18,7 @@ module Guts
       
       # Loop over all policies
       @policies = {}
-      Dir.new("#{Guts::Engine.root}/app/policies/guts")
+      Dir.new(Guts::Engine.root.join('app', 'policies', 'guts'))
          .entries
          .select { |file| file =~ /_policy/ }
          .each do |file|
@@ -26,8 +26,9 @@ module Guts
            next if file =~ /application_policy/
 
            # Get resource name, merge grants with standard grants
-           resource = file.gsub('_policy.rb', '')
-           grants   = standard_grants | grant_methods("Guts::#{file.camelize.gsub('.rb', '')}".constantize)
+           klass    = "Guts::#{file.camelize.gsub('.rb', '')}"
+           resource = klass.remove 'Policy'
+           grants   = standard_grants | grant_methods(klass.constantize)
 
            @policies[resource] = grants
          end

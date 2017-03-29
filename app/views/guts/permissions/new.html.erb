@@ -29,7 +29,7 @@
       <div id="auth-list">
         <% @policies.each do |resource, grants| %>
           <fieldset>
-            <legend><%= resource.humanize.titleize %></legend>
+            <legend><%= resource.demodulize.titleize %></legend>
 
             <% grants.each do |grant| %>
               <% has_grant = @object.permissions.find { |p| p.resource == resource && p.grant == grant } %>

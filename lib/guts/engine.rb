@@ -11,7 +11,7 @@ module Guts
 
     # Allow decorator usage for extending Guts
     config.to_prepare do
-      Dir.glob("#{Rails.root}/app/decorators/*/guts/*_decorator*.rb").each do |c|
+      Dir.glob(Rails.root.join('app', 'decorators', '*', 'guts', '*_decorator*.rb')).each do |c|
         require_dependency(c)
       end
     end
