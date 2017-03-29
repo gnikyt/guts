@@ -17,35 +17,7 @@
 
 <div class="row">
   <% if @navigations.size > 0 %>
-    <% @navigations.each do |navigation| %>
-      <div class="small-12 medium-6 columns nav_block">
-        <div class="callout secondary">
-          <h5><%= navigation.title %></h5>
-          <div class="tiny button-group">
-            <%= link_to('New', new_navigation_navigation_item_path(navigation), { class: 'button' }) if policy([:guts, :navigation_item]).create? %>
-            <%= link_to('Edit', edit_navigation_path(navigation), { class: 'warning button' }) if policy([:guts, :navigation]).update? %>
-            <%= link_to_destroy('Destroy', navigation, { class: 'alert button' }) if policy([:guts, :navigation]).destroy? %>
-          </div>
-          <ul class="sortable" data-url="<%= reorder_navigation_path navigation %>">
-            <% if navigation.navigation_items.size > 0 %>
-              <% navigation.navigation_items.each do |item| %>
-                <li class="item" data-id="<%= item.id %>">
-                  <i class="handle fa fa-reorder"></i>
-                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.custom? ? 'Custom' : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.custom? %>
-                  <div class="action_links">
-                    <%= link_to('Edit', edit_navigation_navigation_item_path(navigation, item)) if policy([:guts, :navigation_item]).update? %>
-                    <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation, item)) if policy([:guts, :navigation_item]).destroy? %>
-                  </div>
-                </li>
-              <% end %>
-            <% else %>
-              <p>No navigational items added to this menu.</p>
-            <% end %>
-          </ul>
-          <div></div>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: 'navigation_row', collection: @navigations %>
   <% else %>
     <div class="small-12 columns">
       <p>No navigational menus have been added.</p>

@@ -21,20 +21,7 @@
     <% if @navigation_items.size > 0 %>
       <table>
         <tbody class="sortable" data-url="<%= reorder_navigation_path @navigation %>">
-          <% @navigation_items.each do |navigation_item| %>
-            <tr class="item" data-id="<%= navigation_item.id %>">
-              <td><i class="handle fa fa-reorder"></i> <%= navigation_item.title %></td>
-              <td>
-                <small>
-                  to: <%= navigation_item.custom? ? 'Custom' : navigation_item.navigatable.navigatable_format %> <%= "(#{navigation_item.custom})" if navigation_item.custom? %>
-                </small>
-              </td>
-              <td class="action_links">
-                <%= link_to('Edit', edit_navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if policy([:guts, :navigation_item]).update? %>
-                <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation_item.navigation, navigation_item)) if policy([:guts, :navigation_item]).destroy? %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'navigation_item_row', collection: @navigation_items %>
         </tbody>
       </table>
     <% else %>

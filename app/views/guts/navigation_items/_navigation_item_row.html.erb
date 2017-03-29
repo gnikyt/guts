@@ -1,0 +1,12 @@
+<tr class="item" data-id="<%= navigation_item_row.id %>">
+  <td><i class="handle fa fa-reorder"></i> <%= navigation_item_row.title %></td>
+  <td>
+    <small>
+      to: <%= navigation_item_row.custom? ? 'Custom' : navigation_item_row.navigatable.navigatable_format %> <%= "(#{navigation_item_row.custom})" if navigation_item_row.custom? %>
+    </small>
+  </td>
+  <td class="action_links">
+    <%= link_to('Edit', edit_navigation_navigation_item_path(navigation_item_row.navigation, navigation_item_row)) if policy([:guts, :navigation_item]).update? %>
+    <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation_item_row.navigation, navigation_item_row)) if policy([:guts, :navigation_item]).destroy? %>
+  </td>
+</tr>
