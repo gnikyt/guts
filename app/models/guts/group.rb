@@ -2,6 +2,7 @@ module Guts
   # Group model
   class Group < ApplicationRecord
     extend FriendlyId
+    include GrantedConcern
 
     validates :title, presence: true, length: { minimum: 3 }
 
@@ -17,15 +18,6 @@ module Guts
     # @return [Boolean]
     def should_generate_new_friendly_id?
       title_changed?
-    end
-
-    # Determines if a user has permission to a resource and type
-    # @param [Symbol|String] resource the resource (controller) name
-    # @param [Symbol|String] method the method for the resource
-    # @return [Boolean] if user has access to resource and method
-    def grants?(resource, method)
-      grants = permissions.where(resource: resource.to_s).pluck(:grant)
-      grants.include? method.to_s.delete('?')
     end
   end
 end

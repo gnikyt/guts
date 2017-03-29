@@ -22,7 +22,7 @@ module Guts
     # Index method policy
     # @return [Boolean] allowed or denied
     def index?
-      standard_check :index?
+      standard_check :index
     end
 
     # Show method policy
@@ -34,7 +34,7 @@ module Guts
     # Create method policy
     # @return [Boolean] allowed or denied
     def create?
-      standard_check :create?
+      standard_check :create
     end
 
     # New method policy
@@ -46,7 +46,7 @@ module Guts
     # Update method policy
     # @return [Boolean] allowed or denied
     def update?
-      standard_check :update?
+      standard_check :update
     end
 
     # Edit method policy
@@ -58,7 +58,7 @@ module Guts
     # Destroy method policy
     # @return [Boolean] allowed or denied
     def destroy?
-      standard_check :destory?
+      standard_check :destory
     end
 
     # Scope for policy
@@ -94,41 +94,39 @@ module Guts
 
     # Checks if a user is granted access to a resource and method
     # @private
-    # @param [Symbol] resource the resource (controller) to check
-    # @param [Symbol] method the method for the resource
+    # @param [Symbol|String|Class|Array] resource the resource (controller) to check
+    # @param [Symbol|String] method the method for the resource
     # @return [Boolean] accepted or denied
-    def user_grants?(resource, method)
-      @user.grants? resource, method
+    def user_granted?(resource, method)
+      @user.granted? resource, method
     end
 
     # Checks if a user's groups are granted access to a resource and method
     # @private
-    # @param [Symbol] resource the resource (controller) to check
-    # @param [Symbol] method the method for the resource
+    # @param [Symbol|String|Class|Array] resource the resource (controller) to check
+    # @param [Symbol|String] method the method for the resource
     # @return [Boolean] accepted or denied
-    def groups_grants?(resource, method)
+    def groups_granted?(resource, method)
       @user.groups.any? do |group|
-        group.grants? resource, method
+        group.granted? resource, method
       end
     end
 
     # Checks if user is in the admin's group
     # @private
     # @return [Boolean]
-    def is_admin?
+    def admin?
       @user.groups.map(&:slug).include? 'admins'
     end
 
     # DRY code for checking methods
     # @private
-    # @param [Symbol] method the method to check
+    # @param [Symbol|String] method the method to check
     # @return [Boolean]
     def standard_check(method)
-      class_name = self.class.to_s.gsub('Policy', '').demodulize.underscore.to_sym
+      class_name = self.class.to_s.remove('Policy')
 
-      is_admin? ||
-        user_grants?(class_name, method) ||
-        groups_grants?(class_name, method)
+      admin? || user_granted?(class_name, method) || groups_granted?(class_name, method)
     end
   end
 end

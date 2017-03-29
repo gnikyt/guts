@@ -61,11 +61,24 @@ module Guts
       assert_operator user.metafields.size, :>, 0
     end
 
+    test 'should determine grant resource string' do
+      user    = guts_users :admin_user
+      result  = user.send :grant_resource_string, %i(guts navigation_item)
+      result2 = user.send :grant_resource_string, %i(guts type)
+      result3 = user.send :grant_resource_string, Guts::User
+      result4 = user.send :grant_resource_string, user
+
+      assert_equal 'Guts::NavigationItem', result
+      assert_equal 'Guts::Type', result2
+      assert_equal 'Guts::User', result3
+      assert_equal 'Guts::User', result4
+    end
+
     test 'should check grants' do
       user = guts_users :admin_user
 
-      assert_equal false, user.grants?(:non_existant_resource, :non_existant_method)
-      assert_equal true, user.grants?(:type, :index) # From fixture
+      assert_equal false, user.granted?(:non_existant_resource, :non_existant_method)
+      assert_equal true, user.granted?(%i(guts type), :index) # From fixture
     end
   end
 end

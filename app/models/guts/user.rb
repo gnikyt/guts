@@ -1,6 +1,8 @@
 module Guts
   # User model
   class User < ApplicationRecord
+    include GrantedConcern
+    
     # Regex to test email against for validation
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -29,15 +31,6 @@ module Guts
     # @return [String] cleaned email string
     def email=(email)
       self[:email] = email.downcase.strip
-    end
-
-    # Determines if a user has permission to a resource and type
-    # @param [Symbol|String] resource the resource (controller) name
-    # @param [Symbol|String] method the method for the resource
-    # @return [Boolean] if user has access to resource and method
-    def grants?(resource, method)
-      grants = permissions.where(resource: resource.to_s).pluck(:grant)
-      grants.include? method.to_s.delete('?')
     end
   end
 end

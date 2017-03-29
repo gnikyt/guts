@@ -4,18 +4,20 @@ module Guts
   module NavigatableConcern
     extend ActiveSupport::Concern
 
-    # Renders a string based on options from the model
-    # @note This method uses instance_eval to get the instance variables..
-    #   :title to self.title, :type.title to self.type.title
-    # @return [String] compiled string based on format and variables
-    # @see Guts::NavigatableConcern::ClassMethods#navigatable
-    def navigatable_format
-      formatted = self.class.navigatable_opts[:format]
-      self.class.navigatable_opts[:variables].each do |var|
-        formatted = formatted.gsub(/\:#{var}/, instance_eval("self.#{var}"))
+    included do
+      # Renders a string based on options from the model
+      # @note This method uses instance_eval to get the instance variables..
+      #   :title to self.title, :type.title to self.type.title
+      # @return [String] compiled string based on format and variables
+      # @see Guts::NavigatableConcern::ClassMethods#navigatable
+      def navigatable_format
+        formatted = self.class.navigatable_opts[:format]
+        self.class.navigatable_opts[:variables].each do |var|
+          formatted = formatted.gsub(/\:#{var}/, instance_eval("self.#{var}"))
+        end
+        
+        formatted
       end
-      
-      formatted
     end
     
     # Class methods for the concern

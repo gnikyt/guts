@@ -35,11 +35,24 @@ module Guts
       assert_operator group.metafields.size, :>, 0
     end
 
+    test 'should determine grant resource string' do
+      group   = guts_groups :admins
+      result  = group.send :grant_resource_string, %i(guts navigation_item)
+      result2 = group.send :grant_resource_string, %i(guts type)
+      result3 = group.send :grant_resource_string, Guts::User
+      result4 = group.send :grant_resource_string, group
+
+      assert_equal 'Guts::NavigationItem', result
+      assert_equal 'Guts::Type', result2
+      assert_equal 'Guts::User', result3
+      assert_equal 'Guts::Group', result4
+    end
+
     test 'should check grants' do
       group = guts_groups :admins
 
-      assert_equal false, group.grants?(:non_existant_resource, :non_existant_method)
-      assert_equal true, group.grants?(:type, :destroy) # From fixture
+      assert_equal false, group.granted?(:non_existant_resource, :non_existant_method)
+      assert_equal true, group.granted?(%i(guts type), :destroy) # From fixture
     end
   end
 end
