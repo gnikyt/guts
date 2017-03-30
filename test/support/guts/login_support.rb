@@ -1,5 +1,6 @@
-# Login a admin user before testing controllers
+# ActionController
 module ActionController
+  # Login a admin user before testing controllers
   class TestCase
     include Guts::SessionConcern
 

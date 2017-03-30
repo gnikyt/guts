@@ -33,12 +33,10 @@ module Guts
       def grant_class_name(subject)
         if subject.respond_to?(:model_name)
           subject.model_name
-        elsif subject.class.respond_to?(:model_name)
-          subject.class.model_name
-        elsif subject.is_a?(Class)
-          subject
         elsif subject.is_a?(Symbol)
           subject.to_s.camelize
+        elsif subject.is_a?(Class)
+          subject
         else
           subject.class
         end
