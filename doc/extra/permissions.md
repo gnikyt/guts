@@ -5,7 +5,7 @@ Permissions for users are handled through [Pundit](https://github.com/elabs/pund
 The policies will allow anyone who's in the "Admins" group to have access to everything. The policies will then check user's permissions from the database to see if they are granted access, it will then also traverse over the user's groups permissions from the database to see if the group is granted access.
 
 Permissions for the policies are stored in the database as such:
-  + resource (controller/model class name, example: "type")
+  + resource (controller/model class name, example: "Guts::Type")
   + grant (method for resource, example: "index", "destroy")
   + permissionable (polymorphic object, example: "Guts::User")
 
@@ -13,14 +13,6 @@ Permissions for the policies are stored in the database as such:
 
 ## Overriding & Extending
 
-To override or extend abilities simply use a decorator. For example if you wanted to change the Type policy's method for `index?` you could do:
-
-```ruby
-Guts::TypePolicy.class_eval do
-  def index?
-    false # now no one has access :)
-  end
-end
-```
+See `doc/extra/extending_guts.md` for how to override policies.
 
 Read more at Pundit's GitHub page for working with policies.

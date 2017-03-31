@@ -1,6 +1,6 @@
 # Extending Guts
 
-Guts loads decorators from the Rails application. The path must be `app/decorators/{controllers,models,concerns,helpers,etc}/guts/{file}_decorator(s).rb`
+Guts loads decorators from the Rails application. The path must be `app/decorators/{controllers,models,concerns,helpers,policies,etc}/guts/{file}_decorator(s).rb`
 
 ## Controllers
 
@@ -59,5 +59,24 @@ end
 As per standard Rails convention, all you need to do is create a the view in your own app. For instance, if you'd like to overwrite `Guts::Users#index` you would make a view `app/views/guts/users/index.html.erb` in your Rails app.
 
 Guts also has some `yield` calls you can hook into in the `app/views/layouts/guts/application.html.erb` file for your convenience. Without having to overwriting the entire layout to hook into these yields, Guts will automatically look for a partial in your Rails app. This partial must exist in `app/views/guts/application` and be called `_layout_hooks` (example: `app/views/guts/application/_layout_hooks.html.erb`).
+
+## Policies
+
+As in controllers and models, create a file in `app/decorators/policies/guts/` such as `content_policy_decorator.rb`
+
+Add in the following code using `class_eval` from Ruby:
+
+``` ruby
+Guts::ContentPolicy.class_eval do
+  # Override create, admins and managers can create, no one else can
+  def create?
+    if admin? || user.groups.map(&:slug).include?('managers')
+      true
+    else
+      false
+    end
+  end
+end
+```
 
 Thats it!

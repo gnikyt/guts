@@ -6,7 +6,7 @@ Guts uses the [tinymce-rails](https://github.com/spohlenz/tinymce-rails) gem. Se
 
 ### Option 1: Pre-Created
 
-For a pre-created file copy our `tinymce.yml` from `test/dummy/config` in Guts' repository to your applications `config` directory and you're good to good.
+For a pre-created file, run `bin/rails generate guts:tinymce`.
 
 ### Option 2: Rolling Your Own
 
