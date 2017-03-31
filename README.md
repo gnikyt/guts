@@ -75,4 +75,4 @@ To see all commands available simply run `bundle exec rake -T guts`. It contains
 
 ## License
 
-This project is released under the "BSD New" license. See `LICENSE` file for more details.
+This project is released under the "MIT" license. See `LICENSE` file for more details.
