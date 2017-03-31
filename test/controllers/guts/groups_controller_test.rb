@@ -3,7 +3,7 @@ require 'test_helper'
 module Guts
   class GroupsControllerTest < ActionController::TestCase
     setup do
-      @group  = guts_groups :test_group
+      @group  = guts_groups :admins
       @routes = Engine.routes
     end
 

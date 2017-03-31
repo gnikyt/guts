@@ -1,10 +1,10 @@
 <%= form_for([@navigation, @navigation_item]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::NavigationItem) || can?(:create, Guts::NavigationItem) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :navigation_item]).create? || policy([:guts, :navigation_item]).update? %>
     <%= link_to 'Back', (@navigation.nil? ? navigations_path : navigation_navigation_items_path(@navigation)), class: 'secondary hollow button' %>
     <% unless @navigation_item.new_record? %>
-      <%= link_to("Metafields (#{@navigation_item.metafields.size})", (@navigation.nil? ? navigation_item_metafields_path : navigation_navigation_item_metafields_path(@navigation, @navigation_item)), class: 'hollow button') if can? :read, Guts::Metafield %>
-      <%= link_to("Media (#{@navigation_item.media.size})", (@navigation.nil? ? navigation_item_media_path : navigation_navigation_item_media_path(@navigation, @navigation_item)), class: 'hollow button warning') if can? :read, Guts::Medium %>
+      <%= link_to("Metafields (#{@navigation_item.metafields.size})", (@navigation.nil? ? navigation_item_metafields_path : navigation_navigation_item_metafields_path(@navigation, @navigation_item)), class: 'hollow button') if policy([:guts, :metafield]).index? %>
+      <%= link_to("Media (#{@navigation_item.media.size})", (@navigation.nil? ? navigation_item_media_path : navigation_navigation_item_media_path(@navigation, @navigation_item)), class: 'hollow button warning') if policy([:guts, :medium]).index? %>
     <% end %>
   </div>
 
@@ -48,7 +48,7 @@
   <% if @navigation.nil? %>
     <div class="small-12 columns">
       <%= f.label :navigation %>
-      <%= f.collection_select :navigation_id, Guts::Navigation.all, :id, :title %>
+      <%= f.collection_select :navigation_id, policy_scope(Guts::Navigation).all, :id, :title %>
     </div>
   <% else %>
     <%= f.hidden_field :navigation_id, value: @navigation.id %>

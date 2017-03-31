@@ -9,15 +9,15 @@ module Guts
 
     test 'should set current site and current site should be nil' do
       get :index
-      assert_nil assigns('current_site')
+      assert_nil assigns(:current_site)
     end
 
     test 'should set current site with actual site' do
-      @request.host = 'fr.testsite.com'
+      @request.host = 'fr.testsite.com' # From fixture
       get :index
 
-      assert_instance_of Guts::Site, assigns('current_site')
-      assert_equal @request.host, assigns('current_site').domain
+      assert_instance_of Guts::Site, assigns(:current_site)
+      assert_equal @request.host, assigns(:current_site).domain
     end
   end
 end

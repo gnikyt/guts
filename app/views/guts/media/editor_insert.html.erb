@@ -9,6 +9,7 @@
         <option value="<%= k.to_s %>"><%= k.to_s.humanize %> (<%= v %>)</option>
       <% end %>
     </select>
+    
     <input type="hidden" id="media_insert_file_link" value="<%= @medium.file.url :original %>">
     <button type="button" class="button secondary" id="media_insert_size">Insert</button>
   </div>

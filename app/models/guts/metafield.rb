@@ -1,6 +1,6 @@
 module Guts
   # Metafield model
-  class Metafield < ActiveRecord::Base
+  class Metafield < ApplicationRecord
     include MultisiteScopeConcern
 
     belongs_to :site

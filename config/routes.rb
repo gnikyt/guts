@@ -3,10 +3,7 @@ Guts::Engine.routes.draw do
   concern(:fieldable) { |opts| resources :metafields, opts }
   concern(:filable) { |opts| resources :media, opts }
   concern(:permissionable) do |opts|
-    resources :permissions, { only: [:index, :destroy, :create, :new] }.merge(opts) do
-      get '/additional', action: :additional, on: :collection
-      post '/additional', action: :additional_create, on: :collection
-    end
+    resources :permissions, { only: %i(index destroy create new) }.merge(opts)
   end
 
   # Resources and routes
@@ -32,7 +29,7 @@ Guts::Engine.routes.draw do
     concerns :filable, filable_type: 'Guts::User'
     concerns :permissionable, permissionable_type: 'Guts::User'
 
-    match :switch_user, on: :collection, via: [:get, :post]
+    match :switch_user, on: :collection, via: %i(get post)
   end
 
   # Groups

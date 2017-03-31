@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Metafields<% if @object.try(:title) %> <span class="sub_title">for <%= sub_title_for @object %>: <%= @object.try(:title) || 'N/A' %></span><% end %></h1>
-    <%= link_to('New', new_polymorphic_path([@object, :metafield]), class: 'button') if can? :create, Guts::Metafield %>
+    <%= link_to('New', new_polymorphic_path([@object, :metafield]), class: 'button') if policy([:guts, :metafield]).create? %>
     <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
   </div>
 </div>
@@ -27,8 +27,8 @@
               <td><%= metafield.key %></td>
               <td><blockquote><%= strip_tags(value)[0..50] %><%= '...' unless value.length < 50 %></blockquote></td>
               <td align="right" class="action_links">
-                <%= link_to('Edit', edit_polymorphic_path([@object, metafield])) if can? :update, Guts::Metafield %>
-                <%= link_to_destroy('Destroy', polymorphic_path([@object, metafield])) if can? :delete, Guts::Metafield %>
+                <%= link_to('Edit', edit_polymorphic_path([@object, metafield])) if policy([:guts, :metafield]).update? %>
+                <%= link_to_destroy('Destroy', polymorphic_path([@object, metafield])) if policy([:guts, :metafield]).destroy? %>
               </td>
             </tr>
           <% end %>

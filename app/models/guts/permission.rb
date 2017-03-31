@@ -1,7 +1,10 @@
 module Guts
   # Polymorphic permissions model
-  class Permission < ActiveRecord::Base
+  class Permission < ApplicationRecord
     belongs_to :permissionable, polymorphic: true, required: true
-    belongs_to :authorization, required: true
+
+    validates :resource, presence: true
+    validates :grant, presence: true
+    validates_uniqueness_of :permissionable_id, scope: %i(permissionable_type resource grant)
   end
 end

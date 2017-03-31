@@ -1,6 +1,6 @@
 module Guts
   # Option model
-  class Option < ActiveRecord::Base
+  class Option < ApplicationRecord
     include MultisiteScopeConcern
 
     # Regex for replacing key values with
@@ -9,7 +9,6 @@ module Guts
     validates :key, presence: true, length: { minimum: 3 }
 
     belongs_to :site
-    has_many :tracks, as: :object
 
     # Setter override for setting key
     # @param [String] key the option key

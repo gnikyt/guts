@@ -3,33 +3,34 @@ require_dependency 'guts/application_controller'
 module Guts
   # Navigations ontroller
   class NavigationsController < ApplicationController
-    include ControllerPermissionConcern
-
-    before_action :set_navigation, only: [:show, :edit, :update, :destroy, :reorder]
-    load_and_authorize_resource
+    before_action :set_navigation, only: %i(show edit update destroy reorder)
 
     # Displays a list of navigations
     def index
-      @navigations = Navigation.all
+      @navigations = policy_scope(Navigation).all
     end
 
     # Shows details about a single navigation
     def show
+      authorize @navigation
     end
 
     # Creation of a new navigation
     def new
       @navigation = Navigation.new
+      authorize @navigation
     end
 
     # Editing of a navigartion
     def edit
+      authorize @navigation
     end
 
     # Creates a navigation through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @navigation = Navigation.new navigation_params
+      authorize @navigation
 
       if @navigation.save
         flash[:notice] = 'Navigation was successfully created.'
@@ -42,6 +43,8 @@ module Guts
     # Updates a navigation through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @navigation
+
       if @navigation.update(navigation_params)
         flash[:notice] = 'Navigation was successfully updated.'
         redirect_to navigations_path
@@ -53,6 +56,7 @@ module Guts
     # Destroys a single navigation
     # @note Redirects to #index on success
     def destroy
+      authorize @navigation
       @navigation.destroy
 
       flash[:notice] = 'Navigation was successfully destroyed.'
@@ -62,6 +66,8 @@ module Guts
     # Updates sorting for a navigation
     # @note This is an AJAX call
     def reorder
+      authorize @navigation, :update?
+      
       ActiveRecord::Base.transaction do
         @navigation.navigation_items.each do |item|
           find = params[:order].select { |_, v| v == item.id.to_s }

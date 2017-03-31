@@ -1,0 +1,12 @@
+<tr>
+  <td width="10%"><%= gravatar_for user_row %></td>
+  <td><%= user_row.name %></td>
+  <td><%= user_row.email %></td>
+  <td><%= user_row.groups.map(&:title).join(', ') %></td>
+  <td align="right" class="action_links">
+    <%= link_to 'Full Info', user_path(user_row) %>
+    <%= link_to('Permissions', user_permissions_path(user_row)) if policy([:guts, :permission]).index? %>
+    <%= link_to('Edit', edit_user_path(user_row)) if policy([:guts, :user]).update? %>
+    <%= link_to_destroy('Destroy', user_row) if policy([:guts, :user]).destroy? %>
+  </td>
+</tr>

@@ -1,6 +1,8 @@
 module Guts
   # User model
-  class User < ActiveRecord::Base
+  class User < ApplicationRecord
+    include GrantedConcern
+    
     # Regex to test email against for validation
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -17,11 +19,8 @@ module Guts
     has_many :metafields, as: :fieldable, dependent: :destroy
     has_many :user_groups
     has_many :groups, through: :user_groups
-    has_many :tracks, as: :object
     has_many :contents
     has_many :permissions, as: :permissionable, dependent: :destroy
-
-    delegate :can?, :cannot?, to: :ability
 
     scope :in_group, ->(group) { includes(:groups).where(guts_groups: { id: group.id }) }
 
@@ -32,13 +31,6 @@ module Guts
     # @return [String] cleaned email string
     def email=(email)
       self[:email] = email.downcase.strip
-    end
-
-    # Gets the user's abilties
-    # @see Guts::Ability
-    # @return [Class] the abilities for this user
-    def ability
-      @ability ||= Guts::Ability.new self
     end
   end
 end

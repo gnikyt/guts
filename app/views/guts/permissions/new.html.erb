@@ -25,19 +25,17 @@
       </div>
     <% end %>
 
-    <% if @grouped_auths %>
+    <% if @policies.size > 0 %>
       <div id="auth-list">
-        <% @grouped_auths.each do |title, auths| %>
+        <% @policies.each do |resource, grants| %>
           <fieldset>
-            <legend><%= clean_subject_class title %></legend>
+            <legend><%= resource.demodulize.titleize %></legend>
 
-            <% current_auth_ids = @object.permissions.map(&:authorization_id) %>
-            <% auths.each do |auth| %>
-              <% has_auth = current_auth_ids.include?(auth.id) %>
-              <%= label_tag(nil, nil, class: has_auth ? 'disabled' : '') do %>
-                <%= check_box_tag 'authorization_ids[]', auth.id, nil, { disabled: has_auth } %>
-                <%= auth.action.titleize %>
-                <%= link_to('(More)', polymorphic_path([:additional, @object, :permissions], authorization_id: auth.id)) unless title == 'all' %>
+            <% grants.each do |grant| %>
+              <% has_grant = @object.permissions.find { |p| p.resource == resource && p.grant == grant } %>
+              <%= label_tag(nil, nil, class: has_grant ? 'disabled' : '') do %>
+                <%= check_box_tag "grants[#{resource}][]", grant, nil, { disabled: has_grant } %>
+                <%= grant.humanize.titleize %>
               <% end %>
             <% end %>
           </fieldset>
@@ -45,9 +43,7 @@
       </div>
     <% end %>
 
-    <div class="hide">
-      <%= f.text_field :permissionable_id, value: @object.id %>
-      <%= f.text_field :permissionable_type, value: @object.class %>
-    </div>
+    <%= f.hidden_field :permissionable_id, value: @object.id %>
+    <%= f.hidden_field :permissionable_type, value: @object.class %>
   <% end %>
 </div>

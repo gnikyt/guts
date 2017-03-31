@@ -1,0 +1,8 @@
+<tr>
+  <td><%= type_row.title %></td>
+  <td><%= pluralize type_row.contents.size, 'record', plural: 'records' %></td>
+  <td align="right" class="action_links">
+    <%= link_to('Edit', edit_type_path(type_row)) if policy([:guts, :type]).update? %>
+    <%= link_to_destroy('Destroy', type_row) if policy([:guts, :type]).destroy? %>
+  </td>
+</tr>

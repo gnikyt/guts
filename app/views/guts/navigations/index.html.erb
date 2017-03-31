@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Navigations</h1>
-    <%= link_to('New', new_navigation_path, class: 'button') if can? :create, Guts::Navigation %>
+    <%= link_to('New', new_navigation_path, class: 'button') if policy([:guts, :navigation]).create? %>
   </div>
 </div>
 
@@ -17,35 +17,7 @@
 
 <div class="row">
   <% if @navigations.size > 0 %>
-    <% @navigations.each do |navigation| %>
-      <div class="small-12 medium-6 columns nav_block">
-        <div class="callout secondary">
-          <h5><%= navigation.title %></h5>
-          <div class="tiny button-group">
-            <%= link_to('New', new_navigation_navigation_item_path(navigation), { class: 'button' }) if can? :create, Guts::NavigationItem %>
-            <%= link_to('Edit', edit_navigation_path(navigation), { class: 'warning button' }) if can? :update, Guts::Navigation %>
-            <%= link_to_destroy('Destroy', navigation, { class: 'alert button' }) if can? :delete, Guts::Navigation %>
-          </div>
-          <ul class="sortable" data-url="<%= reorder_navigation_path navigation %>">
-            <% if navigation.navigation_items.size > 0 %>
-              <% navigation.navigation_items.each do |item| %>
-                <li class="item" data-id="<%= item.id %>">
-                  <i class="handle fa fa-reorder"></i>
-                  <%= item.title %>&nbsp;&nbsp;&mdash;&gt;&nbsp;&nbsp;<%= item.custom? ? 'Custom' : item.navigatable.navigatable_format %> <%= "to: #{item.custom}" if item.custom? %>
-                  <div class="action_links">
-                    <%= link_to('Edit', edit_navigation_navigation_item_path(navigation, item)) if can? :update, Guts::NavigationItem %>
-                    <%= link_to_destroy('Destroy', navigation_navigation_item_path(navigation, item)) if can? :delete, Guts::NavigationItem %>
-                  </div>
-                </li>
-              <% end %>
-            <% else %>
-              <p>No navigational items added to this menu.</p>
-            <% end %>
-          </ul>
-          <div></div>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: 'navigation_row', collection: @navigations %>
   <% else %>
     <div class="small-12 columns">
       <p>No navigational menus have been added.</p>

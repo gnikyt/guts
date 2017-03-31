@@ -3,26 +3,25 @@ require_dependency 'guts/application_controller'
 module Guts
   # Metafields controller
   class MetafieldsController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_object
-    before_action :set_metafield, only: [:show, :edit, :update, :destroy]
-    load_and_authorize_resource
+    before_action :set_metafield, only: %i(show edit update destroy)
 
     # Displays a list of metafields
     def index
-      @metafields = @object.metafields
+      @metafields = policy_scope(@object).metafields
     end
 
     # Creation of a new metafield
     def new
       @metafield = Metafield.new
+      authorize @metafield
     end
 
     # Creates a metafield through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @metafield = Metafield.new metafield_params
+      authorize @metafield
 
       if @metafield.save
         flash[:notice] = 'Metafield was successfully created.'
@@ -34,16 +33,19 @@ module Guts
 
     # Shows details about a single metafield
     def show
+      authorize @metafield
     end
-
 
     # Editing of a metafield
     def edit
+      authorize @metafield
     end
 
     # Updates a metafields through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @metafield
+
       if @metafield.update metafield_params
         flash[:notice] = 'Metafield was successfully updated.'
         redirect_to edit_polymorphic_path([@object, @metafield])
@@ -55,6 +57,7 @@ module Guts
     # Destroys a single metafield
     # @note Redirects to #index on success
     def destroy
+      authorize @metafield
       @metafield.destroy
 
       flash[:notice] = 'Metafield was successfully destroyed.'

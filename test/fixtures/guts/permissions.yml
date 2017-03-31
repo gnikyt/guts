@@ -1,11 +1,9 @@
-regular_user_permission:
-  permissionable: regular_user (Guts::User)
-  authorization: master_authorization
-
-admin_user_permission:
+permission_one:
+  resource: Guts::Type
+  grant: index
   permissionable: admin_user (Guts::User)
-  authorization: master_authorization
 
-group_permission:
-  permissionable: test_group (Guts::Group)
-  authorization: master_authorization
+permission_two:
+  resource: Guts::Type
+  grant: destroy
+  permissionable: admins (Guts::Group)

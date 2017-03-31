@@ -1,0 +1,15 @@
+<tr>
+  <td><% if site_row.default? %><strong>Default:</strong> <% end %><%= site_row.name %></td>
+  <td><%= site_row.domain %></td>
+  <td align="right" class="action_links">
+    <% if policy([:guts, :site]).update? %>
+      <% if site_row.default? %>
+        <%= link_to('Remove Default', remove_default_site_path(site_row)) %>
+      <% else %>
+        <%= link_to('Set as Default', set_default_site_path(site_row)) %>
+      <% end %>
+      <%= link_to('Edit', edit_site_path(site_row)) %>
+    <% end %>
+    <%= link_to_destroy('Destroy', site_row) if policy([:guts, :site]).destroy? %>
+  </td>
+</tr>

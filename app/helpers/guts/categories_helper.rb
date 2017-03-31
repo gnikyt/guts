@@ -1,5 +1,4 @@
 module Guts
   # View helpers for categories
-  module CategoriesHelper
-  end
+  module CategoriesHelper; end
 end

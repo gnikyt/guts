@@ -1,0 +1,14 @@
+<tr>
+  <td>
+    <%= permission_row.resource %>
+  </td>
+  <td>
+    <%= permission_row.grant %>
+  </td>
+  <td>
+    <%= permission_row.created_at.strftime("%b #{permission_row.created_at.day.ordinalize}, %Y") %>
+  </td>
+  <td class="action_links">
+    <%= link_to_destroy('Revoke', polymorphic_path([@object, permission_row])) if policy([:guts, :permission]).destroy? %>
+  </td>
+</tr>

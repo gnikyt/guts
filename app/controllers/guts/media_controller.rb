@@ -3,40 +3,41 @@ require_dependency 'guts/application_controller'
 module Guts
   # Media controller
   class MediaController < ApplicationController
-    include ControllerPermissionConcern
-
     before_action :set_object
-    before_action :set_medium, only: [:show, :edit, :update, :destroy, :editor_insert]
-    before_action :set_per_page, only: [:index]
-    load_and_authorize_resource
+    before_action :set_medium, only: %i(show edit update destroy editor_insert)
+    before_action :set_per_page, only: :index
 
     # Displays a list of media
     # @note Depending on the object passed (polymorphic)
     def index
       @media = if @object
-                 @object.media.paginate(page: params[:page], per_page: @per_page)
+                 policy_scope(@object).media.paginate(page: params[:page], per_page: @per_page)
                else
-                 Medium.paginate(page: params[:page], per_page: @per_page)
+                 policy_scope(Medium).paginate(page: params[:page], per_page: @per_page)
                end
     end
 
     # Shows details about a single medium
     def show
+      authorize @medium
     end
 
     # Creation of a new medium
     def new
       @medium = Medium.new
+      authorize @medium
     end
 
     # Editing for a medium
     def edit
+      authorize @medium
     end
 
     # Creates a medium through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @medium = Medium.new medium_params
+      authorize @medium
 
       if @medium.save
         flash[:notice] = 'Media was successfully created.'
@@ -49,6 +50,8 @@ module Guts
     # Updates a medium through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @medium
+
       if @medium.update(medium_params)
         flash[:notice] = 'Media was successfully updated.'
         redirect_to edit_polymorphic_path([@object, @medium])
@@ -60,6 +63,7 @@ module Guts
     # Destroys a medium
     # @note Redirects to #index on success
     def destroy
+      authorize @medium
       @medium.destroy
 
       flash[:notice] = 'Media was successfully destroyed.'
@@ -69,6 +73,7 @@ module Guts
     # Handles showing the insert medium
     # allowing TinyMce to use it
     def editor_insert
+      authorize @medium, :index?
       render :editor_insert, layout: false
     end
 

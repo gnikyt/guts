@@ -1,7 +1,8 @@
 module Guts
   # Group model
-  class Group < ActiveRecord::Base
+  class Group < ApplicationRecord
     extend FriendlyId
+    include GrantedConcern
 
     validates :title, presence: true, length: { minimum: 3 }
 
@@ -9,10 +10,9 @@ module Guts
     has_many :users, through: :user_groups
     has_many :media, as: :filable, dependent: :destroy
     has_many :metafields, as: :fieldable, dependent: :destroy
-    has_many :tracks, as: :object
     has_many :permissions, as: :permissionable, dependent: :destroy
 
-    friendly_id :title, use: [:slugged, :finders]
+    friendly_id :title, use: %i(slugged finders)
 
     # Updates slug if title changes
     # @return [Boolean]

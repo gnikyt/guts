@@ -1,5 +1,4 @@
 module Guts
   # View helpers for groups
-  module GroupsHelper
-  end
+  module GroupsHelper; end
 end

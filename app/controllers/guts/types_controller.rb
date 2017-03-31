@@ -3,33 +3,34 @@ require_dependency 'guts/application_controller'
 module Guts
   # Types controller
   class TypesController < ApplicationController
-    include ControllerPermissionConcern
-
-    before_action :set_type, only: [:show, :edit, :update, :destroy]
-    load_and_authorize_resource
+    before_action :set_type, only: %i(show edit update destroy)
 
     # Display a list of types
     def index
-      @types = Type.all
+      @types = policy_scope(Type).all
     end
 
     # Show details about a single type
     def show
+      authorize @type
     end
 
     # Creation of a type
     def new
       @type = Type.new
+      authorize @type
     end
 
     # Editing of a type
     def edit
+      authorize @type
     end
 
     # Creates a type through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @type = Type.new type_params
+      authorize @type
 
       if @type.save
         flash[:notice] = 'Type was successfully created.'
@@ -42,6 +43,8 @@ module Guts
     # Updates a type through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @type
+
       if @type.update type_params
         flash[:notice] = 'Type was successfully updated.'
         redirect_to edit_type_path(@type)
@@ -53,6 +56,7 @@ module Guts
     # Destroys a single type
     # @note Redirects to #index on success
     def destroy
+      authorize @type
       @type.destroy
 
       flash[:notice] = 'Type was successfully destroyed.'

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Sites</h1>
-    <%= link_to('New', new_site_path, class: 'button') if can? :create, Guts::Site %>
+    <%= link_to('New', new_site_path, class: 'button') if policy([:guts, :site]).create? %>
   </div>
 </div>
 
@@ -20,21 +20,7 @@
     <% if @sites.size > 0 %>
       <table>
         <tbody>
-          <% @sites.each do |site| %>
-            <tr>
-              <td><% if site.default? %><strong>Default:</strong> <% end %><%= site.name %></td>
-              <td><%= site.domain %></td>
-              <td align="right" class="action_links">
-                <% if site.default? %>
-                  <%= link_to('Remove Default', remove_default_site_path(site)) if can? :set_default, Guts::Site %>
-                <% else %>
-                  <%= link_to('Set as Default', set_default_site_path(site)) if can? :set_default, Guts::Site %>
-                <% end %>
-                <%= link_to('Edit', edit_site_path(site)) if can? :update, Guts::Site %>
-                <%= link_to_destroy('Destroy', site) if can? :delete, Guts::Site %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'site_row', collection: @types %>
         </tbody>
       </table>
     <% else %>

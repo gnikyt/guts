@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bcrypt', '~> 3.1'
   s.add_dependency 'will_paginate', '~> 3.1'
   s.add_dependency 'tinymce-rails', '~> 4.3'
-  s.add_dependency 'cancancan', '~> 1.10'
+  s.add_dependency 'pundit', '~> 1.1'
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'webmock', '~> 1.22'
   s.add_development_dependency 'simplecov', '~> 0.12'

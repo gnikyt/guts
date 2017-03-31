@@ -8,7 +8,7 @@ module Guts
     end
 
     test 'should look for layout_hook file from Rails app' do
-      log_in guts_users(:regular_user)
+      log_in guts_users(:admin_user)
       get :index
       assert_equal true, @response.body.include?('See you in the after')
     end

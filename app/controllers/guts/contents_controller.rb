@@ -3,30 +3,32 @@ require_dependency 'guts/application_controller'
 module Guts
   # Contents controller
   class ContentsController < ApplicationController
-    include ControllerPermissionConcern
-
-    before_action :set_content, only: [:show, :edit, :update, :destroy]
+    before_action :set_content, only: %i(show edit update destroy)
     before_action :set_type
-    before_action :set_per_page, only: [:index]
-    load_and_authorize_resource
+    before_action :set_per_page, only: :index
 
     # Displays a list of contents
     # @note This method must have a type set
     def index
-      @contents = Content.where(type: @type).paginate(page: params[:page], per_page: @per_page)
+      @contents = policy_scope(Content)
+                  .where(type: @type)
+                  .paginate(page: params[:page], per_page: @per_page)
     end
 
     # Creation of a content
     def new
       @content = Content.new
+      authorize @content
     end
 
     # Shows details about a single content
     def show
+      authorize @content
     end
 
     # Editting of a content
     def edit
+      authorize @content
     end
 
     # Creates a content through post
@@ -35,6 +37,8 @@ module Guts
       @content      = Content.new content_params
       @content.user = current_user
       @content.type = @type
+
+      authorize @content
 
       if @content.save
         flash[:notice] = "#{@content.type.title} was successfully created."
@@ -47,6 +51,8 @@ module Guts
     # Updates a content through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @content
+
       if @content.update(content_params)
         flash[:notice] = "#{@content.type.title} was successfully updated."
         redirect_to edit_content_path(@content)
@@ -58,6 +64,7 @@ module Guts
     # Destroys a content
     # @note Redirects to #index on success
     def destroy
+      authorize @content
       @content.destroy
 
       flash[:notice] = "#{@content.type.title} was successfully destroyed."

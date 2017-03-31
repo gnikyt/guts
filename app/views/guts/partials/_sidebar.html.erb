@@ -2,72 +2,54 @@
 
 <% if logged_in? %>
   <ul class="sidebar-nav">
-    <% if can? :read, Guts::Type %>
-      <li class="<%= 'active' if menu_active? :types %>">
-        <%= link_to 'Content Types', types_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :types %>">
+      <%= link_to 'Content Types', types_path %>
+    </li>
 
-    <% if can? :read, Guts::Category %>
-      <li class="<%= 'active' if menu_active? :categories %>">
-        <%= link_to 'Categories', categories_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :categories %>">
+      <%= link_to 'Categories', categories_path %>
+    </li>
 
-    <% if can? :read, Guts::Navigation %>
-      <li class="<%= 'active' if menu_active? :navigation, false %>">
-        <%= link_to 'Navigation', navigations_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :navigation, false %>">
+      <%= link_to 'Navigation', navigations_path %>
+    </li>
 
-    <% if can? :read, Guts::Medium %>
-      <li class="<%= 'active' if menu_active? :media %>">
-        <%= link_to 'Media', media_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :media %>">
+      <%= link_to 'Media', media_path %>
+    </li>
 
-    <% if can? :read, Guts::User %>
-      <li class="<%= 'active' if menu_active? :users %>">
-        <%= link_to 'Users', users_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :users %>">
+      <%= link_to 'Users', users_path %>
+    </li>
 
-    <% if can? :read, Guts::Group %>
-      <li class="<%= 'active' if menu_active? :groups %>">
-        <%= link_to 'User Groups', groups_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :groups %>">
+      <%= link_to 'User Groups', groups_path %>
+    </li>
 
     <li>&nbsp;</li>
 
-    <% if can? :read, Guts::Content %>
-      <% Guts::Type.all.each do |type| %>
-        <li class="<%= 'active' if menu_active?(:contents) and @type == type %>">
-          <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
-        </li>
-      <% end %>
+    <% Guts::Type.all.each do |type| %>
+      <li class="<%= 'active' if menu_active?(:contents) and @type == type %>">
+        <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
+      </li>
     <% end %>
 
     <li>&nbsp;</li>
 
     <%= yield :menu_links %>
 
-    <% if can? :read, Guts::Option %>
-      <li class="<%= 'active' if menu_active? :options %>">
-        <%= link_to 'Options', options_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :options %>">
+      <%= link_to 'Options', options_path %>
+    </li>
 
-    <% if can? :read, Guts::Site %>
-      <li class="<%= 'active' if menu_active? :sites %>">
-        <%= link_to 'Sites', sites_path %>
-      </li>
-    <% end %>
+    <li class="<%= 'active' if menu_active? :sites %>">
+      <%= link_to 'Sites', sites_path %>
+    </li>
 
     <li>&nbsp;</li>
 
-    <li>
-      <a href="<%= destroy_session_path %>">Log out <small><%= current_user.name %></small></a>
+    <li id="current-user">
+      <a href="<%= destroy_session_path %>"><%= gravatar_for current_user %> <%= current_user.name %> <small>Logout</small></a>
     </li>
   </ul>
 <% end %>

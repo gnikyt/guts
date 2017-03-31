@@ -53,12 +53,12 @@ namespace :guts do
       end
 
       user = Guts::User.find_by(email: args[:email])
-      raise StandardError, '[Guts] User not found' unless user
+      raise StandardError, '[Guts] User not found' if user.nil?
 
-      authorization = Guts::Authorization.find_by(subject_class: 'all')
-      raise StandardError, '[Guts] Authorization entry for "all" not found, have you ran authorization seeding?' unless authorization
+      admin_group = Guts::Group.find_by(slug: 'admins')
+      raise StandardError, '[Guts] Missing "Admins" group' if admin_group.nil?
 
-      user.permissions.build(authorization: authorization)
+      user.groups << admin_group
       user.save!
 
       puts '[Guts] User is now authorized for everything'

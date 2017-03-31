@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>Content Types</h1>
-    <%= link_to('New', new_type_path, class: 'button') if can? :create, Guts::Type %>
+    <%= link_to('New', new_type_path, class: 'button') if policy([:guts, :type]).create? %>
   </div>
 </div>
 
@@ -20,16 +20,7 @@
     <% if @types.size > 0 %>
       <table>
         <tbody>
-          <% @types.each do |type| %>
-            <tr>
-              <td><%= type.title %></td>
-              <td><%= pluralize type.contents.size, 'record', plural: 'records' %></td>
-              <td align="right" class="action_links">
-                <%= link_to('Edit', edit_type_path(type)) if can? :update, Guts::Type %>
-                <%= link_to_destroy('Destroy', type) if can? :delete, Guts::Type %>
-              </td>
-            </tr>
-          <% end %>
+          <%= render partial: 'type_row', collection: @types %>
         </tbody>
       </table>
     <% else %>

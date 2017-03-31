@@ -10,6 +10,9 @@ Style/TrailingWhitespace:
 Style/NumericLiterals:
   Enabled: false
 
+Style/LeadingCommentSpace:
+  Enabled: false
+
 AllCops:
   Exclude:
     - vendor/**/*

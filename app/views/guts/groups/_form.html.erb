@@ -1,12 +1,12 @@
 <%= form_for(@group) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:create, Guts::Group) || can?(:update, Guts::Group) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :group]).create? || policy([:guts, :group]).update? %>
     <%= link_to 'Back', groups_path, class: 'secondary hollow button' %>
     <% unless @group.new_record? %>
-      <%= link_to("Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning') if can? :read, Guts::User %>
-      <%= link_to("Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button') if can? :read, Guts::Metafield %>
-      <%= link_to("Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert') if can? :read, Guts::Medium %>
-      <%= link_to("Permissions (#{@group.permissions.size})", group_permissions_path(@group), class: 'hollow button secondary') if can? :read, Guts::Permission %>
+      <%= link_to("Records (#{@group.users.size})", users_path(group: @group.id), class: 'hollow button warning') if policy([:guts, :user]).index? %>
+      <%= link_to("Metafields (#{@group.metafields.size})", group_metafields_path(@group), class: 'hollow button') if policy([:guts, :metafield]).index? %>
+      <%= link_to("Media (#{@group.media.size})", group_media_path(@group), class: 'hollow button alert') if policy([:guts, :medium]).index? %>
+      <%= link_to("Permissions (#{@group.permissions.size})", group_permissions_path(@group), class: 'hollow button secondary') if policy([:guts, :permission]).index? %>
     <% end %>
   </div>
 

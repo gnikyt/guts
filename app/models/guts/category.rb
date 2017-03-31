@@ -1,6 +1,6 @@
 module Guts
   # Category model
-  class Category < ActiveRecord::Base
+  class Category < ApplicationRecord
     extend FriendlyId
     include NavigatableConcern
     include MultisiteScopeConcern
@@ -9,12 +9,11 @@ module Guts
 
     belongs_to :site
     has_many :categorizations
-    has_many :tracks, as: :object
     has_many :contents, through: :categorizations
     has_many :media, as: :filable, dependent: :destroy
     has_many :metafields, as: :fieldable, dependent: :destroy
 
-    friendly_id :title, use: [:slugged, :scoped, :finders], scope: :site_id
+    friendly_id :title, use: %i(slugged scoped finders), scope: :site_id
     navigatable :title, format: ':title'
 
     # Updates slug if title changes

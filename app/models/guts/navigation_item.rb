@@ -1,6 +1,6 @@
 module Guts
   # Navigation item model
-  class NavigationItem < ActiveRecord::Base
+  class NavigationItem < ApplicationRecord
     include MultisiteScopeConcern
 
     before_create :set_position
@@ -18,12 +18,13 @@ module Guts
     # Determines if the navigation item has a custom link
     # @return [Boolean]
     def custom?
-      self[:navigatable_type].nil? || self[:navigatable_type].empty?
+      self[:navigatable_type].blank?
     end
 
     private
 
     # Sets the position (ordering) for a navigation item before creation
+    # @private
     def set_position
       max_position = Navigation.find(self[:navigation_id]).navigation_items.maximum(:position) || -1
 

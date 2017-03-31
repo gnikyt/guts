@@ -149,6 +149,23 @@ textarea.tinymce {
         font-size: 0.70em;
       }
     }
+
+    &#current-user {
+      a {
+        img {
+          border-radius: 50%;
+          vertical-align: middle;
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+        }
+
+        small {
+          display: block;
+          margin-top: 10px;
+        }
+      }
+    }
   }
 
   & > .sidebar-brand {

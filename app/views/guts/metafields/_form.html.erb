@@ -1,6 +1,6 @@
 <%= form_for([@object, @metafield]) do |f| %>
   <div class="small-12 columns">
-    <%= f.submit('Save', class: 'success button') if can?(:update, Guts::Metafield) || can?(:create, Guts::Metafield) %>
+    <%= f.submit('Save', class: 'success button') if policy([:guts, :metafield]).create? || policy([:guts, :metafield]).update? %>
     <%= link_to 'Back', url_for([@object, :metafields]), class: 'secondary hollow button' %>
   </div>
 

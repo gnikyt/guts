@@ -1,0 +1,7 @@
+<tr>
+  <td><%= option_row.key %></td>
+  <td align="right" class="action_links">
+    <%= link_to('Edit', edit_option_path(option_row)) if policy([:guts, :option]).update? %>
+    <%= link_to_destroy('Destroy', option_row) if policy([:guts, :option]).destroy? %>
+  </td>
+</tr>

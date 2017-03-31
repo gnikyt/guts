@@ -1,0 +1,18 @@
+<div class="small-12 medium-6 columns nav_block">
+  <div class="callout secondary">
+    <h5><%= navigation_row.title %></h5>
+    <div class="tiny button-group">
+      <%= link_to('New', new_navigation_navigation_item_path(navigation_row), { class: 'button' }) if policy([:guts, :navigation_item]).create? %>
+      <%= link_to('Edit', edit_navigation_path(navigation_row), { class: 'warning button' }) if policy([:guts, :navigation]).update? %>
+      <%= link_to_destroy('Destroy', navigation_row, { class: 'alert button' }) if policy([:guts, :navigation]).destroy? %>
+    </div>
+    <ul class="sortable" data-url="<%= reorder_navigation_path navigation_row %>">
+      <% if navigation_row.navigation_items.size > 0 %>
+        <%= render partial: 'navigation_item_row', collection: navigation_row.navigation_items, locals: { navigation_row: navigation_row } %>
+      <% else %>
+        <p>No navigational items added to this menu.</p>
+      <% end %>
+    </ul>
+    <div></div>
+  </div>
+</div>

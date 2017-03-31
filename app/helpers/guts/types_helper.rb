@@ -1,5 +1,4 @@
 module Guts
   # View helpers for types
-  module TypesHelper
-  end
+  module TypesHelper; end
 end

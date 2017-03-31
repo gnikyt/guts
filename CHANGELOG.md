@@ -1,6 +1,14 @@
+# Version 3.0.0
+*See UPGRADING.md as this is a breaking release*
+
++ Completely moved away from CanCanCan in favour of Pundit. See `docs/extra/permissions.md`
++ Authorizations model has been removed due to change to Pundit
++ Permissions model has been rewrote due to change to Pundit
++ New permissions controller for assigning permissions to users and groups due to change to Pundit
+
 # Version 2.1.0
 
-+ Abilities model for CanCanCan now extracts default abilities into its own method for easier overwriting. See `docs/extra/permissions.md`.
++ Abilities model for CanCanCan now extracts default abilities into its own method for easier overwriting. See `docs/extra/permissions.md`
 + Extracted TinyMCE toggler into a helper method for better re-usability
 + Metafield entries are defaulted to plain-text input on-load now, previously it loaded TinyMCE
 
@@ -17,7 +25,7 @@
 
 + Code is now updated for Rails 5
 + Rails 4 has been dropped
-  + Due to some breaking changes and deprecations in Rails 5, Guts can not support Rails 4 and Rails 5 at the same time without a lot of conditional if statements. It was decided to move all code to Rails 5. Guts <2.0 will still be on a Rails 4 codebase.
+  + Due to some breaking changes and deprecations in Rails 5, Guts can not support Rails 4 and Rails 5 at the same time without a lot of conditional if statements. It was decided to move all code to Rails 5. Guts <2.0 will still be on a Rails 4 codebase
 + `friendly_id` >= 5.2 is now required (only version which works with Rails 5)
 + Removal of Tracker since its not useful; possible switch to `paper_trail` in future
 + Added fine-grain permissions per-object

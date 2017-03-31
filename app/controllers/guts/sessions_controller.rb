@@ -4,8 +4,7 @@ module Guts
   # Sessions controller
   class SessionsController < ApplicationController
     # Creation of a new session (login page)
-    def new
-    end
+    def new; end
 
     # Checks the users session through post
     # @note It will redirect to Guts::UsersController if successful and
@@ -32,12 +31,12 @@ module Guts
     end
 
     # Forgot password page
-    def forgot
-    end
+    def forgot; end
 
     # Sends the user a new token by email to reset their password
     def forgot_token
       user = User.find_by(email: params[:session][:email].downcase)
+      
       if user
         password = Digest::SHA1.hexdigest("#{Time.current}#{rand(100)}")[0, 8]
         user.update_attribute(:password_token, password)

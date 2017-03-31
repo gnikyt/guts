@@ -3,33 +3,34 @@ require_dependency 'guts/application_controller'
 module Guts
   # Sites controller
   class SitesController < ApplicationController
-    include ControllerPermissionConcern
-
-    before_action :set_site, only: [:show, :set_default, :remove_default, :edit, :update, :destroy]
-    load_and_authorize_resource
+    before_action :set_site, except: %i(index new create)
 
     # Displays a list of sites
     def index
-      @sites = Site.all
+      @sites = policy_scope(Site).all
     end
 
     # Shows detaisl about a single site
     def show
+      authorize @site
     end
 
     # Creation of a site
     def new
       @site = Site.new
+      authorize @site
     end
 
     # Editting of a site
     def edit
+      authorize @site
     end
 
     # Creates a site through post
     # @note Redirects to #index if successfull or re-renders #new if not
     def create
       @site = Site.new site_params
+      authorize @site
 
       if @site.save
         flash[:notice] = 'Site was successfully created.'
@@ -42,6 +43,8 @@ module Guts
     # Updates a site through patch
     # @note Redirects to #index if successfull or re-renders #edit if not
     def update
+      authorize @site
+
       if @site.update site_params
         flash[:notice] = 'Site was successfully updated.'
         redirect_to sites_url
@@ -53,16 +56,19 @@ module Guts
     # Destroys a site
     # @note Redirects to #index on success
     def destroy
+      authorize @site
       @site.destroy
       redirect_to sites_url, notice: 'Site was successfully destroyed.'
     end
 
     # Sets a site as default
     def set_default
-      old_default = Site.find_by(default: true)
-      old_default.update_attribute(:default, false) unless old_default.nil?
+      authorize @site, :update?
 
-      @site.update_attribute(:default, true)
+      old_default = Site.find_by(default: true)
+      old_default.update({ default: false }) unless old_default.nil?
+
+      @site.update({ default: true })
 
       flash[:notice] = 'Site was successfully set to default.'
       redirect_to sites_url
@@ -70,7 +76,8 @@ module Guts
 
     # Removes a site as default
     def remove_default
-      @site.update_attribute(:default, false)
+      authorize @site, :update?
+      @site.update({ default: false })
 
       flash[:notice] = 'Site was successfully changed to not default.'
       redirect_to sites_url
