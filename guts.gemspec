@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = 'A mountable, multisite, CMS engine for Rails 5'
   s.description = 'A mountable, multisite, CMS engine for Rails 5'\
                   'with a basic dashboard interface for your projects'
-  s.license     = 'bsd-3-clause'
+  s.license     = 'mit'
 
   s.files = Dir[
     '{app,config,db,lib}/**/*',
