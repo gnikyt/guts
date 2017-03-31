@@ -2,49 +2,67 @@
 
 <% if logged_in? %>
   <ul class="sidebar-nav">
-    <li class="<%= 'active' if menu_active? :types %>">
-      <%= link_to 'Content Types', types_path %>
-    </li>
+    <% if policy([:guts, :type]).index? %>
+      <li class="<%= 'active' if menu_active? :types %>">
+        <%= link_to 'Content Types', types_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :categories %>">
-      <%= link_to 'Categories', categories_path %>
-    </li>
+    <% if policy([:guts, :category]).index? %>
+      <li class="<%= 'active' if menu_active? :categories %>">
+        <%= link_to 'Categories', categories_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :navigation, false %>">
-      <%= link_to 'Navigation', navigations_path %>
-    </li>
+    <% if policy([:guts, :navigation]).index? %>
+      <li class="<%= 'active' if menu_active? :navigation, false %>">
+        <%= link_to 'Navigation', navigations_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :media %>">
-      <%= link_to 'Media', media_path %>
-    </li>
+    <% if policy([:guts, :medium]).index? %>
+      <li class="<%= 'active' if menu_active? :media %>">
+        <%= link_to 'Media', media_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :users %>">
-      <%= link_to 'Users', users_path %>
-    </li>
+    <% if policy([:guts, :user]).index? %>
+      <li class="<%= 'active' if menu_active? :users %>">
+        <%= link_to 'Users', users_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :groups %>">
-      <%= link_to 'User Groups', groups_path %>
-    </li>
+    <% if policy([:guts, :group]).index? %>
+      <li class="<%= 'active' if menu_active? :groups %>">
+        <%= link_to 'User Groups', groups_path %>
+      </li>
+    <% end %>
 
     <li>&nbsp;</li>
 
-    <% Guts::Type.all.each do |type| %>
-      <li class="<%= 'active' if menu_active?(:contents) and @type == type %>">
-        <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
-      </li>
+    <% if policy([:guts, :content]).index? %>
+      <% policy_scope(Guts::Type).all.each do |type| %>
+        <li class="<%= 'active' if menu_active?(:contents) and @type == type %>">
+          <%= link_to type.title.pluralize(2), contents_path(type: type.slug) %>
+        </li>
+      <% end %>
     <% end %>
 
     <li>&nbsp;</li>
 
     <%= yield :menu_links %>
 
-    <li class="<%= 'active' if menu_active? :options %>">
-      <%= link_to 'Options', options_path %>
-    </li>
+    <% if policy([:guts, :option]).index? %>
+      <li class="<%= 'active' if menu_active? :options %>">
+        <%= link_to 'Options', options_path %>
+      </li>
+    <% end %>
 
-    <li class="<%= 'active' if menu_active? :sites %>">
-      <%= link_to 'Sites', sites_path %>
-    </li>
+    <% if policy([:guts, :site]).index? %>
+      <li class="<%= 'active' if menu_active? :sites %>">
+        <%= link_to 'Sites', sites_path %>
+      </li>
+    <% end %>
 
     <li>&nbsp;</li>
 
