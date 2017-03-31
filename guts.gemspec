@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Tyler King']
   s.email       = ['tyler.n.king@gmail.com']
   s.homepage    = 'https://github.com/tyler-king/guts'
-  s.summary     = 'A mountable, multisite, CMS engine for Rails 5'
-  s.description = 'A mountable, multisite, CMS engine for Rails 5'\
+  s.summary     = 'A mountable, extendable, multisite, CMS engine for Rails 5'
+  s.description = 'A mountable, extendbale, multisite, CMS engine for Rails 5'\
                   'with a basic dashboard interface for your projects'
   s.license     = 'mit'
 
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     'LICENSE',
     'Rakefile',
     'README.md',
+    'UPGRADING.md',
     'CHANGELOG.md'
   ]
   s.test_files = Dir['test/**/*']
@@ -32,6 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'will_paginate', '~> 3.1'
   s.add_dependency 'tinymce-rails', '~> 4.3'
   s.add_dependency 'pundit', '~> 1.1'
+
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'webmock', '~> 1.22'
   s.add_development_dependency 'simplecov', '~> 0.12'

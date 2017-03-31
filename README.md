@@ -4,19 +4,17 @@
 [![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
 [![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
-A mountable, multisite, CMS engine for Rails 5.
+A mountable, extendable, multisite, CMS engine for Rails 5.
 
-### Intensions
-
-This engine is simply released to provide a basic, but full-featured CMS solution for Rails applications. It is not indented to mimic or become an all-inclusive Wordpress system.
+This engine is simply released to provide a basic, but full-featured CMS solution for Rails applications. It is not indented to mimic or become an all-inclusive Wordpress-like system.
 
 ## Installation
 
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', "~> 3.0.0"
-# or for master: gem "guts", git: "git@github.com:tyler-king/guts.git"
+gem 'guts', '~> 3.0.0'
+# or for master: gem 'guts', git: 'git@github.com:tyler-king/guts.git'
 ```
 
 Next, run the following commands for a install of routes, initializer, and editor configurations:
@@ -34,44 +32,51 @@ bundle exec rake guts:install:migrations # installs Guts migrations
 bundle exec rake db:migrate # load migrations into your database
 bundle exec rake guts:db:seed:all # pre-configures required admin group, content types, etc
 bundle exec rake guts:user:create[{name},{email},{password}] # creates a user (replace the values)
-bundle exec rake guts:user:set_master[{email}] # allows user to access everything in the admin panel, should be done for initial user
+bundle exec rake guts:user:set_master[{email}] # allows user to access everything in the admin panel, should be done for initial user (replace the values)
 ```
 
 You will now be able to access Guts by visiting `/admin` in your Rails application.
 
 ## Configuration
 
-See [configurations](doc/extra/configurations.md) in docs.
+No post-install configuration is required but if you wish to change anything see [configurations](doc/extra/configurations.md) in docs.
 
 ## Documentation
 
-See [extra](doc/extra) under docs for information. The docs contain information for configuration usage, extending, and how to implement multisite support.
+See [extra](doc/extra) under docs for information on Guts itself. The docs contain information for configuration usage, extending, and how to implement multisite support.
+
+For code documentation, you can run `bundle exec yardoc` of visit `rubydocs.info`.
 
 ## Commands
 
 To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
 
-## Features
+## Feature Overview
 
-+ Multisite support
 + Unit tested and documented
++ Multisite support
 + Dynamic content types
 + File management
-+ Image processing via Paperclip
-+ WYSIWYG via TinyMCE (with custom plugin which uses the file management)
-+ Metafields
-+ Dynamic navigation builders
++ Media post-processing
++ WYSIWYG editors
++ Metafields for all objects
++ Dynamic navigations
 + Categories
 + Basic user management
 + Basic user groups
 + Basic session management
-+ Databased permissions via Pundit
-+ And more...
++ User and group authorizations
+
+## Notable Gems
+
++ [pundit](https://github.com/elabs/pundit/) - Used for user and group authorization
++ [tinymce-rails](https://github.com/spohlenz/tinymce-rails) - Used for editors
++ [paperclip](https://github.com/thoughtbot/paperclip) - Used for media post-processing
++ [friendly-id](https://github.com/norman/friendly_id) - For slug generations on object
 
 ## Todo
 
-+ Translations
-+ Scope users and groups for multisite (not sure how to handle this yet)
++ Translation support
 
 ## License
 
