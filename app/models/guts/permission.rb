@@ -5,5 +5,6 @@ module Guts
 
     validates :resource, presence: true
     validates :grant, presence: true
+    validates_uniqueness_of :permissionable_id, scope: %i(permissionable_type resource grant)
   end
 end

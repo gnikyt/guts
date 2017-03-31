@@ -30,5 +30,27 @@ module Guts
       assert_not permission.save
       assert_not permission_2.save
     end
+
+    test 'permissions for permissionable should be unique' do
+      permission = Permission.new(
+        permissionable: guts_users(:admin_user),
+        resource: 'guts_user',
+        grant: 'index'
+      )
+      permission2 = Permission.new(
+        permissionable: guts_users(:admin_user),
+        resource: 'guts_user',
+        grant: 'index'
+      )
+      permission3 = Permission.new(
+        permissionable: guts_users(:regular_user),
+        resource: 'guts_user',
+        grant: 'index'
+      )
+
+      assert permission.save
+      assert_not permission2.save
+      assert permission3.save
+    end
   end
 end

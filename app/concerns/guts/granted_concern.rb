@@ -32,13 +32,13 @@ module Guts
       # @note This is from Pundit's finder
       def grant_class_name(subject)
         if subject.respond_to?(:model_name)
-          subject.model_name
+          subject.model_name.to_s
         elsif subject.is_a?(Symbol)
           subject.to_s.camelize
         elsif subject.is_a?(Class)
-          subject
+          subject.to_s
         else
-          subject.class
+          subject.class.to_s
         end
       end
     end

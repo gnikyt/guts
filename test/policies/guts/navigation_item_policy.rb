@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Guts
-  class CategoryPolicyTest < PolicyTest
+  class NavigationItemPolicyTest < PolicyTest
     test 'all methods' do
       %i(index new create update edit destroy).each do |method|
         assert policy_permit(guts_users(:admin_user), method)

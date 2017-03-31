@@ -1,5 +1,4 @@
 module Guts
   # View helpers for navigation items.
-  module NavigationItemsHelper
-  end
+  module NavigationItemsHelper; end
 end

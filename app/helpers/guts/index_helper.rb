@@ -1,5 +1,4 @@
 module Guts
   # View helpers for index
-  module IndexHelper
-  end
+  module IndexHelper; end
 end
