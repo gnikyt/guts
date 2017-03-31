@@ -8,3 +8,8 @@ regular_user:
   name: Test Regular
   email: test_regular@domain.com
   password_digest: <%= BCrypt::Password.create("dingo_regular", cost: 10) %>
+
+regular_user_2:
+  name: Test Regular 2
+  email: test_regular2@domain.com
+  password_digest: <%= BCrypt::Password.create("dingo_regular2", cost: 10) %>

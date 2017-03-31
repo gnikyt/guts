@@ -1,3 +1,7 @@
 admins:
   title: Admins
   slug: admins
+
+managers:
+  title: Managers
+  slug: managers

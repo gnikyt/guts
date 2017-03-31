@@ -7,3 +7,8 @@ permission_two:
   resource: Guts::Type
   grant: destroy
   permissionable: admins (Guts::Group)
+
+permission_three:
+  resource: Guts::Type
+  grant: index
+  permissionable: managers (Guts::Group)
