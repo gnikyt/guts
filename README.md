@@ -1,6 +1,7 @@
 # Guts
 
 [![Build Status](https://secure.travis-ci.org/tyler-king/guts.svg?branch=master)](http://travis-ci.org/tyler-king/guts)
+[![codecov](https://codecov.io/gh/tyler-king/guts/branch/master/graph/badge.svg)](https://codecov.io/gh/tyler-king/guts)
 [![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
 [![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
