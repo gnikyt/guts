@@ -70,7 +70,7 @@ Add in the following code using `class_eval` from Ruby:
 Guts::ContentPolicy.class_eval do
   # Override create, admins and managers can create, no one else can
   def create?
-    if admin? || user.groups.map(&:slug).include?('managers')
+    if admin? || user.in_group?(:managers)
       true
     else
       false

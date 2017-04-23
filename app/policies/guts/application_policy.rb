@@ -79,7 +79,7 @@ module Guts
       # @param [Object|nil] user the user's object
       # @param [Object|nil] scope the scope object
       def initialize(user, scope)
-        @user = user
+        @user  = user
         @scope = scope
       end
 
@@ -116,7 +116,7 @@ module Guts
     # @private
     # @return [Boolean]
     def admin?
-      @user.groups.map(&:slug).include? 'admins'
+      @user.in_group? :admins
     end
 
     # DRY code for checking methods

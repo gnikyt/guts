@@ -67,5 +67,15 @@ module Guts
       assert_equal false, user.granted?(:non_existant_resource, :non_existant_method)
       assert_equal true, user.granted?(%i(guts type), :index) # From fixture
     end
+
+    test 'in_group should work for symbol, string, and fixnum' do
+      user  = guts_users :admin_user
+      group = guts_groups :admins
+
+      assert user.in_group?(:admins)
+      assert user.in_group?('Admins')
+      assert user.in_group?(group.id)
+      assert_not user.in_group?(:this_dont_exist)
+    end
   end
 end

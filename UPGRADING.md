@@ -1,4 +1,6 @@
-# Version 2.0.X to 3.0.X
+# Upgrading
+
+## Version 2.0.X to 3.0.X
 
 One breaking change in this version.
 
@@ -6,11 +8,11 @@ Guts no longer uses CanCanCan, it now uses Pundit. This means authorizations and
 
 If you do not have any specific permissions/authorizations defined, then it is safe to upgrade without harm. However, be sure to add yourself and anyone else to an "Admins" group as the new permission system uses this group for complete priviliages.
 
-# Version 1.4.X to 2.0.X
+## Version 1.4.X to 2.0.X
 
 No steps required. However, please read CHANGELOG entry.
 
-# Version 1.3.X to 1.4.X
+## Version 1.3.X to 1.4.X
 
 Several breaking changes are in this version.
 

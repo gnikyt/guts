@@ -32,5 +32,21 @@ module Guts
     def email=(email)
       self[:email] = email.downcase.strip
     end
+
+    # Quick method for finding if a user is part of a group
+    # @param [String|Symbol|Fixnum] value the value to lookup against
+    # @return [Boolean] user is a part of the group
+    # @example `current_user.in_group?(3)` by ID
+    # @example `current_user.in_group?(:managers)` by slug
+    # @example `current_user.in_group?('Admins')` by title
+    def in_group?(lookup)
+      if lookup.is_a?(Symbol)
+        groups.map(&:slug).include? lookup.to_s
+      elsif lookup.is_a?(String)
+        groups.map(&:title).include? lookup
+      else
+        groups.map(&:id).include? lookup
+      end
+    end
   end
 end
