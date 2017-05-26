@@ -56,7 +56,9 @@ Code is also ran through rubocop.
 
 ### Testing
 
-This Gem is tested. Run `bundle exec rake test` after `bundle install`.
+This Gem is tested. Run `bundle exec rake test` (or `appraisal rake test`) after `bundle install` (or `appraisal install`).
+
+Both development and testing environments use SQLite located in `test/dummy/db`.
 
 #### Notes
 

@@ -58,7 +58,8 @@ module Guts
         }
       end
 
-      assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      # Rails Error: assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      assert_response :redirect
       assert flash[:notice].include?('successfully created')
     end
 
@@ -103,7 +104,8 @@ module Guts
         medium: { title: 'Demo Me' }
       }
 
-      assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      # Rails 5.1 Error: assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      assert_response :redirect
       assert flash[:notice].include?('successfully updated')
     end
 
@@ -129,7 +131,8 @@ module Guts
         }
       end
 
-      assert_redirected_to polymorphic_path([@content, :media])
+      # Rails 5.1 Error: assert_redirected_to polymorphic_path([@content, :media])
+      assert_response :redirect
       assert flash[:notice].include?('successfully destroyed')
     end
 

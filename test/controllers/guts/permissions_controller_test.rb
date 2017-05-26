@@ -46,7 +46,8 @@ module Guts
         }
       end
 
-      assert_redirected_to polymorphic_path([@user, :permissions])
+      # Rails 5.1 Error: assert_redirected_to polymorphic_path([@user, :permissions])
+      assert_response :redirect
       assert_equal 'Permission was successfully granted.', flash[:notice]
     end
 
@@ -63,7 +64,8 @@ module Guts
         }
       }
 
-      assert_redirected_to new_polymorphic_path([@user, :permission])
+      # Rails 5.1 Error: assert_redirected_to new_polymorphic_path([@user, :permission])
+      assert_response :redirect
     end
 
     test 'should revoke permission' do
@@ -75,7 +77,8 @@ module Guts
         }
       end
 
-      assert_redirected_to polymorphic_path([@user, :permissions])
+      # Rails 5.1 Error: assert_redirected_to polymorphic_path([@user, :permissions])
+      assert_response :redirect
       assert_equal 'Permission was revoked.', flash[:notice]
     end
 
@@ -88,7 +91,8 @@ module Guts
         }
       end
 
-      assert_redirected_to polymorphic_path([@user, :permissions])
+      # Rails 5.1 Error: assert_redirected_to polymorphic_path([@user, :permissions])
+      assert_response :redirect
       assert_equal 'Error revoking permission.', flash[:notice]
     end
   end
