@@ -50,4 +50,11 @@ jQuery(document).ready(function($) {
       }
     })
   }
+
+  // Dropzone.js
+  Dropzone.autoDiscover = false;
+  var myDropzone = new Dropzone('#new_medium', {
+    paramName: 'medium[file]',
+    autoProcessQueue: false,
+  });
 });

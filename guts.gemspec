@@ -33,9 +33,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'will_paginate', '~> 3.1'
   s.add_dependency 'tinymce-rails', '~> 4.3'
   s.add_dependency 'pundit', '~> 1.1'
-  s.add_dependency 'foundation-rails', '~> 6.3'
-  s.add_dependency 'font-awesome-rails', '~> 4.7'
-  s.add_dependency 'dropzonejs-rails', '~> 0.7.4'
 
   s.add_development_dependency 'sqlite3', '~> 1.3'
   s.add_development_dependency 'webmock', '~> 1.22'

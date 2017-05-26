@@ -6,17 +6,6 @@ module Guts
       @medium = guts_media :test_file
     end
 
-    test 'should not create without title' do
-      medium = Medium.new
-      assert_not medium.save
-    end
-
-    test 'should not create title less than three' do
-      medium       = Medium.new
-      medium.title = 'xy'
-      assert_not medium.save
-    end
-
     test 'should not process paperclip for non images' do
       medium = Medium.new
 
@@ -39,6 +28,14 @@ module Guts
 
     test 'medium should be multisite compatible' do
       assert Medium.all.to_sql.include?('site_id')
+    end
+
+    test 'should create title based on filename if title empty' do
+      medium                = Medium.new
+      medium.file_file_name = 'Joker.jpg'
+      medium.save
+
+      assert_equal medium.file_file_name, medium.title
     end
   end
 end

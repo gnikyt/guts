@@ -54,16 +54,6 @@ For code documentation, you can run `bundle exec yardoc` of visit `rubydocs.info
 
 Code is also ran through rubocop.
 
-## Development / Testing
-
-### Development via Docker
-
-This project has a Docker compose file which sets up a basic Postgres database and runs Rails server.
-
-1. `docker-compose build` to build the image
-2. `docker-compose up` to start the image
-3. For all installation (Rake) tasks for this Gem run `docker-composer run -e "RAILS_ENV=$ENV" gem $COMMAND`
-
 ### Testing
 
 This Gem is tested. Run `bundle exec rake test` after `bundle install`.

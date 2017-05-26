@@ -6,8 +6,6 @@ module Guts
     # Regex used for sizing_only_images
     CONTENT_TYPE_REGEX = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
 
-    validates :title, presence: true, length: { minimum: 3 }
-
     belongs_to :filable, polymorphic: true, required: false
     has_attached_file(
       :file,
@@ -24,11 +22,19 @@ module Guts
       content_type: Guts.configuration.file_allowed_content_types
     )
 
+    before_save :default_title
+
     # Determine if the file is an image
     # and can be resized by Paperclip
     # @return [Boolean] true for image, false for file
     def sizing_only_images
       false unless self[:file_content_type] =~ CONTENT_TYPE_REGEX
+    end
+
+    # Creates a title based on the file name if
+    # no title was entered
+    def default_title
+      self[:title] = self[:file_file_name] if self[:title].nil? || self[:title].empty?
     end
   end
 end
