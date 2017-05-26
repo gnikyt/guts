@@ -56,5 +56,6 @@ jQuery(document).ready(function($) {
   var myDropzone = new Dropzone('#new_medium', {
     paramName: 'medium[file]',
     autoProcessQueue: false,
+    clickable: false
   });
 });

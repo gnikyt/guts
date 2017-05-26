@@ -62,6 +62,19 @@ module Guts
       assert flash[:notice].include?('successfully created')
     end
 
+    test 'should not create medium for bad file' do
+      post :create, params: {
+        content_id: @content.id,
+        filable_type: 'Guts::Content',
+        medium: {
+          title: 'Bad File',
+          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+        }
+      }
+
+      assert_template 'guts/media/new'
+    end
+
     test 'should show medium' do
       get :show, params: {
         id: @medium,
@@ -92,6 +105,19 @@ module Guts
 
       assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
       assert flash[:notice].include?('successfully updated')
+    end
+
+    test 'should not update medium for bad file' do
+      post :update, params: {
+        id: @medium.id,
+        content_id: @content.id,
+        filable_type: 'Guts::Content',
+        medium: {
+          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+        }
+      }
+
+      assert_template 'guts/media/edit'
     end
 
     test 'should destroy media' do

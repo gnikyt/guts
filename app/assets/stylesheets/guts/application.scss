@@ -283,6 +283,34 @@ textarea.tinymce {
   }
 }
 
+#new_medium {
+  #file_uploader {
+    display: none;
+  }
+
+  .dz-message {
+    margin-top: 2em;
+    text-align: center;
+    clear: both;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+
+    span {
+      display: block;
+      padding: 2em;
+      border: 2px dashed black;
+    }
+  }
+
+  .dz-preview {
+    text-align: center;
+    margin-top: 1em;
+    margin-left: 0.9375rem;
+    margin-right: 0.9375rem;
+    padding: 2em;
+  }
+}
+
 /* Users */
 #users_table {
   tr {

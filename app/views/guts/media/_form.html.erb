@@ -29,9 +29,9 @@
     </div>
   <% end %>
 
-  <div class="small-12 columns">
+  <div class="small-12 columns" id="file_uploader">
     <%= f.label :file %>
-    <%= f.file_field :file, { class: 'hollow button', multiple: true } %>
+    <%= f.file_field :file, { class: 'hollow button' } %>
   </div>
   <div class="small-12 columns">
     <%= f.label :title %>
