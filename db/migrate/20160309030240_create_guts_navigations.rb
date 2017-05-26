@@ -1,4 +1,4 @@
-class CreateGutsNavigations < ActiveRecord::Migration
+class CreateGutsNavigations < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_navigations do |t|
       t.string :title

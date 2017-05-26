@@ -1,4 +1,4 @@
-class AddSiteToGuts < ActiveRecord::Migration
+class AddSiteToGuts < ActiveRecord::Migration[4.2]
   def change
     tables = [
       :guts_types,

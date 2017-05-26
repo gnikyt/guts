@@ -62,6 +62,7 @@ module Guts
       assert flash[:notice].include?('successfully created')
     end
 
+
     test 'should not create medium and send back to new' do
       post :create, params: {
         content_id: @content.id,

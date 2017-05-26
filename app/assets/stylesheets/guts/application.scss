@@ -1,11 +1,9 @@
 /*
- *= require ./vendor/foundation
  *= require ./vendor/sweetalert
- *= require ./vendor/font-awesome
  *= require_tree .
  *= require_self
  */
-
+@import 'foundation';
 $light-grey-color: #F3F3F3;
 
 /* Bases */

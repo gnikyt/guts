@@ -38,6 +38,10 @@ bundle exec rake guts:user:set_master[{email}] # allows user to access everythin
 
 You will now be able to access Guts by visiting `/admin` in your Rails application.
 
+### Commands
+
+To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
+
 ## Configuration
 
 No post-install configuration is required but if you wish to change anything see [configurations](doc/extra/configurations.md) in docs.
@@ -48,9 +52,26 @@ See [extra](doc/extra) under docs for information on Guts itself. The docs conta
 
 For code documentation, you can run `bundle exec yardoc` of visit `rubydocs.info`.
 
-## Commands
+Code is also ran through rubocop.
 
-To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
+## Development / Testing
+
+### Development via Docker
+
+This project has a Docker compose file which sets up a basic Postgres database and runs Rails server.
+
+1. `docker-compose build` to build the image
+2. `docker-compose up` to start the image
+3. For all installation (Rake) tasks for this Gem run `docker-composer run -e "RAILS_ENV=$ENV" gem $COMMAND`
+
+### Testing
+
+This Gem is tested. Run `bundle exec rake test` after `bundle install`.
+
+#### Notes
+
+1. SQLite is used during testing
+2. Appraisal Gem is used to test against multiple Rails versions, you can simply run `bundle exec rake test` or use `appraisal {gemfile} rake test`
 
 ## Feature Overview
 

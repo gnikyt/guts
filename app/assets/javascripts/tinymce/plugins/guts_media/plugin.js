@@ -5,7 +5,7 @@ tinymce.PluginManager.add('guts_media', function(editor, url) {
     onclick: function () {
       editor.windowManager.open({
         title: 'Browse',
-        url: TINYMCE_GUTS_MEDIA_PATH+'?insert=1',
+        url: TINYMCE_GUTS_MEDIA_PATH + '?insert=1',
         width: 700,
         height: 700
       });

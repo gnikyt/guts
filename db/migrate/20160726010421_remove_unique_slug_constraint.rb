@@ -1,5 +1,5 @@
 # Upgrade to scoped slugs
-class RemoveUniqueSlugConstraint < ActiveRecord::Migration
+class RemoveUniqueSlugConstraint < ActiveRecord::Migration[4.2]
   def change
     # Categories
     remove_index :guts_categories, :slug

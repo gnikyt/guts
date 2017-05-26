@@ -1,4 +1,4 @@
-class CreateGutsCategories < ActiveRecord::Migration
+class CreateGutsCategories < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_categories do |t|
       t.string :title

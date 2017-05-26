@@ -1,4 +1,4 @@
-class CreateGutsMedia < ActiveRecord::Migration
+class CreateGutsMedia < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_media do |t|
       t.string :title

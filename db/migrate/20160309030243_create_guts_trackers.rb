@@ -1,4 +1,4 @@
-class CreateGutsTrackers < ActiveRecord::Migration
+class CreateGutsTrackers < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_trackers do |t|
       t.references :object, polymorphic: true, index: true
