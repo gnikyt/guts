@@ -5,7 +5,7 @@ module Guts
 
     # Regex used for sizing_only_images
     CONTENT_TYPE_REGEX = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
-
+    
     belongs_to :filable, polymorphic: true, required: false
     has_attached_file(
       :file,
@@ -15,12 +15,12 @@ module Guts
       path: ':rails_root/public/system/:class/:id_partition/:style/:filename'
     )
 
-    before_post_process :sizing_only_images
-
     validates_attachment_content_type(
       :file,
       content_type: Guts.configuration.file_allowed_content_types
     )
+
+    before_post_process :sizing_only_images
 
     before_save :default_title
 

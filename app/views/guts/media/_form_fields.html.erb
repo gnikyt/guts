@@ -1,0 +1,47 @@
+<% if @medium.errors.any? %>
+  <div class="small-12 columns">
+    <div class="callout warning">
+      <h5><%= pluralize(@medium.errors.count, 'error') %> prohibited this content from being saved:</h5>
+
+      <ul>
+        <% @medium.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<% if notice %>
+  <div class="small-12 columns">
+    <div class="callout success notice">
+      <p><%= notice %></p>
+    </div>
+  </div>
+<% end %>
+
+<div class="small-12 columns" id="file_uploader">
+  <%= f.label :file %>
+  <%= f.file_field :file, { class: 'hollow button' } %>
+</div>
+<div class="small-12 columns">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <p class="help-text">If no title is given, title of file will be used.</p>
+  <span >
+</div>
+<div class="small-12 columns">
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+</div>
+<div class="small-12 columns">
+  <%= f.label :tags %>
+  <%= f.text_field :tags, { class: 'tags' } %>
+</div>
+
+<% if @object %>
+  <%= f.hidden_field :filable_type, value: @object.class %>
+  <%= f.hidden_field :filable_id, value: @object.id %>
+<% end %>
+
+<%= current_site_form_field f %>

@@ -40,10 +40,18 @@ module Guts
       authorize @medium
 
       if @medium.save
-        flash[:notice] = 'Media was successfully created.'
-        redirect_to edit_polymorphic_path([@object, @medium])
+        respond_to do |format|
+          format.html do
+            flash[:notice] = 'Media was successfully created.'
+            redirect_to edit_polymorphic_path([@object, @medium])
+          end
+          format.json { render json: { success: true }, status: :created }
+        end
       else
-        render :new
+        respond_to do |format|
+          format.html { render :new }
+          format.json { render json: { error: @medium.errors.full_messages.last }, status: :unprocessable_entity }
+        end
       end
     end
 

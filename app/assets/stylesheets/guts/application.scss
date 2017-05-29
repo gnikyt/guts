@@ -283,31 +283,55 @@ textarea.tinymce {
   }
 }
 
+#page-content-wrapper {
+  &.dragenter {
+    background: rgba(173, 216, 230, 0.5);
+    opacity: 0.7;
+  }
+}
+
 #new_medium {
-  #file_uploader {
-    display: none;
-  }
-
-  .dz-message {
-    margin-top: 2em;
-    text-align: center;
-    clear: both;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
-
-    span {
-      display: block;
-      padding: 2em;
-      border: 2px dashed black;
+  &.dropzone {
+    #file_uploader {
+      display: none;
     }
-  }
 
-  .dz-preview {
-    text-align: center;
-    margin-top: 1em;
-    margin-left: 0.9375rem;
-    margin-right: 0.9375rem;
-    padding: 2em;
+    #files_progress {
+      visibility: hidden;
+    }
+
+    .file_row {
+      .file_name {
+        font-weight: bold;
+        margin-right: 1em;
+      }
+
+      .file_size {
+        font-size: 0.9em;
+        font-style: italic;
+      }
+
+      .file_error {
+        display: block;
+        color: red;
+        font-size: 0.85em;
+      }
+    }
+
+    .dz-message {
+      text-align: center;
+      border: 2px dashed #cacaca;
+      padding: 3em 0;
+
+      p {
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+
+    .dz-message, #file_previews {
+      margin-bottom: 3em;
+    }
   }
 }
 

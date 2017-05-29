@@ -37,13 +37,25 @@ module Guts
       assert_not_nil assigns(:media)
     end
 
-    test 'should get new' do
+    test 'should get new and the basic uploader' do
       get :new, params: {
         content_id: @content.id,
         filable_type: 'Guts::Content'
       }
 
       assert_response :success
+      assert_equal false, @response.body.include?('dropzone')
+    end
+
+    test 'should get new and the multi uploader' do
+      get :new, params: {
+        content_id: @content.id,
+        filable_type: 'Guts::Content',
+        multi: true
+      }
+
+      assert_response :success
+      assert @response.body.include?('dropzone')
     end
 
     test 'should create medium' do
