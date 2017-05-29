@@ -30,7 +30,7 @@ class GutsTest < ActiveSupport::TestCase
   
   test 'config should be overrideable' do
     original_groups                 = Guts.configuration.admin_groups
-    Guts.configuration.admin_groups = %w(Changed To More Admins)
+    Guts.configuration.admin_groups = %w[Changed To More Admins]
     assert_not_equal Guts.configuration.admin_groups, original_groups
   end
   

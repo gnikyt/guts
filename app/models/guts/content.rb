@@ -16,7 +16,7 @@ module Guts
     has_many :media, as: :filable, dependent: :destroy
     has_many :metafields, as: :fieldable, dependent: :destroy
 
-    friendly_id :title, use: %i(slugged scoped finders), scope: :site_id
+    friendly_id :title, use: %i[slugged scoped finders], scope: :site_id
     navigatable :'type.title', :title, format: '[:type.title] :title'
 
     # Updates slug if title changes

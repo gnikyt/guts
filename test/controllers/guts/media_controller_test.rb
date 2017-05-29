@@ -58,7 +58,7 @@ module Guts
       assert @response.body.include?('dropzone')
     end
 
-    test 'should create medium' do
+    test 'should create medium basic' do
       assert_difference('Medium.count') do
         post :create, params: {
           content_id: @content.id,
@@ -75,6 +75,28 @@ module Guts
       assert flash[:notice].include?('successfully created')
     end
 
+    test 'should create medium multi via json' do
+      assert_difference('Medium.count') do
+        post_params = {
+          content_id: @content.id,
+          filable_type: 'Guts::Content',
+          medium: {
+            title: 'Demo File',
+            file: fixture_file_upload('/guts/files/spongebob.png', 'image/png')
+          }
+        }
+        
+        post(
+          :create,
+          params: post_params.to_json,
+          headers: { ACCEPT: 'application/json', CONTENT_TYPE: 'application/json; charset=UTF-8' },
+          format: :json
+        )
+      end
+
+      assert_response :created
+    end
+
     test 'should not create medium for bad file' do
       post :create, params: {
         content_id: @content.id,
@@ -86,6 +108,26 @@ module Guts
       }
 
       assert_template 'guts/media/new'
+    end
+
+    test 'should not create medium for bad file via json' do
+      post_params = {
+        content_id: @content.id,
+        filable_type: 'Guts::Content',
+        medium: {
+          title: 'Bad File',
+          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+        }
+      }
+
+      post(
+        :create,
+        params: post_params.to_json,
+        headers: { ACCEPT: 'application/json', CONTENT_TYPE: 'application/json' },
+        format: :json
+      )
+
+      assert_response :unprocessable_entity
     end
 
     test 'should show medium' do

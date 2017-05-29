@@ -4,7 +4,7 @@ require 'generators/guts/routes/routes_generator'
 module Guts
   class RoutesGeneratorTest < Rails::Generators::TestCase
     tests Guts::RoutesGenerator
-    destination Rails.root.join('tmp/generators/routes')
+    destination Rails.root.join('tmp', 'generators', 'routes')
     setup :prepare_destination
 
     test 'generator injects routes' do

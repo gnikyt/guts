@@ -34,7 +34,7 @@ module Guts
     # Creates a title based on the file name if
     # no title was entered
     def default_title
-      self[:title] = self[:file_file_name] if self[:title].nil? || self[:title].empty?
+      self[:title] = self[:file_file_name] if self[:title].blank?
     end
   end
 end

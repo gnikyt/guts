@@ -12,7 +12,7 @@ module Guts
     has_many :metafields, as: :fieldable, dependent: :destroy
     has_many :permissions, as: :permissionable, dependent: :destroy
 
-    friendly_id :title, use: %i(slugged finders)
+    friendly_id :title, use: %i[slugged finders]
 
     # Updates slug if title changes
     # @return [Boolean]

@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Sites controller
   class SitesController < ApplicationController
-    before_action :set_site, except: %i(index new create)
+    before_action :set_site, except: %i[index new create]
 
     # Displays a list of sites
     def index
@@ -68,7 +68,7 @@ module Guts
       old_default = Site.find_by(default: true)
       old_default.update({ default: false }) unless old_default.nil?
 
-      @site.update({ default: true })
+      @site.update(default: true)
 
       flash[:notice] = 'Site was successfully set to default.'
       redirect_to sites_url
@@ -77,7 +77,7 @@ module Guts
     # Removes a site as default
     def remove_default
       authorize @site, :update?
-      @site.update({ default: false })
+      @site.update(default: false)
 
       flash[:notice] = 'Site was successfully changed to not default.'
       redirect_to sites_url

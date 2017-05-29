@@ -24,11 +24,11 @@ module Guts
     end
 
     test 'should not add if missing resource or grant' do
-      permission   = Permission.new(resource: 'guts_user')
-      permission_2 = Permission.new(grant: 'index')
+      permission  = Permission.new(resource: 'guts_user')
+      permission2 = Permission.new(grant: 'index')
 
       assert_not permission.save
-      assert_not permission_2.save
+      assert_not permission2.save
     end
 
     test 'permissions for permissionable should be unique' do

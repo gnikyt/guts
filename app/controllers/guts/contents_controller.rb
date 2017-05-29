@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Contents controller
   class ContentsController < ApplicationController
-    before_action :set_content, only: %i(show edit update destroy)
+    before_action :set_content, only: %i[show edit update destroy]
     before_action :set_type
     before_action :set_per_page, only: :index
 

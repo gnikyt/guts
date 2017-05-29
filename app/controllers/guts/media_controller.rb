@@ -4,7 +4,7 @@ module Guts
   # Media controller
   class MediaController < ApplicationController
     before_action :set_object
-    before_action :set_medium, only: %i(show edit update destroy editor_insert)
+    before_action :set_medium, only: %i[show edit update destroy editor_insert]
     before_action :set_per_page, only: :index
 
     # Displays a list of media
@@ -45,12 +45,20 @@ module Guts
             flash[:notice] = 'Media was successfully created.'
             redirect_to edit_polymorphic_path([@object, @medium])
           end
-          format.json { render json: { success: true }, status: :created }
+
+          format.json do
+            render json: { success: true }, status: :created
+          end
         end
       else
         respond_to do |format|
-          format.html { render :new }
-          format.json { render json: { error: @medium.errors.full_messages.last }, status: :unprocessable_entity }
+          format.html do
+            render :new
+          end
+
+          format.json do
+            render json: { error: @medium.errors.full_messages.last }, status: :unprocessable_entity
+          end
         end
       end
     end

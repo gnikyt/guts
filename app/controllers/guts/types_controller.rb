@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Types controller
   class TypesController < ApplicationController
-    before_action :set_type, only: %i(show edit update destroy)
+    before_action :set_type, only: %i[show edit update destroy]
 
     # Display a list of types
     def index
