@@ -1,0 +1,54 @@
+<%= form_for([@object, @medium], html: { class: 'dropzone' }) do |f| %>
+  <div class="small-12 columns" id="actions">
+    <% if policy([:guts, :medium]).create? || policy([:guts, :medium]).update? %>
+      <button class="button primary dz-clickable" id="add_files" type="button">Add Files...</button>
+      <button class="button success" id="start_uploads" type="button">Start Uploads</button>
+      <button class="button alert" id="cancel_uploads" type="button">Cancel Uploads</button>
+    <% end %>
+    <%= link_to 'Back', polymorphic_url([@object, :media]), class: 'secondary hollow button' %>
+  </div>
+
+  <div class="small-12 columns">
+    <div class="callout secondary"><p>This area allows you to upload multiple files at once. Simply click "Add Files" above or drag and drop files onto this page.<br>When ready, click "Start Uploads" above.<br>When the uploads are completed, you will be redirected to the file listings page.</p></div>
+  </div>
+
+  <div class="small-12 columns">
+    <div id="files_progress" class="progress" tabindex="0">
+      <div class="progress-meter" data-dz-uploadprogress></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 medium-6 medium-push-6 columns">
+      <div class="dz-message"><p>Drag and drop files here or click "Add Files" above.</p></div>
+
+      <div id="file_previews">
+        <div id="file_template">
+          <div class="row file_row">
+            <div class="small-12 medium-2 columns">
+              <span class="preview"><img data-dz-thumbnail /></span>
+            </div>
+
+            <div class="small-12 medium-10 columns">
+              <span class="file_name" data-dz-name></span><span class="file_size" data-dz-size></span>
+              <strong class="file_error" data-dz-errormessage></strong>
+
+              <div class="file_progress progress">
+                <div class="progress-meter" data-dz-uploadprogress></div>
+              </div>
+
+              <div class="small button-group">
+                <button data-dz-remove class="button warning cancel_upload" type="button"><span>Cancel</span></button>
+                <button data-dz-remove class="button alert delete" type="button"><span>Delete</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="small-12 medium-6 medium-pull-6 columns">
+      <%= render partial: 'form_fields', locals: { f: f } %>
+    </div>
+  </div>
+<% end %>

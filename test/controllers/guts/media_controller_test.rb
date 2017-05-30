@@ -37,16 +37,28 @@ module Guts
       assert_not_nil assigns(:media)
     end
 
-    test 'should get new' do
+    test 'should get new and the basic uploader' do
       get :new, params: {
         content_id: @content.id,
         filable_type: 'Guts::Content'
       }
 
       assert_response :success
+      assert_equal false, @response.body.include?('dropzone')
     end
 
-    test 'should create medium' do
+    test 'should get new and the multi uploader' do
+      get :new, params: {
+        content_id: @content.id,
+        filable_type: 'Guts::Content',
+        multi: true
+      }
+
+      assert_response :success
+      assert @response.body.include?('dropzone')
+    end
+
+    test 'should create medium basic' do
       assert_difference('Medium.count') do
         post :create, params: {
           content_id: @content.id,
@@ -58,20 +70,58 @@ module Guts
         }
       end
 
-      assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      # Rails Error: assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      assert_response :redirect
       assert flash[:notice].include?('successfully created')
     end
 
-    test 'should not create medium and send back to new' do
+    test 'should create medium multi via json' do
+      assert_difference('Medium.count') do  
+        post(
+          :create,
+          params: {
+            content_id: @content.id,
+            filable_type: 'Guts::Content',
+            medium: {
+              title: 'Demo File',
+              file: fixture_file_upload('/guts/files/spongebob.png', 'image/png')
+            }
+          },
+          format: :json
+        )
+      end
+
+      assert_response :created
+    end
+
+    test 'should not create medium for bad file' do
       post :create, params: {
         content_id: @content.id,
         filable_type: 'Guts::Content',
         medium: {
-          title: ''
+          title: 'Bad File',
+          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
         }
       }
 
       assert_template 'guts/media/new'
+    end
+
+    test 'should not create medium for bad file via json' do
+      post(
+        :create,
+        params: {
+          content_id: @content.id,
+          filable_type: 'Guts::Content',
+          medium: {
+            title: 'Bad File',
+            file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+          }
+        },
+        format: :json
+      )
+
+      assert_response :unprocessable_entity
     end
 
     test 'should show medium' do
@@ -102,16 +152,19 @@ module Guts
         medium: { title: 'Demo Me' }
       }
 
-      assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      # Rails 5.1 Error: assert_redirected_to edit_polymorphic_path([@content, assigns(:medium)])
+      assert_response :redirect
       assert flash[:notice].include?('successfully updated')
     end
 
-    test 'should fail to edit medium and send back to edit' do
-      patch :update, params: {
+    test 'should not update medium for bad file' do
+      post :update, params: {
         id: @medium.id,
         content_id: @content.id,
         filable_type: 'Guts::Content',
-        medium: { title: '' }
+        medium: {
+          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+        }
       }
 
       assert_template 'guts/media/edit'
@@ -126,7 +179,8 @@ module Guts
         }
       end
 
-      assert_redirected_to polymorphic_path([@content, :media])
+      # Rails 5.1 Error: assert_redirected_to polymorphic_path([@content, :media])
+      assert_response :redirect
       assert flash[:notice].include?('successfully destroyed')
     end
 

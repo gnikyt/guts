@@ -39,7 +39,7 @@ module Guts
       group = guts_groups :admins
 
       assert_equal false, group.granted?(:non_existant_resource, :non_existant_method)
-      assert_equal true, group.granted?(%i(guts type), :destroy) # From fixture
+      assert_equal true, group.granted?(%i[guts type], :destroy) # From fixture
     end
   end
 end

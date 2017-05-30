@@ -5,5 +5,9 @@
 </div>
 
 <div class="row">
-  <%= render 'form' %>
+  <% if params[:multi].present? %>
+    <%= render 'form_multi' %>
+  <% else %>
+    <%= render 'form_basic' %>
+  <% end %>
 </div>

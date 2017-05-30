@@ -1,0 +1,124 @@
+jQuery(document).ready(function($) {
+  $('.media_add').on('click', function() {
+    $(this).remove();
+    $('.media_add_new').show();
+  });
+
+  $('.media_destroy').on('click', function(e) {
+    e.preventDefault();
+
+    var $that = $(this);
+
+    swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this attachment after deletion.',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DD6B55',
+      confirmButtonText: 'Yes, delete it!',
+      closeOnConfirm: false
+    }, function() {
+      swal.close();
+
+      $that.parents('.media_block').find('input[type=checkbox]').trigger('click');
+      $that.parents('.media_block').fadeOut('slow');
+    });
+  });
+
+  if (window.top.tinymce && window.top != window) {
+    $('.media_insert').css('display', 'inline');
+
+    $(document).on('click', '#media_insert_size', function() {
+      var size = $(this).parent().find('select').val();
+      var file = $(this).parent().find('#media_insert_file_link');
+
+      var editor = window.top.tinymce.editors[0];
+      editor.insertContent('<img src="'+file.val().replace('original', size)+'" alt="Image">');
+      editor.windowManager.close();
+    });
+
+    $('.media_insert').on('click', function(e) {
+      e.preventDefault();
+
+      if ($(this).data('type').indexOf('image') != -1) {
+        var modal = $('#media_insert_modal');
+        $.get($(this).attr('href'), function(resp) { modal.html(resp).foundation('open'); });
+      } else {
+        var editor = window.top.tinymce.editors[0];
+        editor.insertContent('<a href="'+$(this).data('url')+'" target="_blank">'+$(this).data('title')+'</a>');
+        editor.windowManager.close();
+      }
+    })
+  }
+
+  // Dropzone.js
+  if ($('#new_medium.dropzone').length) {
+    var previewNode = document.querySelector('#file_template');
+    previewNode.id = '';
+    var previewTemplate = previewNode.parentNode.innerHTML;
+    previewNode.parentNode.removeChild(previewNode);
+
+    Dropzone.autoDiscover = false;
+    var dropzone = new Dropzone('#new_medium', {
+      paramName: 'medium[file]',
+      parallelUploads: 2,
+      previewTemplate: previewTemplate,
+      autoQueue: false,
+      acceptedFiles: "<%= Guts.configuration.file_allowed_content_types.join(',') %>",
+      previewsContainer: '#file_previews',
+      clickable: '#add_files',
+    });
+
+    dropzone.on('dragover', function() {
+      $('#page-content-wrapper').addClass('dragenter');
+    });
+
+    dropzone.on('drop', function() {
+      $('#page-content-wrapper').removeClass('dragenter');
+      $('.dz-message').hide();
+    });
+
+    dropzone.on('dragleave', function() {
+      $('#page-content-wrapper').removeClass('dragenter');
+    });
+
+    dropzone.on('addedfile', function(file) {
+      $(file.previewElement).find('.start_upload').on('click', function() {
+        dropzone.enqueueFile(file);
+      });
+    });
+
+    dropzone.on('removedfile', function() {
+      if (dropzone.files.length == 0) {
+        $('.dz-message').show();
+      }
+    });
+
+    dropzone.on('totaluploadprogress', function(progress) {
+      $('#files_progress').show();
+      $('#files_progess .progress-meter').css('width', progress + '%');
+    });
+
+    dropzone.on('sending', function(file) {
+      $('#files_progress').css('visibility', 'visble');
+      $(file.previewElement).find('.start_upload').prop('disabled', true);
+    });
+
+    dropzone.on('queuecomplete', function() {
+      if ($('.dz-error').length == 0) {
+        window.location.href = $('#actions a').attr('href');
+      }
+    });
+
+    $('#actions #start_uploads').on('click', function() {
+      if (dropzone.files.length > 0 && $('.dz-error').length == 0) {
+        dropzone.enqueueFiles(dropzone.getFilesWithStatus(Dropzone.ADDED));
+      }
+    });
+
+    $('#actions #cancel_uploads').on('click', function() {
+      dropzone.removeAllFiles(true);
+      $('.dz-message').show();
+    });
+  }
+});

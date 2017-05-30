@@ -1,11 +1,10 @@
 /*
  *= require ./vendor/foundation
- *= require ./vendor/sweetalert
  *= require ./vendor/font-awesome
+ *= require ./vendor/sweetalert
  *= require_tree .
  *= require_self
  */
-
 $light-grey-color: #F3F3F3;
 
 /* Bases */
@@ -281,6 +280,58 @@ textarea.tinymce {
   .media_insert {
     font-weight: 700;
     display: none;
+  }
+}
+
+#page-content-wrapper {
+  &.dragenter {
+    background: rgba(173, 216, 230, 0.5);
+    opacity: 0.7;
+  }
+}
+
+#new_medium {
+  &.dropzone {
+    #file_uploader {
+      display: none;
+    }
+
+    #files_progress {
+      visibility: hidden;
+    }
+
+    .file_row {
+      .file_name {
+        font-weight: bold;
+        margin-right: 1em;
+      }
+
+      .file_size {
+        font-size: 0.9em;
+        font-style: italic;
+      }
+
+      .file_error {
+        display: block;
+        color: red;
+        font-size: 0.85em;
+      }
+    }
+
+    .dz-message {
+      text-align: center;
+      border: 2px dashed #cacaca;
+      padding: 3em 0;
+
+      p {
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+
+    .dz-message, #file_previews {
+      margin-bottom: 3em;
+    }
   }
 }
 

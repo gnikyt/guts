@@ -1,4 +1,4 @@
-class CreateGutsAuthorizations < ActiveRecord::Migration
+class CreateGutsAuthorizations < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_authorizations do |t|
       t.string :title

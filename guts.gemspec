@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   ]
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'rails', '~> 5.0'
+  s.add_dependency 'rails', '>= 5.0'
   s.add_dependency 'friendly_id', '~> 5.2'
   s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'paperclip', '~> 4.3'
@@ -41,4 +41,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard', '~> 0.8'
   s.add_development_dependency 'inch', '~> 0.7'
   s.add_development_dependency 'rubocop', '~> 0.45'
+  s.add_development_dependency 'appraisal'
 end

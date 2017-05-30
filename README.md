@@ -14,7 +14,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', '~> 3.0.0'
+gem 'guts' # to grab latest, or specify a specific version
 # or for master: gem 'guts', git: 'git@github.com:tyler-king/guts.git'
 ```
 
@@ -38,6 +38,10 @@ bundle exec rake guts:user:set_master[{email}] # allows user to access everythin
 
 You will now be able to access Guts by visiting `/admin` in your Rails application.
 
+### Commands
+
+To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
+
 ## Configuration
 
 No post-install configuration is required but if you wish to change anything see [configurations](doc/extra/configurations.md) in docs.
@@ -48,16 +52,25 @@ See [extra](doc/extra) under docs for information on Guts itself. The docs conta
 
 For code documentation, you can run `bundle exec yardoc` of visit `rubydocs.info`.
 
-## Commands
+Code is also ran through rubocop.
 
-To see all commands available simply run `bundle exec rake -T guts`. It contains tasks for user creation, user deletion, changing user passwords, database seeds for install, and migration installs.
+### Testing
+
+This Gem is tested. Run `bundle exec rake test` (or `appraisal rake test`) after `bundle install` (or `appraisal install`).
+
+Both development and testing environments use SQLite located in `test/dummy/db`.
+
+#### Notes
+
+1. SQLite is used during testing
+2. Appraisal Gem is used to test against multiple Rails versions, you can simply run `bundle exec rake test` or use `appraisal {gemfile} rake test`
 
 ## Feature Overview
 
 + Unit tested and documented
 + Multisite support
 + Dynamic content types
-+ File management
++ File management (with multi-upload)
 + Media post-processing
 + WYSIWYG editors
 + Metafields for all objects

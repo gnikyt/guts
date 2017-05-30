@@ -4,7 +4,7 @@ require 'generators/guts/tinymce/tinymce_generator'
 module Guts
   class TinymceGeneratorTest < Rails::Generators::TestCase
     tests Guts::TinymceGenerator
-    destination Rails.root.join('tmp/generators/tinymce')
+    destination Rails.root.join('tmp', 'generators', 'tinymce')
     setup :prepare_destination
 
     test 'generator copies tinymce file' do

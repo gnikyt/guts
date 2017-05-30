@@ -1,4 +1,4 @@
-class CreateGutsUsers < ActiveRecord::Migration
+class CreateGutsUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_users do |t|
       t.string :name

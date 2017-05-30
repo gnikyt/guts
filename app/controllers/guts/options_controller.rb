@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Options controller
   class OptionsController < ApplicationController
-    before_action :set_option, only: %i(show edit update destroy)
+    before_action :set_option, only: %i[show edit update destroy]
     before_action :set_per_page, only: :index
     
     # Display a list of options

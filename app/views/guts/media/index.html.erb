@@ -6,6 +6,7 @@
       <%= link_to 'Back', url_for([:edit, @object]), class: 'secondary hollow button' %>
     <% else %>
       <%= link_to('New', new_medium_path, class: 'button') if policy([:guts, :medium]).create? %>
+      <%= link_to('New (Multi)', new_medium_path(multi: true), class: 'button hollow') if policy([:guts, :medium]).create? %>
     <% end %>
   </div>
 </div>

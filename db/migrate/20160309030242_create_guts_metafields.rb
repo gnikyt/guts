@@ -1,4 +1,4 @@
-class CreateGutsMetafields < ActiveRecord::Migration
+class CreateGutsMetafields < ActiveRecord::Migration[4.2]
   def change
     create_table :guts_metafields do |t|
       t.string :key

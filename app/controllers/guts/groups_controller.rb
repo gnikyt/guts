@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Groups controller
   class GroupsController < ApplicationController
-    before_action :set_group, only: %i(show edit update destroy)
+    before_action :set_group, only: %i[show edit update destroy]
 
     # Displays a list of groups
     def index

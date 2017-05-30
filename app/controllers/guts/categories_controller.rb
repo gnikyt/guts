@@ -3,7 +3,7 @@ require_dependency 'guts/application_controller'
 module Guts
   # Categories controller
   class CategoriesController < ApplicationController
-    before_action :set_category, only: %i(show edit update destroy)
+    before_action :set_category, only: %i[show edit update destroy]
 
     # Displays a list of categories
     def index
