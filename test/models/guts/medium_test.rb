@@ -9,11 +9,11 @@ module Guts
     test 'should not process paperclip for non images' do
       medium = Medium.new
 
-      assert_equal false, medium.sizing_only_images
+      assert_equal false, medium.image?
     end
 
     test 'should process paperclip for images' do
-      assert_nil @medium.sizing_only_images
+      assert @medium.image?
     end
 
     test 'should return urls for different sizes' do

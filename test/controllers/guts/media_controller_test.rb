@@ -76,20 +76,17 @@ module Guts
     end
 
     test 'should create medium multi via json' do
-      assert_difference('Medium.count') do
-        post_params = {
-          content_id: @content.id,
-          filable_type: 'Guts::Content',
-          medium: {
-            title: 'Demo File',
-            file: fixture_file_upload('/guts/files/spongebob.png', 'image/png')
-          }
-        }
-        
+      assert_difference('Medium.count') do  
         post(
           :create,
-          params: post_params.to_json,
-          headers: { ACCEPT: 'application/json', CONTENT_TYPE: 'application/json; charset=UTF-8' },
+          params: {
+            content_id: @content.id,
+            filable_type: 'Guts::Content',
+            medium: {
+              title: 'Demo File',
+              file: fixture_file_upload('/guts/files/spongebob.png', 'image/png')
+            }
+          },
           format: :json
         )
       end
@@ -111,19 +108,16 @@ module Guts
     end
 
     test 'should not create medium for bad file via json' do
-      post_params = {
-        content_id: @content.id,
-        filable_type: 'Guts::Content',
-        medium: {
-          title: 'Bad File',
-          file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
-        }
-      }
-
       post(
         :create,
-        params: post_params.to_json,
-        headers: { ACCEPT: 'application/json', CONTENT_TYPE: 'application/json' },
+        params: {
+          content_id: @content.id,
+          filable_type: 'Guts::Content',
+          medium: {
+            title: 'Bad File',
+            file: fixture_file_upload('/guts/files/spongebob.zip', 'application/zip')
+          }
+        },
         format: :json
       )
 

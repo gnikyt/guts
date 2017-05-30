@@ -64,9 +64,9 @@ jQuery(document).ready(function($) {
       parallelUploads: 2,
       previewTemplate: previewTemplate,
       autoQueue: false,
+      acceptedFiles: "<%= Guts.configuration.file_allowed_content_types.join(',') %>",
       previewsContainer: '#file_previews',
       clickable: '#add_files',
-      acceptedFiles: "<%= Guts.configuration.file_allowed_content_types.join(',') %>"
     });
 
     dropzone.on('dragover', function() {

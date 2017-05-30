@@ -17,6 +17,8 @@ Guts.configure do |config|
     'image/jpg',
     'image/jpeg',
     'image/png',
-    'image/gif'
+    'image/gif',
+    'application/pdf',
+    'text/plain'
   ]
 end
