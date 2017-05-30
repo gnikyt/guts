@@ -14,7 +14,7 @@ This engine is simply released to provide a basic, but full-featured CMS solutio
 Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
-gem 'guts', '~> 3.0.0'
+gem 'guts' # to grab latest, or specify a specific version
 # or for master: gem 'guts', git: 'git@github.com:tyler-king/guts.git'
 ```
 
@@ -70,7 +70,7 @@ Both development and testing environments use SQLite located in `test/dummy/db`.
 + Unit tested and documented
 + Multisite support
 + Dynamic content types
-+ File management
++ File management (with multi-upload)
 + Media post-processing
 + WYSIWYG editors
 + Metafields for all objects
