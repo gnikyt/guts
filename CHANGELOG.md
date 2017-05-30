@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.1.0
+
++ Moved Paperclip logic to determine when to run Imagick, old method did not work well
++ Added `application/pdf` and `text/plain` to default allowed file types since they're used a lot.
++ Added Dropzone.js to the project so multiple file uploads can happen
++ New multi media page added with use of Dropzone.js
++ Moved view code to always use partials
+
 ## Version 3.0.1
 
 + Fixed one migration entry which caused issues on Postgres installs (0 => false)
