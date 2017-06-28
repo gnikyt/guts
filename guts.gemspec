@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Guts::VERSION
   s.authors     = ['Tyler King']
   s.email       = ['tyler.n.king@gmail.com']
-  s.homepage    = 'https://github.com/tyler-king/guts'
+  s.homepage    = 'https://github.com/ohmybrew/guts'
   s.summary     = 'A mountable, extendable, multisite, CMS engine for Rails 5'
   s.description = 'A mountable, extendbale, multisite, CMS engine for Rails 5'\
                   'with a basic dashboard interface for your projects'

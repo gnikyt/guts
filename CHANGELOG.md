@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.1
+
++ Updated URLs
+
 ## Version 3.1.0
 
 + Moved Paperclip logic to determine when to run Imagick, old method did not work well

@@ -1,5 +1,9 @@
 # Upgrading
 
+## Version 3.0.X to 3.1.X
+
+No steps required.
+
 ## Version 2.0.X to 3.0.X
 
 One breaking change in this version.

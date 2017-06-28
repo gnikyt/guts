@@ -1,8 +1,8 @@
 # Guts
 
-[![Build Status](https://secure.travis-ci.org/tyler-king/guts.svg?branch=master)](http://travis-ci.org/tyler-king/guts)
-[![codecov](https://codecov.io/gh/tyler-king/guts/branch/master/graph/badge.svg)](https://codecov.io/gh/tyler-king/guts)
-[![Docs](http://inch-ci.org/github/tyler-king/guts.svg)](http://inch-ci.org/github/tyler-king/guts)
+[![Build Status](https://secure.travis-ci.org/ohmybrew/guts.svg?branch=master)](http://travis-ci.org/ohmybrew/guts)
+[![codecov](https://codecov.io/gh/ohmybrew/guts/branch/master/graph/badge.svg)](https://codecov.io/gh/ohmybrew/guts)
+[![Docs](http://inch-ci.org/github/ohmybrew/guts.svg)](http://inch-ci.org/github/ohmybrew/guts)
 [![Gem Version](https://badge.fury.io/rb/guts.svg)](https://badge.fury.io/rb/guts)
 
 A mountable, extendable, multisite, CMS engine for Rails 5.
@@ -15,7 +15,7 @@ Include the gem in your `Gemfile` and run `bundle install`:
 
 ``` ruby
 gem 'guts' # to grab latest, or specify a specific version
-# or for master: gem 'guts', git: 'git@github.com:tyler-king/guts.git'
+# or for master: gem 'guts', git: 'git@github.com:ohmybrew/guts.git'
 ```
 
 Next, run the following commands for a install of routes, initializer, and editor configurations:
