@@ -70,8 +70,8 @@ module Guts
       
       ActiveRecord::Base.transaction do
         @navigation.navigation_items.each do |item|
-          find = params[:order].select { |_, v| v == item.id.to_s }
-          item.update_attribute(:position, find[0].to_i)
+          find = params[:order].permit!.select { |_, v| v == item.id.to_s }
+          item.update_attribute(:position, find.keys.first.to_i)
         end
       end
 

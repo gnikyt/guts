@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.2
+
++ Fixed navigation controller re-order error (params needed to be permitted for Rails 5.1)
+
 ## Version 3.1.1
 
 + Updated URLs
